@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AnalysisUIOptions">
+    <option name="ANALYZE_TEST_SOURCES" value="false" />
+  </component>
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="7012e3a3-1d32-426b-90c8-6574a8dd71bb" name="Changes" comment="init commit">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/input.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/reserve.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/simeon/Client.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/simeon/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/simeon/Request.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/simeon/Response.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/simeon/Server.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/simeon/collection/CollectionLoader.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/simeon/collection/CollectionManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/simeon/collection/JsonCollectionLoader.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/simeon/collection/MyCollection.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/simeon/collection/Sequence.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/simeon/collection/comarators/AnnualTurnoverComparator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/simeon/collection/comarators/PostalAddressComparator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/simeon/collection/element/Address.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/simeon/collection/element/AnnualTurnoverConstraint.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/simeon/collection/element/AnnualTurnoverValidator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/simeon/collection/element/Coordinates.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/simeon/collection/element/Organization.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/simeon/collection/element/OrganizationType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/simeon/collection/element/ZipCodeConstraint.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/simeon/collection/element/ZipCodeConstraintValidator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/simeon/commands/AddCommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/simeon/commands/AddIfMaxCommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/simeon/commands/ClearCommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/simeon/commands/Command.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/simeon/commands/ExecuteScriptCommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/simeon/commands/ExitCommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/simeon/commands/FilterGreaterThanTypeCommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/simeon/commands/HelpCommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/simeon/commands/ICommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/simeon/commands/InfoCommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/simeon/commands/MinByPostalAddressCommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/simeon/commands/NewElementBuilder.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/simeon/commands/PrintFieldDescendingPostalAddressCommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/simeon/commands/RemoveAtCommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/simeon/commands/RemoveByIDCommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/simeon/commands/ReorderCommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/simeon/commands/SaveCommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/simeon/commands/ShowCommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/simeon/commands/UpdateCommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/simeon/exceptions/InvalidArgument.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/simeon/exceptions/InvalidCollectionDataException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/simeon/exceptions/InvalidCommandParametersException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/simeon/exceptions/UnknownCommandException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/simeon/utils/CommandParser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 0
+}</component>
+  <component name="ProjectId" id="2dagTSY87LkiShgUub7Cf9jAKz3" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Downloaded.Files.Path.Enabled": "false",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "/Users/simeongor/Documents/java_codes/Application/src/main/java/com/simeon",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "onboarding.tips.debug.path": "/Users/simeongor/Documents/java_codes/Application/src/main/java/com/simeon/Main.java",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/java/com/simeon" />
+      <recent name="$PROJECT_DIR$" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.simeon.collection" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.Main">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.simeon.Main" />
+      <module name="Application" />
+      <option name="PROGRAM_PARAMETERS" value="input.json" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.simeon.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Application [clean,package]" type="MavenRunConfiguration" factoryName="Maven" nameIsGenerated="true">
+      <MavenSettings>
+        <option name="myGeneralSettings" />
+        <option name="myRunnerSettings" />
+        <option name="myRunnerParameters">
+          <MavenRunnerParameters>
+            <option name="cmdOptions" />
+            <option name="profiles">
+              <set />
+            </option>
+            <option name="goals">
+              <list>
+                <option value="clean" />
+                <option value="package" />
+              </list>
+            </option>
+            <option name="pomFileName" />
+            <option name="profilesMap">
+              <map />
+            </option>
+            <option name="projectsCmdOptionValues">
+              <list />
+            </option>
+            <option name="resolveToWorkspace" value="false" />
+            <option name="workingDirPath" value="$PROJECT_DIR$" />
+          </MavenRunnerParameters>
+        </option>
+      </MavenSettings>
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Application.Main" />
+      <item itemvalue="Maven.Application [clean,package]" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Main" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="7012e3a3-1d32-426b-90c8-6574a8dd71bb" name="Changes" comment="" />
+      <created>1710251612799</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1710251612799</updated>
+      <workItem from="1710251613967" duration="17588000" />
+      <workItem from="1710445042643" duration="275000" />
+      <workItem from="1710445665205" duration="28000" />
+      <workItem from="1710445697950" duration="26428000" />
+    </task>
+    <task id="LOCAL-00001" summary="init commit">
+      <option name="closed" value="true" />
+      <created>1710446114084</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1710446114084</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="main" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="init commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="init commit" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/com/simeon/Server.java</url>
+          <line>48</line>
+          <properties class="com.simeon.Server" method="executeRequest">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/simeon/Server.java</url>
+          <line>71</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>
