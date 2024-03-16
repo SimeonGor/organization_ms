@@ -2,6 +2,7 @@ package com.simeon.commands;
 
 import com.simeon.Client;
 import com.simeon.exceptions.InvalidCommandParametersException;
+import lombok.NonNull;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -21,11 +22,11 @@ public interface ICommand {
      * @param parameters
      * @param client
      */
-    void execute(@NotBlank String parameters, @NotNull Client client) throws InvalidCommandParametersException;
+    void execute(@NonNull String parameters, @NonNull Client client) throws InvalidCommandParametersException;
 
     /**
      * Execute the command without parameters
      * @param client
      */
-    void execute(@NotNull Client client) throws InvalidCommandParametersException;
+    void execute(@NonNull Client client) throws InvalidCommandParametersException;
 }
