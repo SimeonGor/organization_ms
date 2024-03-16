@@ -76,7 +76,7 @@ public class JsonCollectionLoader implements CollectionLoader {
             Set<ConstraintViolation<MyCollection>> validates = validator.validate(collection);
             if (!validates.isEmpty()) {
                 for (var e : validates) {
-                    System.out.println(e);
+                    System.out.println(e.getMessage());
                 }
                 throw new InvalidCollectionDataException(path);
             }
