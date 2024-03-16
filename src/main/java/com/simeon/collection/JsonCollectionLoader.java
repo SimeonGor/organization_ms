@@ -122,6 +122,7 @@ public class JsonCollectionLoader implements CollectionLoader {
                     .create();
             String json = gson.toJson(collection);
             outputStreamWriter.write(json);
+            outputStreamWriter.flush();
         } catch (FileNotFoundException e) {
             throw new FileNotFoundException(String.format("%s : no such file", path));
         } catch (IOException e) {
