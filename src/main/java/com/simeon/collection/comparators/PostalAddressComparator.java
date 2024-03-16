@@ -1,4 +1,4 @@
-package com.simeon.collection.comarators;
+package com.simeon.collection.comparators;
 
 import com.simeon.collection.element.Organization;
 

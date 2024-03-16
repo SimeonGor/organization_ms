@@ -1,7 +1,7 @@
 package com.simeon.collection;
 
 
-import com.simeon.collection.comarators.AnnualTurnoverComparator;
+import com.simeon.collection.comparators.AnnualTurnoverComparator;
 import com.simeon.collection.element.Organization;
 import com.simeon.exceptions.InvalidCollectionDataException;
 import lombok.Getter;
