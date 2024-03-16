@@ -1,0 +1,14 @@
+show
+help
+clear
+show
+add
+qw
+199
+0
+0.0001
+public
+
+show
+
+execute_script script
