@@ -13,6 +13,7 @@ import java.io.*;
 import java.lang.reflect.Type;
 import java.nio.file.AccessDeniedException;
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.Set;
 
 /**
@@ -76,9 +77,13 @@ public class JsonCollectionLoader implements CollectionLoader {
             Set<ConstraintViolation<MyCollection>> validates = validator.validate(collection);
             if (!validates.isEmpty()) {
                 for (var e : validates) {
+                    var it = e.getPropertyPath().iterator();
+                    it.next();
+                    int index = it.next().getIndex();
+                    collection.getCollection().remove(index);
                     System.out.println(e.getMessage());
                 }
-                throw new InvalidCollectionDataException(path);
+//                throw new InvalidCollectionDataException(path);
             }
             return collection;
         } catch (FileNotFoundException e) {
