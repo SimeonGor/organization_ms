@@ -13,6 +13,7 @@ import java.io.*;
 import java.lang.reflect.Type;
 import java.nio.file.AccessDeniedException;
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.Collections;
 import java.util.Set;
 
@@ -40,7 +41,11 @@ public class JsonCollectionLoader implements CollectionLoader {
             @Override
             public LocalDate deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
                 String data = json.getAsString();
-                return LocalDate.parse(data);
+                try {
+                    return LocalDate.parse(data);
+                } catch (DateTimeParseException e) {
+                    return null;
+                }
             }
 
         }
@@ -79,11 +84,20 @@ public class JsonCollectionLoader implements CollectionLoader {
                 for (var e : validates) {
                     var it = e.getPropertyPath().iterator();
                     it.next();
-                    int index = it.next().getIndex();
-                    collection.getCollection().remove(index);
-                    System.out.println(e.getMessage());
+                    if (it.hasNext()) {
+                        var item = it.next();
+                        if (item.isInIterable()) {
+                            int index = item.getIndex();
+                            collection.getCollection().remove(index);
+                            System.out.println(String.format("Invlid data in %dth element. %s", index, e.getMessage()));
+                        }
+                    }
+                    else {
+                        System.out.println(String.format("Invlid data in %s. %s", e.getPropertyPath(), e.getMessage()));
+                        throw new InvalidCollectionDataException(path);
+                    }
                 }
-//                throw new InvalidCollectionDataException(path);
+
             }
             return collection;
         } catch (FileNotFoundException e) {
