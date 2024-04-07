@@ -2,7 +2,7 @@ package com.simeon.collection;
 
 
 import com.google.gson.*;
-import com.simeon.collection.element.OrganizationType;
+import com.simeon.element.OrganizationType;
 import com.simeon.exceptions.InvalidCollectionDataException;
 
 import javax.validation.ConstraintViolation;
@@ -14,7 +14,6 @@ import java.lang.reflect.Type;
 import java.nio.file.AccessDeniedException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-import java.util.Collections;
 import java.util.Set;
 
 /**

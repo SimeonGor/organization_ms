@@ -1,8 +1,6 @@
 package com.simeon.collection;
 
-
-import com.simeon.collection.comparators.AnnualTurnoverComparator;
-import com.simeon.collection.element.Organization;
+import com.simeon.element.Organization;
 import com.simeon.exceptions.InvalidCollectionDataException;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,13 +10,15 @@ import java.time.LocalDate;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.function.Predicate;
+import java.util.stream.Stream;
 
 /**
  * Class for managing the collection and its elements
  *
  * @see MyCollection
  */
-public class CollectionManager {
+//TODO log
+public class CollectionManager implements ICollectionManager<Organization> {
     private MyCollection collection;
     private final String filepath;
     private final CollectionLoader collectionLoader;
@@ -26,7 +26,7 @@ public class CollectionManager {
 
     @Getter
     @Setter
-    private Comparator<Organization> comparator = new AnnualTurnoverComparator();
+    private Comparator<Organization> comparator;
 
     /**
      * Load collection in the file by collection loader
@@ -35,7 +35,7 @@ public class CollectionManager {
      * @throws InvalidCollectionDataException invalid collection data in the file
      * @throws IOException errors reading from a file
      */
-    public CollectionManager(String path, CollectionLoader collectionLoader) throws InvalidCollectionDataException, IOException {
+    public CollectionManager(String path, CollectionLoader collectionLoader, Comparator<Organization> comparator) throws InvalidCollectionDataException, IOException {
         this.filepath = path;
         this.collectionLoader = collectionLoader;
         collection = collectionLoader.load(path);
@@ -43,6 +43,7 @@ public class CollectionManager {
             collection = new MyCollection();
             collection.setCreationDate(LocalDate.now());
         }
+        this.comparator = comparator;
         collection.getCollection().sort(comparator);
 
         long maxId = 0;
@@ -59,19 +60,19 @@ public class CollectionManager {
      * get info about the collection
      * @return string with info
      */
+    @Override
     public String getInfo() {
-        StringBuilder result = new StringBuilder();
-        result.append("Type: ").append("Organization")
-                .append("\nCreation date: ").append(collection.getCreationDate())
-                .append("\nModified date: ").append(collection.getModifiedDate())
-                .append("\nSize: ").append(collection.getCollection().size());
-        return result.toString();
+        return "Type: " + "Organization" +
+                "\nCreation date: " + collection.getCreationDate() +
+                "\nModified date: " + collection.getModifiedDate() +
+                "\nSize: " + collection.getCollection().size();
     }
 
     /**
      * add new item to the collection
      * @param e instance of Organization
      */
+    @Override
     public void add(Organization e) {
         e.setId(id_sequence.nextValue());
         collection.add(e);
@@ -82,6 +83,7 @@ public class CollectionManager {
      * Save collection to the file
      * @throws IOException errors writing to a file
      */
+    @Override
     public void save() throws IOException {
         collectionLoader.save(filepath, collection);
     }
@@ -89,6 +91,7 @@ public class CollectionManager {
     /**
      * clear the collection
      */
+    @Override
     public void clear() {
         collection.getCollection().clear();
         collection.setModifiedDate(LocalDate.now());
@@ -98,32 +101,18 @@ public class CollectionManager {
      * check if collection is empty
      * @return true if collection is empty
      */
+    @Override
     public boolean isEmpty() {
         return collection.getCollection().isEmpty();
     }
 
     /**
-     * get a collection in a string view
-     * @return collection in a string view
+     * get Stream
+     * @return java.util.stream.Stream
      */
-    public String getCollectionAsString() {
-        return collection.toString();
-    }
-
-    /**
-     * get a collection in a string view in which the condition is true
-     * @param predicate condition
-     * @return new collection with items in which the condition is true
-     */
-    public String selectWhere(Predicate<Organization> predicate) {
-        MyCollection result = new MyCollection();
-        for (var e : collection.getCollection()) {
-            if (predicate.test(e)) {
-                result.add(e);
-            }
-        }
-        result.getCollection().sort(comparator);
-        return result.toString();
+    @Override
+    public Stream<Organization> getStream() {
+        return collection.collection.stream();
     }
 
     /**
@@ -131,6 +120,7 @@ public class CollectionManager {
      * @param predicate condition
      * @return true if the elements have been deleted
      */
+    @Override
     public boolean removeWhere(Predicate<Organization> predicate) {
         return collection.getCollection().removeIf(predicate);
     }
@@ -138,35 +128,27 @@ public class CollectionManager {
     /**
      * remove item at index
      * @param index index in the collection
+     * @return true if the elements have been deleted
      */
-    public void removeAt(int index) {
-        collection.getCollection().remove(index);
-    }
-
-    /**
-     * find minimum item
-     * @param comp comparator
-     * @return instance of Organization
-     */
-    public Organization minIf(Comparator<Organization> comp) {
-        return Collections.min(collection.getCollection(), comp);
-    }
-    /**
-     * find maximum item
-     * @param comp comparator
-     * @return instance of Organization
-     */
-    public Organization maxIf(Comparator<Organization> comp) {
-        return Collections.max(collection.getCollection(), comp);
+    @Override
+    public boolean removeAt(int index) {
+        try {
+            collection.getCollection().remove(index);
+            return true;
+        }
+        catch (ArrayIndexOutOfBoundsException e) {
+            return false;
+        }
     }
 
     /**
      * update item in which the condition is true
      * @param predicate condition
      * @param item instance of Organization
-     * @return true if the elements have been replaced
+     * @return true if the element have been upgraded
      */
-    public boolean updateWhere(Predicate<Organization> predicate, Organization item) {
+    @Override
+    public boolean updateWhere(Organization item, Predicate<Organization> predicate) {
         boolean isReplaced = false;
         for (int i = 0; i < collection.getCollection().size(); i++) {
             Organization element = collection.getCollection().get(i);
@@ -182,10 +164,19 @@ public class CollectionManager {
         return isReplaced;
     }
 
+    /**
+     * get size of collection
+     * @return size of collection
+     */
+    @Override
     public int size() {
         return collection.getCollection().size();
     }
 
+    /**
+     * Reorder the collection
+     */
+    @Override
     public void reorder() {
         Collections.reverse(collection.getCollection());
     }
