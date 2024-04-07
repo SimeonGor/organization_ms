@@ -1,8 +1,13 @@
-package com.simeon.collection.element;
+package com.simeon.element;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
+
+/**
+ * Annual turnover validator
+ * @see ConstraintValidator
+ */
 public class AnnualTurnoverValidator implements ConstraintValidator<AnnualTurnoverConstraint, Double> {
     AnnualTurnoverConstraint annualTurnoverConstraint;
     @Override

@@ -1,6 +1,6 @@
 package com.simeon.collection.comparators;
 
-import com.simeon.collection.element.Organization;
+import com.simeon.element.Organization;
 
 import java.util.Comparator;
 

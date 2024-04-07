@@ -1,7 +1,8 @@
-package com.simeon.collection.element;
+package com.simeon.element;
 
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Enum for organization type
@@ -34,29 +35,15 @@ public enum OrganizationType {
 
     /**
      * Return array of the types of organization
-     * @return String[]
+     * @return List
      */
-    public static String[] listOfElements() {
+    public static List<String> listOfElements() {
         ArrayList<String> result = new ArrayList<>();
         for (var e : values()) {
             result.add(e.toString());
         }
 
-        return result.toArray(new String[0]);
-    }
-
-    /**
-     * Return a string listing the types of organization in the form { ... }
-     * @return String
-     */
-    public static String listOfElementsPrettyView() {
-        StringBuilder result = new StringBuilder();
-        result.append("{ ");
-        for (var e : listOfElements()) {
-            result.append(e).append(", ");
-        }
-        result.delete(result.length() - 2, result.length()).append(" }");
-        return result.toString();
+        return result;
     }
 
     /**

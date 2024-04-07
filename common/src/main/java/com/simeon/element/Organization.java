@@ -1,4 +1,4 @@
-package com.simeon.collection.element;
+package com.simeon.element;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -13,7 +13,7 @@ import java.time.LocalDate;
 
 
 /**
- * Class for organization
+ * Organization
  */
 @Getter
 @Setter
