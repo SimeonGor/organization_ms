@@ -20,10 +20,10 @@ public interface ICommand {
      * Execute the command with parameters
      * @param parameters map of parameters
      */
-    Response execute(@NonNull HashMap<String, Object> parameters) throws InvalidCommandParametersException;
+    Response execute(@NonNull HashMap<String, Object> parameters);
 
     /**
      * Execute the command without parameters
      */
-    Response execute() throws InvalidCommandParametersException;
+    Response execute();
 }
