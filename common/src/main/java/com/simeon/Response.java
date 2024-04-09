@@ -18,9 +18,8 @@ public class Response implements Serializable {
      * Response status
      */
     private final boolean status;
-    //TODO необходимо поменять тип
     /**
      * Response data
      */
-    private final Object data;
+    private final Serializable data;
 }

@@ -21,5 +21,5 @@ public class Request implements Serializable {
     /**
      * List of parameters
      */
-    private final HashMap<String, Object> params;
+    private final HashMap<String, Serializable> params;
 }
