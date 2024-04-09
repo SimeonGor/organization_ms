@@ -5,6 +5,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 
 /**
  * Organization's address
@@ -13,7 +14,7 @@ import javax.validation.constraints.Size;
 @Getter
 @Setter
 @ToString
-public class Address {
+public class Address implements Serializable {
     /**
      * The string must be at least 0 characters long or empty.
      */

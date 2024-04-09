@@ -7,6 +7,7 @@ import com.simeon.element.OrganizationType;
 import lombok.NonNull;
 import lombok.extern.java.Log;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.logging.Level;
 
@@ -30,7 +31,7 @@ public class FilterGreaterThanTypeCommand extends Command<Organization> {
                 return new Response(true, "The collection is empty");
             }
             return new Response(true,
-                    collectionManager.getStream().filter((o1) -> o1.getType().compareTo(type) > 0));
+                    (ArrayList<Organization>) collectionManager.getStream().filter((o1) -> o1.getType().compareTo(type) > 0).toList());
         }
         catch (ClassCastException e) {
             return new Response(false, "Invalid type of parameters");

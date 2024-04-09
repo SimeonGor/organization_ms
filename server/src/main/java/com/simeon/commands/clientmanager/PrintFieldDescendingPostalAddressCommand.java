@@ -5,6 +5,7 @@ import com.simeon.collection.ICollectionManager;
 import com.simeon.element.Organization;
 import lombok.extern.java.Log;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.logging.Level;
 
@@ -25,7 +26,7 @@ public class PrintFieldDescendingPostalAddressCommand extends Command<Organizati
             return new Response(true, "The collection is empty");
         }
         return new Response(true,
-                collectionManager.getStream()
+                (ArrayList<Organization>) collectionManager.getStream()
                         .filter((o) -> o.getPostalAddress() != null && o.getPostalAddress().getZipCode() != null)
                         .sorted(Comparator.comparing(o -> o.getPostalAddress().getZipCode()))
                         .toList());

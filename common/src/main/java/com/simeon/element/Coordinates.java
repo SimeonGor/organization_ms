@@ -5,6 +5,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.validation.constraints.Max;
+import java.io.Serializable;
 
 /**
  * Class for organization coordinates
@@ -12,7 +13,7 @@ import javax.validation.constraints.Max;
 @Getter
 @Setter
 @ToString
-public class Coordinates {
+public class Coordinates implements Serializable {
     /**
      * Maximum field value: 199
      */

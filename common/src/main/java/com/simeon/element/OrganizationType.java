@@ -1,13 +1,14 @@
 package com.simeon.element;
 
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Enum for organization type
  */
-public enum OrganizationType {
+public enum OrganizationType implements Serializable {
     COMMERCIAL {
         @Override
         public String toString() {

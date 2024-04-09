@@ -5,6 +5,7 @@ import com.simeon.collection.ICollectionManager;
 import com.simeon.element.Organization;
 import lombok.extern.java.Log;
 
+import java.util.ArrayList;
 import java.util.logging.Level;
 
 /**
@@ -23,6 +24,6 @@ public class ShowCommand extends Command<Organization> {
         if (collectionManager == null || collectionManager.isEmpty()) {
             return new Response(true, "The collection is empty");
         }
-        return new Response(true, collectionManager.getStream().toList());
+        return new Response(true, (ArrayList<Organization>) collectionManager.getStream().toList());
     }
 }
