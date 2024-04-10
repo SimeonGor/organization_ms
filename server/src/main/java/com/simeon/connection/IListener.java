@@ -1,6 +1,6 @@
 package com.simeon.connection;
 
-import java.nio.channels.ByteChannel;
+import java.net.Socket;
 
 /**
  * Interface to  listen new connections
@@ -10,7 +10,7 @@ public interface IListener {
      * Channel of connection
      * @return channel or null if there is not any new connections
      */
-    ByteChannel accept();
+    Socket accept();
 
     /**
      * Close listener
