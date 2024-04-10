@@ -11,9 +11,11 @@ import java.util.logging.Level;
  * Command to print information about the collection
  */
 @Log
-public class InfoCommand extends Command<Organization> {
+public class InfoCommand extends Command {
+    protected final ICollectionManager<Organization> collectionManager;
     public InfoCommand(ICollectionManager<Organization> collectionManager) {
-        super(collectionManager, "info", "print information about the collection");
+        super("info", "print information about the collection");
+        this.collectionManager = collectionManager;
     }
 
     @Override

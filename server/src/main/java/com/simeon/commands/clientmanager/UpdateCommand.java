@@ -13,10 +13,12 @@ import java.util.logging.Level;
  * Command to update the value of a collection item whose id is equal to the specified one
  */
 @Log
-public class UpdateCommand extends Command<Organization> {
+public class UpdateCommand extends Command {
+    protected final ICollectionManager<Organization> collectionManager;
     public UpdateCommand(ICollectionManager<Organization> collectionManager) {
-        super(collectionManager, "update",
+        super("update",
                 "update the value of a collection item whose id is equal to the specified one");
+        this.collectionManager = collectionManager;
         addParameter("id", Long.class);
         addParameter("element", Organization.class);
     }

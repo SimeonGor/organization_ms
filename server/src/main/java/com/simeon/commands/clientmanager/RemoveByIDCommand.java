@@ -13,9 +13,11 @@ import java.util.logging.Level;
  * Command to delete an item from the collection by its id
  */
 @Log
-public class RemoveByIDCommand extends Command<Organization> {
+public class RemoveByIDCommand extends Command {
+    protected final ICollectionManager<Organization> collectionManager;
     public RemoveByIDCommand(ICollectionManager<Organization> collectionManager) {
-        super(collectionManager, "remove_by_id", "delete an item from the collection by its id");
+        super("remove_by_id", "delete an item from the collection by its id");
+        this.collectionManager = collectionManager;
         addParameter("id", Long.class);
     }
 

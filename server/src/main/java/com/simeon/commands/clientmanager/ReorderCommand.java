@@ -11,9 +11,11 @@ import java.util.logging.Level;
  * Command to reorder the collection
  */
 @Log
-public class ReorderCommand extends Command<Organization> {
+public class ReorderCommand extends Command {
+    protected final ICollectionManager<Organization> collectionManager;
     public ReorderCommand(ICollectionManager<Organization> collectionManager) {
-        super(collectionManager, "reorder", "reorder the collection");
+        super("reorder", "reorder the collection");
+        this.collectionManager = collectionManager;
     }
 
     @Override

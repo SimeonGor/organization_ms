@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.NonNull;
 import lombok.extern.java.Log;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.logging.Level;
 
@@ -15,22 +16,20 @@ import java.util.logging.Level;
  * Command abstract class
  */
 @Log
-public abstract class Command<T> implements ICommand {
+public abstract class Command implements ICommand {
     @Getter
     protected String name, description;
-    protected final ICollectionManager<T> collectionManager;
     @Getter(AccessLevel.PUBLIC)
-    private HashMap<String, Class<?>> parameterTypes;
+    private HashMap<String, Class<? extends Serializable>> parameterTypes;
     protected boolean hasParameters;
 
-    public Command(ICollectionManager<T> collectionManager, String name, String description) {
-        this.collectionManager = collectionManager;
+    public Command(String name, String description) {
         this.name = name;
         this.description = description;
         this.hasParameters = false;
     }
 
-    protected void addParameter(String name, Class<?> type) {
+    protected void addParameter(String name, Class<? extends Serializable> type) {
         parameterTypes.put(name, type);
         hasParameters = true;
     }

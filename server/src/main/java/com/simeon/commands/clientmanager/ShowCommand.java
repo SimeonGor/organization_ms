@@ -12,10 +12,12 @@ import java.util.logging.Level;
  * Command to print all the elements of the collection in a string representation to the standard output stream
  */
 @Log
-public class ShowCommand extends Command<Organization> {
+public class ShowCommand extends Command {
+    protected final ICollectionManager<Organization> collectionManager;
     public ShowCommand(ICollectionManager<Organization> collectionManager) {
-        super(collectionManager, "show",
+        super("show",
                 "print all the elements of the collection in a string representation to the standard output stream");
+        this.collectionManager = collectionManager;
     }
 
     @Override

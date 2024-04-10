@@ -33,11 +33,10 @@ public class ServerSocketListener implements IListener {
     }
 
     @Override
-    public SocketChannel accept() {
+    public Socket accept() {
         try {
             if (!serverSocket.isClosed()) {
-                Socket socket = serverSocket.accept();
-                return socket.getChannel();
+                return serverSocket.accept();
             }
             return null;
         }

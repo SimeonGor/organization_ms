@@ -1,9 +1,9 @@
 package com.simeon.commands;
 
 import com.simeon.Response;
-import com.simeon.exceptions.InvalidCommandParametersException;
 import lombok.NonNull;
 
+import java.io.Serializable;
 import java.util.HashMap;
 
 /**
@@ -11,7 +11,7 @@ import java.util.HashMap;
  */
 public interface ICommand {
     String getName();
-    HashMap<String, Class<?>> getParameterTypes();
+    HashMap<String, Class<? extends Serializable>> getParameterTypes();
     String getDescription();
 
     boolean hasParameters();

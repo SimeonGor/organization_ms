@@ -14,10 +14,12 @@ import java.util.logging.Level;
  * Command to add new item to the collection if its value exceeds the value of the largest item in this collection
  */
 @Log
-public class AddIfMaxCommand extends Command<Organization> {
+public class AddIfMaxCommand extends Command {
+    protected final ICollectionManager<Organization> collectionManager;
     public AddIfMaxCommand(ICollectionManager<Organization> collectionManager) {
-        super(collectionManager, "add_if_max",
+        super("add_if_max",
                 "add a new item to the collection if its value exceeds the value of the largest item in this collection");
+        this.collectionManager = collectionManager;
         addParameter("element", Organization.class);
     }
 

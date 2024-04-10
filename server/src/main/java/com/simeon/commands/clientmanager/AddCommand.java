@@ -13,10 +13,12 @@ import java.util.logging.Level;
  * Command to add new element to the collection
  */
 @Log
-public class AddCommand extends Command<Organization> {
+public class AddCommand extends Command {
+    protected final ICollectionManager<Organization> collectionManager;
     public AddCommand(ICollectionManager<Organization> collectionManager) {
-        super(collectionManager, "add", "add new element to the collection");
-        this.addParameter("element", Organization.class);
+        super("add", "add new element to the collection");
+        this.collectionManager = collectionManager;
+        addParameter("element", Organization.class);
     }
 
     @Override

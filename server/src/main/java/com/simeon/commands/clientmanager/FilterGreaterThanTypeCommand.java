@@ -15,10 +15,12 @@ import java.util.logging.Level;
  * Command to output elements whose type field value is greater than the specified one
  */
 @Log
-public class FilterGreaterThanTypeCommand extends Command<Organization> {
+public class FilterGreaterThanTypeCommand extends Command {
+    protected final ICollectionManager<Organization> collectionManager;
     public FilterGreaterThanTypeCommand(ICollectionManager<Organization> collectionManager) {
-        super(collectionManager, "filter_greater_than_type",
+        super("filter_greater_than_type",
                 "output elements whose type field value is greater than the specified one");
+        this.collectionManager = collectionManager;
         addParameter("type", OrganizationType.class);
     }
 

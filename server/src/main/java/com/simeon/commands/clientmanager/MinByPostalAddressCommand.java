@@ -12,9 +12,12 @@ import java.util.logging.Level;
  * Command to output any object from the collection whose postal Address field value is minimal
  */
 @Log
-public class MinByPostalAddressCommand extends Command<Organization> {
+public class MinByPostalAddressCommand extends Command {
+    protected final ICollectionManager<Organization> collectionManager;
     public MinByPostalAddressCommand(ICollectionManager<Organization> collectionManager) {
-        super(collectionManager, "min_by_postal_address", "output any object from the collection whose postal Address field value is minimal");
+        super("min_by_postal_address",
+                "output any object from the collection whose postal Address field value is minimal");
+        this.collectionManager = collectionManager;
     }
 
     @Override

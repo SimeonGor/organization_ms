@@ -11,9 +11,11 @@ import java.util.logging.Level;
  * Command to clearing the collection
  */
 @Log
-public class ClearCommand extends Command<Organization> {
+public class ClearCommand extends Command {
+    protected final ICollectionManager<Organization> collectionManager;
     public ClearCommand(ICollectionManager<Organization> collectionManager) {
-        super(collectionManager, "clear", "clear the collection");
+        super("clear", "clear the collection");
+        this.collectionManager = collectionManager;
     }
 
     @Override

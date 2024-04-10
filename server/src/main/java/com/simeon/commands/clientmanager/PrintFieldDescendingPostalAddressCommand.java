@@ -13,10 +13,12 @@ import java.util.logging.Level;
  * Command to print the values of the PostalAddress field of all elements in descending order
  */
 @Log
-public class PrintFieldDescendingPostalAddressCommand extends Command<Organization> {
+public class PrintFieldDescendingPostalAddressCommand extends Command {
+    protected final ICollectionManager<Organization> collectionManager;
     public PrintFieldDescendingPostalAddressCommand(ICollectionManager<Organization> collectionManager) {
-        super(collectionManager, "print_field_descending_postal_address",
+        super("print_field_descending_postal_address",
                 "print the values of the PostalAddress field of all elements in descending order");
+        this.collectionManager = collectionManager;
     }
 
     @Override

@@ -13,10 +13,12 @@ import java.util.logging.Level;
  * Command to delete an item from the collection by index
  */
 @Log
-public class RemoveAtCommand extends Command<Organization> {
+public class RemoveAtCommand extends Command {
+    protected final ICollectionManager<Organization> collectionManager;
     public RemoveAtCommand(ICollectionManager<Organization> collectionManager) {
-        super(collectionManager, "remove_at","delete an item from the collection by index");
+        super("remove_at","delete an item from the collection by index");
         addParameter("index", Integer.class);
+        this.collectionManager = collectionManager;
     }
 
     @Override
