@@ -11,7 +11,6 @@ import java.util.HashMap;
 @Setter
 @AllArgsConstructor
 public class CommandInfo {
-    protected String name, description;
-    protected HashMap<String, Class<? extends Serializable>> parameters;
-
+    private String name, description;
+    private HashMap<String, Class<? extends Serializable>> parameters;
 }
