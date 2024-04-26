@@ -5,6 +5,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.validation.constraints.Size;
+import java.io.Serial;
 import java.io.Serializable;
 
 /**
@@ -15,6 +16,8 @@ import java.io.Serializable;
 @Setter
 @ToString
 public class Address implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 0L;
     /**
      * The string must be at least 0 characters long or empty.
      */

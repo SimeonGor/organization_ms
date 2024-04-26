@@ -5,6 +5,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.validation.constraints.Max;
+import java.io.Serial;
 import java.io.Serializable;
 
 /**
@@ -14,6 +15,8 @@ import java.io.Serializable;
 @Setter
 @ToString
 public class Coordinates implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 0L;
     /**
      * Maximum field value: 199
      */

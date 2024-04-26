@@ -1,6 +1,7 @@
 package com.simeon.element;
 
 import javax.validation.constraints.NotNull;
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +34,9 @@ public enum OrganizationType implements Serializable {
             return "OJSC";
         }
     };
+
+    @Serial
+    private static final long serialVersionUID = 0L;
 
     /**
      * Return array of the types of organization

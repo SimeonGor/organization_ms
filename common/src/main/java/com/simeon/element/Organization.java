@@ -9,6 +9,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDate;
 
@@ -20,6 +21,8 @@ import java.time.LocalDate;
 @Setter
 @ToString
 public class Organization implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 0L;
     @NotNull
     @Min(value=0)
     private long id; //Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
