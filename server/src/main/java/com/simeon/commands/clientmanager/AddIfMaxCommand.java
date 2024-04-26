@@ -2,10 +2,12 @@ package com.simeon.commands.clientmanager;
 
 import com.simeon.Response;
 import com.simeon.collection.ICollectionManager;
+import com.simeon.commands.Command;
 import com.simeon.element.Organization;
 import lombok.NonNull;
 import lombok.extern.java.Log;
 
+import java.io.Serializable;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.logging.Level;
@@ -24,8 +26,8 @@ public class AddIfMaxCommand extends Command {
     }
 
     @Override
-    public Response execute(@NonNull HashMap<String, Object> parameters) {
-        log.log(Level.FINE, "Add_if_max command started with ", parameters.toString());
+    public Response execute(@NonNull HashMap<String, ? extends Serializable> parameters) {
+        log.log(Level.INFO, "Add_if_max command started with ", parameters.toString());
         try {
             Organization element = (Organization) parameters.get("element");
             Comparator cmp = collectionManager.getComparator();

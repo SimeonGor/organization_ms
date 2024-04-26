@@ -2,10 +2,12 @@ package com.simeon.commands.clientmanager;
 
 import com.simeon.Response;
 import com.simeon.collection.ICollectionManager;
+import com.simeon.commands.Command;
 import com.simeon.element.Organization;
 import lombok.NonNull;
 import lombok.extern.java.Log;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.logging.Level;
 
@@ -22,8 +24,8 @@ public class RemoveAtCommand extends Command {
     }
 
     @Override
-    public Response execute(@NonNull HashMap<String, Object> parameters) {
-        log.log(Level.FINE, "{0} command command started with {1}", new String[]{name, parameters.toString()});
+    public Response execute(@NonNull HashMap<String, ? extends Serializable> parameters) {
+        log.log(Level.INFO, "{0} command command started with {1}", new String[]{name, parameters.toString()});
         if (collectionManager.isEmpty()) {
             return new Response(true, "The collection is empty");
         }

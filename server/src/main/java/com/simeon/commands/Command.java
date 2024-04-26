@@ -1,4 +1,4 @@
-package com.simeon.commands.clientmanager;
+package com.simeon.commands;
 
 import com.simeon.Response;
 import com.simeon.collection.ICollectionManager;
@@ -20,7 +20,7 @@ public abstract class Command implements ICommand {
     @Getter
     protected String name, description;
     @Getter(AccessLevel.PUBLIC)
-    private HashMap<String, Class<? extends Serializable>> parameterTypes;
+    private HashMap<String, Class<? extends Serializable>> parameterTypes = new HashMap<>();
     protected boolean hasParameters;
 
     public Command(String name, String description) {
@@ -48,7 +48,7 @@ public abstract class Command implements ICommand {
      * @param parameters map of parameters
      */
     @Override
-    public Response execute(@NonNull HashMap<String, Object> parameters) {
+    public Response execute(@NonNull HashMap<String, ? extends Serializable> parameters) {
         log.log(Level.FINE, "Execution stub with the parameter started");
         if (!hasParameters()) {
             return new Response(false, "Invalid parameters");

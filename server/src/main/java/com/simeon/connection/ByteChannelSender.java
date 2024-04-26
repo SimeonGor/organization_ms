@@ -5,20 +5,16 @@ import lombok.AllArgsConstructor;
 
 import java.io.IOException;
 import java.io.ObjectOutputStream;
-import java.io.OutputStream;
+import java.nio.channels.ByteChannel;
+import java.nio.channels.Channels;
 
-/**
- * Sender that use OutputStream
- * @see OutputStream
- */
 @AllArgsConstructor
-public class Sender implements ISender {
-    protected OutputStream outputStream;
-
+public class ByteChannelSender implements ISender {
+    protected ByteChannel byteChannel;
     @Override
     public boolean send(Response response) {
         try {
-            ObjectOutputStream out = new ObjectOutputStream(outputStream);
+            ObjectOutputStream out = new ObjectOutputStream(Channels.newOutputStream(byteChannel));
             out.writeObject(response);
             return true;
         } catch (IOException e) {

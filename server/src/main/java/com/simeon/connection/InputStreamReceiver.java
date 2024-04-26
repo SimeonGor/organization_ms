@@ -6,9 +6,10 @@ import lombok.AllArgsConstructor;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
+import java.nio.channels.Channels;
 
 @AllArgsConstructor
-public class Receiver implements IReceiver {
+public class InputStreamReceiver implements IReceiver {
     protected InputStream inputStream;
     @Override
     public Request receive() {

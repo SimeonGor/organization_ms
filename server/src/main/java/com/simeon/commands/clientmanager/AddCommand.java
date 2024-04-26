@@ -2,10 +2,12 @@ package com.simeon.commands.clientmanager;
 
 import com.simeon.Response;
 import com.simeon.collection.ICollectionManager;
+import com.simeon.commands.Command;
 import com.simeon.element.Organization;
 import lombok.NonNull;
 import lombok.extern.java.Log;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.logging.Level;
 
@@ -22,8 +24,8 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public Response execute(@NonNull HashMap<String, Object> parameters) {
-        log.log(Level.FINE, "Add command started with ", parameters.toString());
+    public Response execute(@NonNull HashMap<String, ? extends Serializable> parameters) {
+        log.log(Level.INFO, "Add command started with ", parameters.toString());
         try {
             collectionManager.add((Organization) parameters.get("element"));
             return new Response(true, "New element has been added");

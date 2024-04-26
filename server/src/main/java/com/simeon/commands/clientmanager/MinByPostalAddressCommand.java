@@ -2,6 +2,7 @@ package com.simeon.commands.clientmanager;
 
 import com.simeon.Response;
 import com.simeon.collection.ICollectionManager;
+import com.simeon.commands.Command;
 import com.simeon.element.Organization;
 import lombok.extern.java.Log;
 
@@ -22,7 +23,7 @@ public class MinByPostalAddressCommand extends Command {
 
     @Override
     public Response execute() {
-        log.log(Level.FINE, "{0} command command started", name);
+        log.log(Level.INFO, "{0} command command started", name);
         if (collectionManager.isEmpty()) {
             return new Response(true, "The collection is empty");
         }
@@ -33,6 +34,7 @@ public class MinByPostalAddressCommand extends Command {
             return o1.getPostalAddress().getZipCode().compareTo(
                     o2.getPostalAddress().getZipCode());
         });
+
         return op.map(organization -> new Response(true, organization))
                 .orElseGet(() -> new Response(true, "No such elements")); // интересная замена от IDE
     }

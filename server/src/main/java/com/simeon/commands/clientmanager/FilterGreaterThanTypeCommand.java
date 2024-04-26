@@ -2,11 +2,13 @@ package com.simeon.commands.clientmanager;
 
 import com.simeon.Response;
 import com.simeon.collection.ICollectionManager;
+import com.simeon.commands.Command;
 import com.simeon.element.Organization;
 import com.simeon.element.OrganizationType;
 import lombok.NonNull;
 import lombok.extern.java.Log;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.logging.Level;
@@ -25,15 +27,15 @@ public class FilterGreaterThanTypeCommand extends Command {
     }
 
     @Override
-    public Response execute(@NonNull HashMap<String, Object> parameters) {
-        log.log(Level.FINE, "filter_greater_than_type command started with ", parameters.toString());
+    public Response execute(@NonNull HashMap<String, ? extends Serializable> parameters) {
+        log.log(Level.INFO, "filter_greater_than_type command started with ", parameters.toString());
         try {
             OrganizationType type = (OrganizationType) parameters.get("type");
             if (collectionManager.isEmpty()) {
                 return new Response(true, "The collection is empty");
             }
             return new Response(true,
-                    (ArrayList<Organization>) collectionManager.getStream().filter((o1) -> o1.getType().compareTo(type) > 0).toList());
+                    new ArrayList<Organization>(collectionManager.getStream().filter((o1) -> o1.getType().compareTo(type) > 0).toList()));
         }
         catch (ClassCastException e) {
             return new Response(false, "Invalid type of parameters");

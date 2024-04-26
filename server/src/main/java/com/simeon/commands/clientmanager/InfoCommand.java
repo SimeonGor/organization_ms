@@ -2,6 +2,7 @@ package com.simeon.commands.clientmanager;
 
 import com.simeon.Response;
 import com.simeon.collection.ICollectionManager;
+import com.simeon.commands.Command;
 import com.simeon.element.Organization;
 import lombok.extern.java.Log;
 
@@ -20,7 +21,7 @@ public class InfoCommand extends Command {
 
     @Override
     public Response execute() {
-        log.log(Level.FINE, "{0} command command started", name);
+        log.log(Level.INFO, "{0} command command started", name);
         String result;
         if (collectionManager.isEmpty()) {
             result= "The collection is empty";
