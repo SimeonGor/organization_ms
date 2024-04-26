@@ -1,42 +1,115 @@
 package com.simeon;
 
-import com.simeon.connection.Receiver;
-import com.simeon.connection.Sender;
+import com.simeon.commands.*;
+import com.simeon.commands.input.*;
+import com.simeon.commands.output.*;
+import com.simeon.connection.*;
+import com.simeon.exceptions.InvalidArgumentException;
+import com.simeon.exceptions.InvalidConnectionException;
+import com.simeon.exceptions.UnknownCommandException;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.java.Log;
 
-import javax.management.ObjectName;
 import java.io.IOException;
 import java.io.Serializable;
 import java.net.Socket;
-import java.net.UnknownHostException;
-import java.nio.channels.SocketChannel;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Scanner;
 
 /**
  * Class for client that which interacts with the user
  */
 @Log
 public class Client {
-    public static void main(String[] args) {
-        try (Socket socket = new Socket("localhost", 3345)) {
-            if (!socket.isOutputShutdown()) {
-                System.out.println(socket);
-                Sender sender = new Sender(socket.getOutputStream());
-                HashMap<String, Serializable> param = new HashMap<>();
-                param.put("a", "b");
-                sender.send(new Request("help", param));
-                Receiver receiver = new Receiver(socket.getInputStream());
-                Response response = receiver.receive();
-                while (response == null) {
-                    response = receiver.receive();
-                }
-                System.out.println(response.isStatus());
-                System.out.println(response.getData());
+    @Setter
+    @Getter
+    private CLI cli;
+    private CommandHandler commandHandler;
+    private final InputHandler inputHandler;
+    private final OutputHandler outputHandler;
+    private Socket socket;
+
+    public Client(CLI cli, InputHandler inputHandler, OutputHandler outputHandler) {
+        this.cli = cli;
+        this.inputHandler = inputHandler;
+        this.outputHandler = outputHandler;
+    }
+
+    public void start(String ip, int port) throws IOException, InvalidConnectionException {
+        cli.print("Connecting...\n");
+        this.socket = new Socket(ip, port);
+        if (!socket.isOutputShutdown()) {
+            ISender sender = SenderFactory.getSEnder(socket.getOutputStream());
+            IReceiver receiver = ReceiverFactory.getReceiver(socket.getInputStream());
+
+            ServerCommandHandler servercommandHandler = new ServerCommandHandler(sender, receiver);
+
+            Response response = receiver.receive();
+            if (response != null && response.isStatus())
+                servercommandHandler.setCommands((ArrayList<CommandInfo>) response.getData());
+            else {
+                throw new InvalidConnectionException(socket.getInetAddress(), port);
             }
-        } catch (UnknownHostException e) {
-            throw new RuntimeException(e);
+            ClientCommandHandler clientCommandHandler = new ClientCommandHandler();
+            clientCommandHandler.setSuccessor(servercommandHandler);
+            clientCommandHandler.addCommand(new HelpCommand(clientCommandHandler));
+            clientCommandHandler.addCommand(new ExitCommand(this));
+            clientCommandHandler.addCommand(new ExecuteScriptCommand(this));
+            this.commandHandler = clientCommandHandler;
+            cli.print("Connected!\n");
+        }
+    }
+    public void loop() {
+        Scanner scanner = cli.getScanner();
+        cli.printShellPrompt();
+        try {
+            while (scanner.hasNext()) {
+                String method = scanner.next();
+                try {
+                    CommandInfo commandInfo = commandHandler.getCommandInfoOf(method);
+                    HashMap<String, Class<? extends Serializable>> params_info = commandInfo.getParameters();
+                    HashMap<String, Serializable> parameters = new HashMap<>();
+                    for (var e : params_info.entrySet()) {
+                        parameters.put(e.getKey(), inputHandler.getInput(e.getValue(), cli));
+                    }
+                    Response response = commandHandler.handle(method, parameters);
+                    outputHandler.handle(response.getData(), cli); // TODO: 26.04.2024 может вернуть null
+                } catch (UnknownCommandException | InvalidArgumentException e) {
+                    cli.error(e);
+                }
+                cli.flush();
+                cli.printShellPrompt();
+            }
+        } catch (IllegalStateException ignored) {
+        }
+    }
+
+    public void close() throws IOException {
+        cli.scanner.close();
+        socket.close();
+    }
+
+    public static void main(String[] args) {
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            System.out.println("Client was interrupted");
+        }));
+
+        CLI cli = new CLI(System.in, System.out, System.out);
+
+        Client client = new Client(cli,
+                InputHandlerFactory.getInputHandler(),
+                OutputHandlerFactory.getOutputHandler());
+
+        try {
+            client.start(args[0], Integer.parseInt(args[1]));
+            client.loop();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            System.out.println("Something went wrong. (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧");
+            System.out.println("Server is not available now");
+        } catch (InvalidConnectionException e) {
+            System.out.println(e.getMessage());
         }
     }
 }
