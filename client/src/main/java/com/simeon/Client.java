@@ -45,7 +45,7 @@ public class Client {
             IReceiver receiver = ReceiverFactory.getReceiver(socket.getInputStream());
 
             ServerCommandHandler servercommandHandler = new ServerCommandHandler(sender, receiver);
-
+            sender.send(new Request("get_api", new HashMap<>()));
             Response response = receiver.receive();
             if (response != null && response.isStatus())
                 servercommandHandler.setCommands((ArrayList<CommandInfo>) response.getData());
