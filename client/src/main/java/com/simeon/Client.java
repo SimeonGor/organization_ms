@@ -80,7 +80,7 @@ public class Client {
                         parameters.put(e.getKey(), inputHandler.getInput(e.getValue(), cli));
                     }
                     Response response = commandHandler.handle(method, parameters);
-                    outputHandler.handle(response.getData(), cli); // TODO: 26.04.2024 может вернуть null
+                    outputHandler.handle(response.getData(), cli);
                 } catch (UnknownCommandException | InvalidArgumentException e) {
                     cli.error(e);
                 }
