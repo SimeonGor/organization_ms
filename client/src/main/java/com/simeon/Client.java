@@ -32,9 +32,6 @@ public class Client {
     private final OutputHandler outputHandler;
     private Socket socket;
 
-    private String ip;
-    private int port;
-
     public Client(CLI cli, InputHandler inputHandler, OutputHandler outputHandler) {
         this.cli = cli;
         this.inputHandler = inputHandler;
