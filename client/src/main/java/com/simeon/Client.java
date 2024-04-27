@@ -16,6 +16,7 @@ import java.io.Serializable;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 import java.util.logging.LogManager;
 
@@ -84,7 +85,8 @@ public class Client {
                 cli.flush();
                 cli.printShellPrompt();
             }
-        } catch (IllegalStateException ignored) {
+        }catch (NoSuchElementException | IllegalStateException ignored) {
+
         }
     }
 
