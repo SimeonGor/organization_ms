@@ -24,6 +24,7 @@ public class CLI {
     protected PrintStream outputStream;
     protected PrintStream errorStream;
     protected boolean interactiveMode = true;
+    private boolean block = false;
 
     public CLI(InputStream inputStream, PrintStream outputStream, PrintStream errorStream) {
         this.inputStream = inputStream;
@@ -32,12 +33,21 @@ public class CLI {
         this.errorStream = errorStream;
     }
 
+    public void block() {
+        block = true;
+    }
     @SneakyThrows
     public void flush() {
+        if (block) {
+            block = false;
+            return;
+        }
         if (interactiveMode) {
             scanner.skip(Pattern.compile(".*"));
         } else {
-            scanner.skip(Pattern.compile(".*\n"));
+            if (scanner.hasNext()) {
+                scanner.skip(Pattern.compile(".*\n"));
+            }
         }
     }
 

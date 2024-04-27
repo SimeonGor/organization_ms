@@ -79,7 +79,7 @@ public class OrganizationInputCommand implements InputCommand {
                 cli.error(e);
             }
         }
-
+        cli.block();
         return element;
     }
 }
