@@ -6,6 +6,7 @@ import com.simeon.element.Organization;
 import com.simeon.element.OrganizationType;
 import com.simeon.exceptions.InvalidArgumentException;
 import java.io.Serializable;
+import java.util.regex.Pattern;
 
 public class OrganizationInputCommand implements InputCommand {
     @Override
@@ -15,6 +16,8 @@ public class OrganizationInputCommand implements InputCommand {
 
     @Override
     public Serializable read(CLI cli) throws InvalidArgumentException {
+        cli.getScanner().skip(Pattern.compile(".*\n"));
+
         Organization element = new Organization();
         while (true) {
             try {

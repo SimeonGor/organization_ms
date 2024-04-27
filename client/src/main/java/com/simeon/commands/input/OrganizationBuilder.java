@@ -22,7 +22,7 @@ public class OrganizationBuilder {
         validator = validatorFactory.usingContext().getValidator();
     }
     public static String getName(Scanner scanner)  throws InvalidArgumentException {
-        String name = scanner.next();
+        String name = scanner.nextLine();
         Set<ConstraintViolation<Organization>> validates =
                 validator.validateValue(Organization.class, "name", name);
 
@@ -36,7 +36,7 @@ public class OrganizationBuilder {
 
     public static int getCoordinatesX(Scanner scanner) throws InvalidArgumentException {
         try {
-            int x = scanner.nextInt();
+            int x = Integer.parseInt(scanner.nextLine());
             Set<ConstraintViolation<Organization>> validates =
                     validator.validateValue(Organization.class, "coordinates.x", x);
 
@@ -46,14 +46,14 @@ public class OrganizationBuilder {
             throw new InvalidArgumentException(
                     String.join("\n", validates.stream().map(ConstraintViolation::getMessage).toList())
             );
-        } catch (InputMismatchException e) {
+        } catch (InputMismatchException | NumberFormatException e) {
             throw new InvalidArgumentException("it must be an integer");
         }
     }
 
     public static long getCoordinatesY(Scanner scanner) throws InvalidArgumentException {
         try {
-            long y = scanner.nextLong();
+            long y = Long.parseLong(scanner.nextLine());
             Set<ConstraintViolation<Organization>> validates =
                     validator.validateValue(Organization.class, "coordinates.y", y);
 
@@ -63,14 +63,14 @@ public class OrganizationBuilder {
             throw new InvalidArgumentException(
                     String.join("\n", validates.stream().map(ConstraintViolation::getMessage).toList())
             );
-        } catch (InputMismatchException e) {
+        } catch (InputMismatchException | NumberFormatException e) {
             throw new InvalidArgumentException("it must be an integer");
         }
     }
 
     public static double getAnnualTurnover(Scanner scanner) throws InvalidArgumentException {
         try {
-            double annualTurnover = scanner.nextDouble();
+            double annualTurnover = Double.parseDouble(scanner.nextLine());
             Set<ConstraintViolation<Organization>> validates =
                     validator.validateValue(Organization.class, "annualTurnover", annualTurnover);
 
@@ -86,7 +86,7 @@ public class OrganizationBuilder {
     }
 
     public static OrganizationType getOrganizationType(Scanner scanner) throws InvalidArgumentException {
-        OrganizationType organizationType = OrganizationType.getByName(scanner.next());
+        OrganizationType organizationType = OrganizationType.getByName(scanner.nextLine());
         Set<ConstraintViolation<Organization>> validates =
                 validator.validateValue(Organization.class, "type", organizationType);
 
@@ -100,7 +100,7 @@ public class OrganizationBuilder {
 
     public static Address getAddress(Scanner scanner) throws InvalidArgumentException {
         Address address = new Address();
-        String t = scanner.next();
+        String t = scanner.nextLine();
         if (t.isEmpty()) {
             address.setZipCode(null);
         }

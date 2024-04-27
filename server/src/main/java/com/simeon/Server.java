@@ -29,6 +29,7 @@ import java.nio.ByteBuffer;
 import java.nio.channels.*;
 import java.util.*;
 import java.util.logging.Level;
+import java.util.logging.LogManager;
 
 /**
  * Class to server
@@ -40,8 +41,6 @@ public class Server {
     private ICollectionManager<Organization> collectionManager;
     private CommandHandler commandHandler;
     private CommandHandler serverCommandHandler;
-    private IReceiver receiver;
-    private ISender sender;
     private Selector selector;
 
     public Server(String filename, int port) throws InvalidCollectionDataException, IOException {
@@ -166,7 +165,14 @@ public class Server {
 
     public static void main(String[] args) {
         try {
+            LogManager.getLogManager().readConfiguration(Server.class.getResourceAsStream("/logging.properties"));
+        } catch (IOException ignored) {
+            System.out.println("config file was not found");
+        }
+
+        try {
             Server server = new Server(args[0], Integer.parseInt(args[1]));
+            System.out.println("Server started");
             server.loop();
         } catch (InvalidCollectionDataException e) {
             System.out.println(e.getMessage());

@@ -27,10 +27,11 @@ public class AddCommand extends Command {
     public Response execute(@NonNull HashMap<String, ? extends Serializable> parameters) {
         log.log(Level.INFO, "Add command started with ", parameters.toString());
         try {
-            collectionManager.add((Organization) parameters.get("element"));
+            Organization element = (Organization) parameters.get("element");
+            collectionManager.add(element);
             return new Response(true, "New element has been added");
         }
-        catch (ClassCastException e) {
+        catch (ClassCastException | NullPointerException e) {
             return new Response(false, "Invalid type of parameters");
         }
     }

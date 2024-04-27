@@ -9,6 +9,7 @@ public class InputHandlerFactory {
         inputHandler.add(new StringInputCommand());
         inputHandler.add(new OrganizationInputCommand());
         inputHandler.add(new OrganizationTypeInputCommand());
+        inputHandler.add(new LongInputCommand());
         return inputHandler;
     }
 }

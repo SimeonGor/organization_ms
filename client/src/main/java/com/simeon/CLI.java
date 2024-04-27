@@ -3,6 +3,7 @@ package com.simeon;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.SneakyThrows;
 import lombok.extern.java.Log;
 
 import java.io.IOException;
@@ -31,11 +32,11 @@ public class CLI {
         this.errorStream = errorStream;
     }
 
+    @SneakyThrows
     public void flush() {
         if (interactiveMode) {
             scanner.skip(Pattern.compile(".*"));
-        }
-        else {
+        } else {
             scanner.skip(Pattern.compile(".*\n"));
         }
     }

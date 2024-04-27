@@ -17,6 +17,7 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
+import java.util.logging.LogManager;
 
 /**
  * Class for client that which interacts with the user
@@ -30,6 +31,9 @@ public class Client {
     private final InputHandler inputHandler;
     private final OutputHandler outputHandler;
     private Socket socket;
+
+    private String ip;
+    private int port;
 
     public Client(CLI cli, InputHandler inputHandler, OutputHandler outputHandler) {
         this.cli = cli;
@@ -57,6 +61,7 @@ public class Client {
             clientCommandHandler.addCommand(new HelpCommand(clientCommandHandler));
             clientCommandHandler.addCommand(new ExitCommand(this));
             clientCommandHandler.addCommand(new ExecuteScriptCommand(this));
+            clientCommandHandler.addCommand(new RestartCommand(this));
             this.commandHandler = clientCommandHandler;
             cli.print("Connected!\n");
         }
@@ -92,6 +97,12 @@ public class Client {
     }
 
     public static void main(String[] args) {
+        try {
+            LogManager.getLogManager().readConfiguration(Client.class.getResourceAsStream("/logging.properties"));
+        } catch (IOException ignored) {
+            System.out.println("config file was not found");
+        }
+
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
             System.out.println("Client was interrupted");
         }));
