@@ -100,6 +100,16 @@ public class Server {
         } catch (IOException ignored) {
             ;
         }
+        catch (NoSuchElementException ignored) {
+            try {
+                collectionManager.save();
+                System.out.println("Collection has been saved");
+            } catch (IOException ignored1) {
+                System.out.println("Collection has not been saved");
+            }
+            System.out.println("Server has been interrupted");
+            close();
+        }
     }
 
     private void addNewClient(ServerSocketChannel serverSocketChannel) {
