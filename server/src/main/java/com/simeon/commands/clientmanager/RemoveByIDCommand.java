@@ -4,11 +4,12 @@ import com.simeon.Response;
 import com.simeon.collection.ICollectionManager;
 import com.simeon.commands.Command;
 import com.simeon.element.Organization;
+import com.simeon.exceptions.NoSuchParameterException;
 import lombok.NonNull;
 import lombok.extern.java.Log;
 
 import java.io.Serializable;
-import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Level;
 
 /**
@@ -24,19 +25,20 @@ public class RemoveByIDCommand extends Command {
     }
 
     @Override
-    public Response execute(@NonNull HashMap<String, ? extends Serializable> parameters) {
+    public Response execute(@NonNull Map<String, ? extends Serializable> parameters) {
         log.log(Level.INFO, "{0} command command started with {1}", new String[]{name, parameters.toString()});
-        if (collectionManager.isEmpty()) {
-            return new Response(true, "The collection is empty");
-        }
-
+        long id;
         try {
-            long id = (long) parameters.get("id");
-            collectionManager.removeWhere(organization -> organization.getId() == id);
-            return new Response(true, String.format("The item with id %d is no longer in the collection", id));
+            id = (long) parameters.get("id");
         }
         catch (ClassCastException e) {
             return new Response(false, "Invalid type of parameters");
         }
+        catch (NullPointerException e) {
+            return new Response(false, new NoSuchParameterException(name, "id"));
+        }
+
+        collectionManager.deleteById(id);
+        return new Response(true, String.format("The item with id %d is no longer in the collection", id));
     }
 }

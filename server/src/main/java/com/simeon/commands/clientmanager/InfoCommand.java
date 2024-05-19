@@ -22,13 +22,6 @@ public class InfoCommand extends Command {
     @Override
     public Response execute() {
         log.log(Level.INFO, "{0} command command started", name);
-        String result;
-        if (collectionManager.isEmpty()) {
-            result= "The collection is empty";
-        }
-        else {
-            result = collectionManager.getInfo();
-        }
-        return new Response(true, result);
+        return new Response(true, collectionManager.getInfo());
     }
 }

@@ -25,12 +25,10 @@ public class PrintFieldDescendingPostalAddressCommand extends Command {
     @Override
     public Response execute() {
         log.log(Level.INFO, "{0} command command started", name);
-        if (collectionManager.isEmpty()) {
-            return new Response(true, "The collection is empty");
-        }
         return new Response(true,
-                new ArrayList<>(collectionManager.getStream()
-                        .filter((o) -> o.getPostalAddress() != null && o.getPostalAddress().getZipCode() != null)
+                new ArrayList<>(collectionManager.getAllItems().parallelStream()
+                        .filter((o) -> o.getPostalAddress() != null)
+                        .filter((o) -> o.getPostalAddress().getZipCode() != null)
                         .sorted(Comparator.comparing(o -> o.getPostalAddress().getZipCode()))
                         .toList()));
     }

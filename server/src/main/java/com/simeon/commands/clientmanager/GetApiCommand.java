@@ -5,7 +5,9 @@ import com.simeon.Response;
 import com.simeon.commands.Command;
 import com.simeon.commands.CommandHandler;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class GetApiCommand extends Command {
     protected final CommandHandler commandHandler;
@@ -22,7 +24,7 @@ public class GetApiCommand extends Command {
                         .map((entry) -> new CommandInfo(
                                 entry.getKey(),
                                 entry.getValue().getDescription(),
-                                entry.getValue().getParameterTypes()))
+                                new HashMap<>(entry.getValue().getParameterTypes())))
                         .toList()));
     }
 }

@@ -4,11 +4,13 @@ import com.simeon.Response;
 import com.simeon.collection.ICollectionManager;
 import com.simeon.commands.Command;
 import com.simeon.element.Organization;
+import com.simeon.exceptions.NoSuchParameterException;
 import lombok.NonNull;
 import lombok.extern.java.Log;
+import org.mockito.internal.matchers.Or;
 
 import java.io.Serializable;
-import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Level;
 
 /**
@@ -26,17 +28,29 @@ public class UpdateCommand extends Command {
     }
 
     @Override
-    public Response execute(@NonNull HashMap<String, ? extends Serializable> parameters) {
+    public Response execute(@NonNull Map<String, ? extends Serializable> parameters) {
         log.log(Level.INFO, "{0} command command started with {1}", new String[]{name, parameters.toString()});
+        long id;
         try {
-            long id = (long) parameters.get("id");
-            Organization element = (Organization) parameters.get("element");
-            element.setId(id);
-            collectionManager.updateWhere(element, organization -> organization.getId() == id);
-            return new Response(true, String.format("The item with id %s has been successful updated", id));
+            id = (long) parameters.get("id");
         } catch (ClassCastException e) {
-            return new Response(false, "Invalid type of parameters");
+            return new Response(false, e);
+        } catch (NullPointerException e) {
+            return new Response(false, new NoSuchParameterException(name, "id"));
+        }
+        Organization element;
+        try {
+            element = (Organization) parameters.get("element");
+        }
+        catch (ClassCastException e) {
+            return new Response(false, e);
+        }
+        catch (NullPointerException e) {
+            return new Response(false, new NoSuchParameterException(name, "element"));
         }
 
+        element.setId(id);
+        Organization added_entity = collectionManager.update(element);
+        return new Response(true, added_entity);
     }
 }

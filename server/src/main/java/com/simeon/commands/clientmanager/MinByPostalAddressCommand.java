@@ -6,6 +6,7 @@ import com.simeon.commands.Command;
 import com.simeon.element.Organization;
 import lombok.extern.java.Log;
 
+import java.util.Comparator;
 import java.util.logging.Level;
 
 
@@ -24,16 +25,11 @@ public class MinByPostalAddressCommand extends Command {
     @Override
     public Response execute() {
         log.log(Level.INFO, "{0} command command started", name);
-        if (collectionManager.isEmpty()) {
-            return new Response(true, "The collection is empty");
-        }
-        var op = collectionManager.getStream().min((o1, o2) -> {
-            if (o1.getPostalAddress().getZipCode() == null && o2.getPostalAddress().getZipCode() == null) return 0;
-            if (o2.getPostalAddress().getZipCode() == null) return -1;
-            if (o1.getPostalAddress().getZipCode() == null) return 1;
-            return o1.getPostalAddress().getZipCode().compareTo(
-                    o2.getPostalAddress().getZipCode());
-        });
+
+        var op = collectionManager.getAllItems().parallelStream()
+                .filter((o) -> o.getPostalAddress() != null)
+                .filter((o) -> o.getPostalAddress().getZipCode() != null)
+                .min(Comparator.comparing(o -> o.getPostalAddress().getZipCode()));
 
         return op.map(organization -> new Response(true, organization))
                 .orElseGet(() -> new Response(true, "No such elements")); // интересная замена от IDE

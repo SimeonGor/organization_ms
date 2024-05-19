@@ -4,11 +4,13 @@ import com.simeon.Response;
 import com.simeon.collection.ICollectionManager;
 import com.simeon.commands.Command;
 import com.simeon.element.Organization;
+import com.simeon.exceptions.DBException;
+import com.simeon.exceptions.NoSuchParameterException;
 import lombok.NonNull;
 import lombok.extern.java.Log;
 
 import java.io.Serializable;
-import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Level;
 
 /**
@@ -24,15 +26,25 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public Response execute(@NonNull HashMap<String, ? extends Serializable> parameters) {
+    public Response execute(@NonNull Map<String, ? extends Serializable> parameters) {
         log.log(Level.INFO, "Add command started with ", parameters.toString());
+        Organization element;
         try {
-            Organization element = (Organization) parameters.get("element");
-            collectionManager.add(element);
-            return new Response(true, "New element has been added");
+            element = (Organization) parameters.get("element");
         }
-        catch (ClassCastException | NullPointerException e) {
-            return new Response(false, "Invalid type of parameters");
+        catch (ClassCastException e) {
+            return new Response(false, e);
+        }
+        catch (NullPointerException e) {
+            return new Response(false, new NoSuchParameterException(name, "element"));
+        }
+
+        Organization entity = collectionManager.create(element);
+        if (entity != null) {
+            return new Response(true, entity);
+        }
+        else {
+            return new Response(false, new DBException());
         }
     }
 }

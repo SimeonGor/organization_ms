@@ -1,8 +1,6 @@
 package com.simeon.commands;
 
 import com.simeon.Response;
-import com.simeon.collection.ICollectionManager;
-import com.simeon.commands.ICommand;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NonNull;
@@ -10,6 +8,7 @@ import lombok.extern.java.Log;
 
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Level;
 
 /**
@@ -20,7 +19,7 @@ public abstract class Command implements ICommand {
     @Getter
     protected String name, description;
     @Getter(AccessLevel.PUBLIC)
-    private HashMap<String, Class<? extends Serializable>> parameterTypes = new HashMap<>();
+    private Map<String, Class<? extends Serializable>> parameterTypes = new HashMap<>();
     protected boolean hasParameters;
 
     public Command(String name, String description) {
@@ -48,7 +47,7 @@ public abstract class Command implements ICommand {
      * @param parameters map of parameters
      */
     @Override
-    public Response execute(@NonNull HashMap<String, ? extends Serializable> parameters) {
+    public Response execute(@NonNull Map<String, ? extends Serializable> parameters) {
         log.log(Level.FINE, "Execution stub with the parameter started");
         if (!hasParameters()) {
             return new Response(false, "Invalid parameters");

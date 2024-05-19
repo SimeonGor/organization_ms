@@ -22,7 +22,7 @@ public class ClearCommand extends Command {
     @Override
     public Response execute() {
         log.log(Level.INFO, "{0} command command started", name);
-        collectionManager.clear();
+        collectionManager.deleteAll();
         return new Response(true, "The collection is empty");
     }
 }

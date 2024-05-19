@@ -24,9 +24,6 @@ public class ShowCommand extends Command {
     @Override
     public Response execute() {
         log.log(Level.INFO, "{0} command command started", name);
-        if (collectionManager == null || collectionManager.isEmpty()) {
-            return new Response(true, "The collection is empty");
-        }
-        return new Response(true, new ArrayList<>(collectionManager.getStream().toList()));
+        return new Response(true, new ArrayList<>(collectionManager.getAllItems()));
     }
 }
