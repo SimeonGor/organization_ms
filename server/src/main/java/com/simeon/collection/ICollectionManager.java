@@ -1,21 +1,17 @@
 package com.simeon.collection;
 
-import java.io.IOException;
-import java.util.Comparator;
-import java.util.function.Predicate;
-import java.util.stream.Stream;
+import com.simeon.CollectionInfo;
+
+import java.util.List;
 
 public interface ICollectionManager<T> {
-     String getInfo();
-     void add(T element);
-     void save() throws IOException;
-     void clear();
-     boolean isEmpty();
-     Stream<T> getStream();
-     boolean removeWhere(Predicate<T> predicate);
-     boolean removeAt(int index);
-     boolean updateWhere(T element, Predicate<T> predicate);
-     int size();
-     void reorder();
-     Comparator<T> getComparator();
+     T create(final T entity);
+     T createIfMax(final T entity);
+     void delete(final T entity);
+     void deleteAll();
+     void deleteAt(int index) throws IndexOutOfBoundsException;
+     void deleteById(final long entityId);
+     List<T> getAllItems();
+     CollectionInfo getInfo();
+     T update(final T entity);
 }
