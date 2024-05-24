@@ -1,6 +1,7 @@
 package com.simeon.commands;
 
 import com.simeon.Response;
+import com.simeon.UserInfo;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NonNull;
@@ -47,7 +48,7 @@ public abstract class Command implements ICommand {
      * @param parameters map of parameters
      */
     @Override
-    public Response execute(@NonNull Map<String, ? extends Serializable> parameters) {
+    public Response execute(@NonNull Map<String, ? extends Serializable> parameters, @NonNull UserInfo userInfo) {
         log.log(Level.FINE, "Execution stub with the parameter started");
         if (!hasParameters()) {
             return new Response(false, "Invalid parameters");
@@ -59,7 +60,7 @@ public abstract class Command implements ICommand {
      * Execution stub without the parameter. Throws exception if it has parameters.
      */
     @Override
-    public Response execute() {
+    public Response execute(@NonNull UserInfo userInfo) {
         log.log(Level.FINE, "Execution stub without the parameter started");
         if (hasParameters()) {
             return new Response(false, "Invalid parameters");

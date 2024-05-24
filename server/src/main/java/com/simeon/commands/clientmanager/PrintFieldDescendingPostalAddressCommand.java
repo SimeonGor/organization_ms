@@ -1,9 +1,11 @@
 package com.simeon.commands.clientmanager;
 
 import com.simeon.Response;
+import com.simeon.UserInfo;
 import com.simeon.collection.ICollectionManager;
 import com.simeon.commands.Command;
 import com.simeon.element.Organization;
+import lombok.NonNull;
 import lombok.extern.java.Log;
 
 import java.util.ArrayList;
@@ -23,7 +25,7 @@ public class PrintFieldDescendingPostalAddressCommand extends Command {
     }
 
     @Override
-    public Response execute() {
+    public Response execute(@NonNull UserInfo userInfo) {
         log.log(Level.INFO, "{0} command command started", name);
         return new Response(true,
                 new ArrayList<>(collectionManager.getAllItems().parallelStream()

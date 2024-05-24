@@ -1,6 +1,7 @@
 package com.simeon.commands.clientmanager;
 
 import com.simeon.Response;
+import com.simeon.UserInfo;
 import com.simeon.collection.ICollectionManager;
 import com.simeon.commands.Command;
 import com.simeon.element.Organization;
@@ -29,7 +30,7 @@ public class FilterGreaterThanTypeCommand extends Command {
     }
 
     @Override
-    public Response execute(@NonNull Map<String, ? extends Serializable> parameters) {
+    public Response execute(@NonNull Map<String, ? extends Serializable> parameters, @NonNull UserInfo userInfo) {
         log.log(Level.INFO, "filter_greater_than_type command started with ", parameters.toString());
         OrganizationType type;
         try {

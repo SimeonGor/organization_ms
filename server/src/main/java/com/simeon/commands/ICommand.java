@@ -1,6 +1,7 @@
 package com.simeon.commands;
 
 import com.simeon.Response;
+import com.simeon.UserInfo;
 import lombok.NonNull;
 
 import java.io.Serializable;
@@ -21,10 +22,10 @@ public interface ICommand {
      * Execute the command with parameters
      * @param parameters map of parameters
      */
-    Response execute(@NonNull Map<String, ? extends Serializable> parameters);
+    Response execute(@NonNull Map<String, ? extends Serializable> parameters, @NonNull UserInfo userInfo);
 
     /**
      * Execute the command without parameters
      */
-    Response execute();
+    Response execute(@NonNull UserInfo userInfo);
 }

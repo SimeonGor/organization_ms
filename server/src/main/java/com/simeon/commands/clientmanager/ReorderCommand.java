@@ -1,12 +1,17 @@
 package com.simeon.commands.clientmanager;
 
 import com.simeon.Response;
+import com.simeon.UserInfo;
 import com.simeon.collection.ICollectionManager;
 import com.simeon.commands.Command;
 import com.simeon.element.Organization;
+import lombok.NonNull;
 import lombok.extern.java.Log;
+import org.apache.commons.collections4.CollectionUtils;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.logging.Level;
 
 /**
@@ -21,10 +26,11 @@ public class ReorderCommand extends Command {
     }
 
     @Override
-    public Response execute() {
+    public Response execute(@NonNull UserInfo userInfo) {
         log.log(Level.INFO, "{0} command command started", name);
-        // TODO: 19.05.2024 переделать 
+        List<Organization> result = collectionManager.getAllItems();
+        Collections.reverse(result);
         return new Response(true,
-                new ArrayList<>(collectionManager.getAllItems()));
+                new ArrayList<>(result));
     }
 }
