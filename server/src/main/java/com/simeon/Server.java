@@ -125,7 +125,7 @@ public class Server {
             System.out.println("server started");
             server.start();
         } catch (IOException e) {
-            ;
+            System.out.println("io exception");
         }
         catch (NumberFormatException e) {
             System.out.println("port must be an integer");
