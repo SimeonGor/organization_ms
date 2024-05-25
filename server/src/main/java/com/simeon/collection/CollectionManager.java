@@ -10,13 +10,13 @@ import com.simeon.element.OrganizationType;
 import com.simeon.exceptions.DBException;
 import lombok.Setter;
 import org.apache.commons.collections4.ListUtils;
-import org.checkerframework.checker.units.qual.A;
-import org.checkerframework.checker.units.qual.C;
-import org.mockito.internal.matchers.Or;
 
 import java.sql.*;
 import java.time.LocalDate;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
