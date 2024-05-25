@@ -146,7 +146,6 @@ public class CollectionManager implements ICollectionManager<Organization> {
             id.next();
             long genId = id.getLong("id");
 
-
             String query = "INSERT INTO Organizations(id, name, x, y, creationDate, annualTurnover, type_id, postalAddress, user_id) VALUES\n" +
                     "(?, ?, ?, ?, current_date, ?, (select id from organizationtypes where type = ?), ?, ?);";
             PreparedStatement statement = connection.prepareStatement(query);
@@ -160,7 +159,7 @@ public class CollectionManager implements ICollectionManager<Organization> {
             statement.setLong(8, entity.getUserInfo().getId());
 
             statement.executeUpdate();
-
+            entity.setId(genId);
             collection.add(entity);
             collection.sort(comparator);
             return entity;
