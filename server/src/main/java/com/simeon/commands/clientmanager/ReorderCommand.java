@@ -28,7 +28,7 @@ public class ReorderCommand extends Command {
     @Override
     public Response execute(@NonNull UserInfo userInfo) {
         log.log(Level.INFO, "{0} command command started", name);
-        List<Organization> result = collectionManager.getAllItems();
+        List<Organization> result = new ArrayList<>(collectionManager.getAllItems());
         Collections.reverse(result);
         return new Response(true,
                 new ArrayList<>(result));

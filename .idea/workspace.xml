@@ -8,10 +8,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7012e3a3-1d32-426b-90c8-6574a8dd71bb" name="Changes" comment="fix: add id to entity">
+    <list default="true" id="7012e3a3-1d32-426b-90c8-6574a8dd71bb" name="Changes" comment="fix: hotfix">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/script" beforeDir="false" afterPath="$PROJECT_DIR$/script" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/simeon/commands/output/CollectionInfoOutputCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/simeon/commands/output/CollectionInfoOutputCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/src/main/java/com/simeon/collection/CollectionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/simeon/collection/CollectionManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/simeon/commands/clientmanager/ReorderCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/simeon/commands/clientmanager/ReorderCommand.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -80,6 +81,7 @@
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
     "settings.editor.selected.configurable": "profiler.jvm",
+    "spring.configuration.checksum": "cf1e8c14e54505f60aa10ceb8d5d8ab3",
     "vue.rearranger.settings.migration": "true"
   },
   "keyToStringList": {
@@ -105,7 +107,7 @@
       <recent name="com.simeon.collection" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Server">
+  <component name="RunManager" selected="Application.Client">
     <configuration name="Client" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="com.simeon.Client" />
       <module name="client" />
@@ -219,7 +221,8 @@
       <workItem from="1715928977923" duration="193000" />
       <workItem from="1715969448365" duration="3133000" />
       <workItem from="1715975858348" duration="58000" />
-      <workItem from="1715976049003" duration="113977000" />
+      <workItem from="1715976049003" duration="115803000" />
+      <workItem from="1716650517682" duration="3029000" />
     </task>
     <task id="LOCAL-00001" summary="init commit">
       <option name="closed" value="true" />
@@ -445,7 +448,31 @@
       <option name="project" value="LOCAL" />
       <updated>1716627558929</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="fix: remove imports">
+      <option name="closed" value="true" />
+      <created>1716634792266</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1716634792266</updated>
+    </task>
+    <task id="LOCAL-00030" summary="feat: add sql create script">
+      <option name="closed" value="true" />
+      <created>1716634892944</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1716634892944</updated>
+    </task>
+    <task id="LOCAL-00031" summary="fix: hotfix">
+      <option name="closed" value="true" />
+      <created>1716652699273</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1716652699273</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -475,9 +502,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="fix: add Serializable" />
-    <MESSAGE value="fix" />
-    <MESSAGE value="feat: add connection to client" />
     <MESSAGE value="feat: add connection to server" />
     <MESSAGE value="feat: add CommandHandler to server" />
     <MESSAGE value="feat: change logic of Command (remove field collectionManager)" />
@@ -500,6 +524,9 @@
     <MESSAGE value="feat: server without DB" />
     <MESSAGE value="feat: working" />
     <MESSAGE value="fix: add id to entity" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix: add id to entity" />
+    <MESSAGE value="fix: remove imports" />
+    <MESSAGE value="feat: add sql create script" />
+    <MESSAGE value="fix: hotfix" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: hotfix" />
   </component>
 </project>

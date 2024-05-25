@@ -15,6 +15,6 @@ public class CollectionInfoOutputCommand implements OutputCommand {
     @Override
     public void show(Serializable message, CLI cli) throws ClassCastException {
         CollectionInfo collectionInfo = (CollectionInfo) message;
-        cli.print(String.valueOf(collectionInfo.getSize()));
+        cli.print(String.format("%d elements in the collection\n", collectionInfo.getSize()));
     }
 }

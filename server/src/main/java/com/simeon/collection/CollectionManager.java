@@ -207,8 +207,9 @@ public class CollectionManager implements ICollectionManager<Organization> {
             preparedStatement.setInt(2, entity.getCoordinates().getX());
             preparedStatement.setLong(3, entity.getCoordinates().getY());
             preparedStatement.setDouble(4, entity.getAnnualTurnover());
-            preparedStatement.setString(5, entity.getType().toString());
-
+            preparedStatement.setString(5, entity.getPostalAddress().getZipCode());
+            preparedStatement.setString(6, entity.getType().toString());
+            preparedStatement.setLong(7, entity.getId());
             preparedStatement.executeUpdate();
 
             collection.remove(old);
