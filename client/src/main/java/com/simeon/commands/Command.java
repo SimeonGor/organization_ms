@@ -9,6 +9,7 @@ import lombok.extern.java.Log;
 
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.logging.Level;
 
 /**
@@ -19,7 +20,7 @@ public abstract class Command implements ICommand {
     @Getter
     protected String name, description;
     @Getter(AccessLevel.PUBLIC)
-    private HashMap<String, Class<? extends Serializable>> parameterTypes = new HashMap<>();
+    private LinkedHashMap<String, Class<? extends Serializable>> parameterTypes = new LinkedHashMap<>();
     protected boolean hasParameters;
 
     public Command(String name, String description) {

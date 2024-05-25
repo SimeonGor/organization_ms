@@ -6,5 +6,5 @@ import java.io.Serializable;
 
 public interface OutputCommand {
     Class<? extends Serializable> getOutputType();
-    void show(Serializable message, CLI cli);
+    void show(Serializable message, CLI cli) throws ClassCastException;
 }

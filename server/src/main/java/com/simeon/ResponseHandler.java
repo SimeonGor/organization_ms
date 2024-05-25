@@ -1,10 +1,13 @@
 package com.simeon;
 
 import com.simeon.connection.ConnectionChannel;
+import lombok.extern.java.Log;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.logging.Level;
 
+@Log
 public class ResponseHandler {
     private final ExecutorService executorService;
 
@@ -13,6 +16,10 @@ public class ResponseHandler {
     }
     public void send(Response response, ConnectionChannel connectionChannel) {
         executorService.execute(new Handler(response, connectionChannel));
+    }
+
+    public void close() {
+        executorService.shutdown();
     }
 
     private class Handler implements Runnable {
@@ -26,6 +33,7 @@ public class ResponseHandler {
 
         @Override
         public void run() {
+            log.log(Level.INFO, "send " + response.isStatus());
             connectionChannel.send(response);
         }
     }

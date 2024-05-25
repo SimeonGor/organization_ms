@@ -4,6 +4,7 @@ import com.simeon.Response;
 import com.simeon.UserInfo;
 import com.simeon.authentication.IAuthenticationService;
 import com.simeon.commands.Command;
+import com.simeon.exceptions.AuthorizedException;
 import com.simeon.exceptions.NoSuchParameterException;
 import com.simeon.exceptions.UnauthorizedUserException;
 import lombok.NonNull;
@@ -15,7 +16,7 @@ public class LoginCommand extends Command {
     private final IAuthenticationService authenticationService;
     public LoginCommand(IAuthenticationService authenticationService) {
         super("login", "log in to your account");
-        addParameter("login", String.class);
+        addParameter("username", String.class);
         addParameter("password", String.class);
         this.authenticationService = authenticationService;
     }
@@ -46,7 +47,7 @@ public class LoginCommand extends Command {
 
         try {
             return new Response(true, authenticationService.authentication(username, password));
-        } catch (UnauthorizedUserException e) {
+        } catch (AuthorizedException e) {
             return new Response(false, e);
         }
     }

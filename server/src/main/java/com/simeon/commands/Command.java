@@ -6,9 +6,11 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.extern.java.Log;
+import org.apache.commons.collections4.map.LinkedMap;
 
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.logging.Level;
 
@@ -20,7 +22,7 @@ public abstract class Command implements ICommand {
     @Getter
     protected String name, description;
     @Getter(AccessLevel.PUBLIC)
-    private Map<String, Class<? extends Serializable>> parameterTypes = new HashMap<>();
+    private LinkedHashMap<String, Class<? extends Serializable>> parameterTypes = new LinkedHashMap<>();
     protected boolean hasParameters;
 
     public Command(String name, String description) {

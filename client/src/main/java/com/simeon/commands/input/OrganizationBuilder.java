@@ -99,13 +99,13 @@ public class OrganizationBuilder {
     }
 
     public static Address getAddress(Scanner scanner) throws InvalidArgumentException {
-        Address address = new Address();
+        Address address;
         String t = scanner.nextLine();
         if (t.isEmpty()) {
-            address.setZipCode(null);
+            address = new Address(null);
         }
         else {
-            address.setZipCode(t);
+            address = new Address(t);
         }
 
         Set<ConstraintViolation<Address>> validates =

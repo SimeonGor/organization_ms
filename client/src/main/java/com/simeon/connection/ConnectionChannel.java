@@ -7,7 +7,6 @@ import lombok.NonNull;
 import java.io.IOException;
 
 public interface ConnectionChannel {
-    Request receive() throws IOException;
-    void send(@NonNull Response response);
-    void close();
+    Response receive();
+    void send(@NonNull Request request);
 }

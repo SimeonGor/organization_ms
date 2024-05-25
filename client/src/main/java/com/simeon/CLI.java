@@ -51,6 +51,14 @@ public class CLI {
         }
     }
 
+    @SneakyThrows
+    public void close() {
+        scanner.close();
+        inputStream.close();
+        outputStream.close();
+        errorStream.close();
+    }
+
     public void print(String message) {
         outputStream.print(message);
     }

@@ -19,7 +19,7 @@ public class ExitCommand extends Command {
     @Override
     public Response execute() throws InvalidArgumentException {
         try {
-            client.close();
+            client.shutdown();
             return new Response(true, "Goodbye!");
         } catch (IOException e) {
             return new Response(false, "something went wrong (」°ロ°)」");

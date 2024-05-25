@@ -18,21 +18,21 @@ public class OrganizationInputCommand implements InputCommand {
     public Serializable read(CLI cli) throws InvalidArgumentException {
         cli.getScanner().skip(Pattern.compile(".*\n"));
 
-        Organization element = new Organization();
+        Organization.OrganizationBuilder element = Organization.builder();
         while (true) {
             try {
                 cli.printParameterPrompt("name");
-                element.setName(OrganizationBuilder.getName(cli.getScanner()));
+                element.name(OrganizationBuilder.getName(cli.getScanner()));
                 break;
             } catch (InvalidArgumentException e) {
                 cli.error(e);
             }
         }
-        Coordinates coordinates = new Coordinates();
+        Coordinates.CoordinatesBuilder coordinates = Coordinates.builder();
         while (true) {
             try {
                 cli.printParameterPrompt("coordinates.x");
-                coordinates.setX(OrganizationBuilder.getCoordinatesX(cli.getScanner()));
+                coordinates.x(OrganizationBuilder.getCoordinatesX(cli.getScanner()));
                 break;
             } catch (InvalidArgumentException e) {
                 cli.error(e);
@@ -41,18 +41,18 @@ public class OrganizationInputCommand implements InputCommand {
         while (true) {
             try {
                 cli.printParameterPrompt("coordinates.y");
-                coordinates.setY(OrganizationBuilder.getCoordinatesY(cli.getScanner()));
+                coordinates.y(OrganizationBuilder.getCoordinatesY(cli.getScanner()));
                 break;
             } catch (InvalidArgumentException e) {
                 cli.error(e);
             }
         }
-        element.setCoordinates(coordinates);
+        element.coordinates(coordinates.build());
 
         while (true) {
             try {
                 cli.printParameterPrompt("annual turnover");
-                element.setAnnualTurnover(OrganizationBuilder.getAnnualTurnover(cli.getScanner()));
+                element.annualTurnover(OrganizationBuilder.getAnnualTurnover(cli.getScanner()));
                 break;
             } catch (InvalidArgumentException e) {
                 cli.error(e);
@@ -63,7 +63,7 @@ public class OrganizationInputCommand implements InputCommand {
             try {
                 cli.printParameterPrompt(String.format("type { %s }",
                         String.join(",", OrganizationType.listOfElements())));
-                element.setType(OrganizationBuilder.getOrganizationType(cli.getScanner()));
+                element.type(OrganizationBuilder.getOrganizationType(cli.getScanner()));
                 break;
             } catch (InvalidArgumentException e) {
                 cli.error(e);
@@ -73,13 +73,13 @@ public class OrganizationInputCommand implements InputCommand {
         while (true) {
             try {
                 cli.printParameterPrompt("address");
-                element.setPostalAddress(OrganizationBuilder.getAddress(cli.getScanner()));
+                element.postalAddress(OrganizationBuilder.getAddress(cli.getScanner()));
                 break;
             } catch (InvalidArgumentException e) {
                 cli.error(e);
             }
         }
         cli.block();
-        return element;
+        return element.build();
     }
 }

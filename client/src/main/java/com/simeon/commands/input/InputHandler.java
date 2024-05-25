@@ -4,14 +4,15 @@ import com.simeon.CLI;
 import com.simeon.commands.input.InputCommand;
 import com.simeon.exceptions.InvalidArgumentException;
 import com.simeon.exceptions.UnknownCommandException;
+import lombok.NonNull;
 
 import java.io.Serializable;
 import java.util.HashMap;
 
 public class InputHandler {
-    private HashMap<Class<? extends Serializable>, InputCommand> commands = new HashMap<>();
+    private final HashMap<Class<? extends Serializable>, InputCommand> commands = new HashMap<>();
 
-    public boolean add(InputCommand inputCommand) {
+    public boolean add(@NonNull InputCommand inputCommand) {
         if (commands.containsKey(inputCommand.getInputType())) {
             return false;
         }

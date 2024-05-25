@@ -7,6 +7,7 @@ import lombok.Setter;
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 @Getter
 @Setter
@@ -15,5 +16,5 @@ public class CommandInfo implements Serializable {
     @Serial
     private static final long serialVersionUID = 0L;
     private String name, description;
-    private HashMap<String, Class<? extends Serializable>> parameters;
+    private LinkedHashMap<String, Class<? extends Serializable>> parameters;
 }

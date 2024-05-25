@@ -1,8 +1,6 @@
 package com.simeon.element;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.validation.constraints.Max;
 import java.io.Serial;
@@ -13,6 +11,8 @@ import java.io.Serializable;
  */
 @Getter
 @Setter
+@Builder
+@AllArgsConstructor
 @ToString
 public class Coordinates implements Serializable {
     @Serial

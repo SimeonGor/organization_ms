@@ -3,52 +3,18 @@
   "modifiedDate": "2024-03-01",
   "collection": [
     {
-      "id": 0,
-      "name": "qw",
+      "id": 5,
+      "name": "vkus",
       "coordinates": {
-        "x": 1,
-        "y": 1
-      },
-      "creationDate": "2024-03-01",
-      "annualTurnover": 1.0,
-      "type": "PUBLIC"
-    },
-    {
-      "id": 6,
-      "name": "1",
-      "coordinates": {
-        "x": 1,
-        "y": 1
+        "x": 23,
+        "y": 199
       },
       "creationDate": "2024-03-02",
-      "annualTurnover": 1.0,
+      "annualTurnover": 35.0,
       "type": "PRIVATE_LIMITED_COMPANY",
-      "postalAddress": null
-    },
-    {
-      "id": 2,
-      "name": "12",
-      "coordinates": {
-        "x": 12,
-        "y": 12
-      },
-      "creationDate": "2024-03-02",
-      "annualTurnover": 12.0,
-      "type": "OPEN_JOINT_STOCK_COMPANY",
       "postalAddress": {
-        "zipCode": "q"
+        "zipCode": "196.168.0.1"
       }
-    },
-    {
-      "id": 4,
-      "name": "xyq",
-      "coordinates": {
-        "x": 56,
-        "y": -90
-      },
-      "creationDate": "2024-03-02",
-      "annualTurnover": 12.0,
-      "type": "PRIVATE_LIMITED_COMPANY"
     },
     {
       "id": 3,
@@ -65,18 +31,37 @@
       }
     },
     {
-      "id": 5,
-      "name": "vkus",
+      "id": 4,
+      "name": "xyq",
       "coordinates": {
-        "x": 23,
-        "y": 199
+        "x": 56,
+        "y": -90
       },
       "creationDate": "2024-03-02",
-      "annualTurnover": 35.0,
-      "type": "PRIVATE_LIMITED_COMPANY",
-      "postalAddress": {
-        "zipCode": "196.168.0.1"
-      }
+      "annualTurnover": 12.0,
+      "type": "PRIVATE_LIMITED_COMPANY"
+    },
+    {
+      "id": 6,
+      "name": "1",
+      "coordinates": {
+        "x": 1,
+        "y": 1
+      },
+      "creationDate": "2024-03-02",
+      "annualTurnover": 1.0,
+      "type": "PRIVATE_LIMITED_COMPANY"
+    },
+    {
+      "id": 0,
+      "name": "qw",
+      "coordinates": {
+        "x": 1,
+        "y": 1
+      },
+      "creationDate": "2024-03-01",
+      "annualTurnover": 1.0,
+      "type": "PUBLIC"
     }
   ]
 }

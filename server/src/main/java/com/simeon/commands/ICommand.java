@@ -3,9 +3,11 @@ package com.simeon.commands;
 import com.simeon.Response;
 import com.simeon.UserInfo;
 import lombok.NonNull;
+import org.apache.commons.collections4.map.LinkedMap;
 
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
@@ -13,7 +15,7 @@ import java.util.Map;
  */
 public interface ICommand {
     String getName();
-    Map<String, Class<? extends Serializable>> getParameterTypes();
+    LinkedHashMap<String, Class<? extends Serializable>> getParameterTypes();
     String getDescription();
 
     boolean hasParameters();

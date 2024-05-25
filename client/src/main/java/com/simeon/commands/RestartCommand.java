@@ -23,6 +23,7 @@ public class RestartCommand extends Command {
     @Override
     public Response execute(@NonNull HashMap<String, ? extends Serializable> parameters) {
         try {
+            client.close();
             client.start((String) parameters.get("ip"), (int) parameters.get("port"));
             return new Response(true, "reconnected");
         } catch (IOException | InvalidConnectionException e) {

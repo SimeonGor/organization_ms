@@ -2,6 +2,7 @@ package com.simeon.commands;
 
 import com.simeon.CommandInfo;
 import com.simeon.Response;
+import com.simeon.Token;
 import com.simeon.exceptions.InvalidArgumentException;
 import com.simeon.exceptions.UnknownCommandException;
 import lombok.extern.java.Log;
@@ -36,7 +37,7 @@ public class ClientCommandHandler extends CommandHandler {
     }
 
     @Override
-    public Response handle(String method, HashMap<String, ? extends Serializable> parameters) throws UnknownCommandException {
+    public Response handle(String method, HashMap<String, ? extends Serializable> parameters, Token token) throws UnknownCommandException {
         if (commands.containsKey(method)) {
             ICommand command = commands.get(method);
             try {
@@ -47,9 +48,9 @@ public class ClientCommandHandler extends CommandHandler {
                     return command.execute(parameters);
                 }
             } catch (InvalidArgumentException e) {
-                return successor.handle(method, parameters);
+                return successor.handle(method, parameters, token);
             }
         }
-        return successor.handle(method, parameters);
+        return successor.handle(method, parameters, token);
     }
 }

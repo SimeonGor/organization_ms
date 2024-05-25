@@ -1,5 +1,7 @@
 package com.simeon.element;
 
+import com.simeon.UserInfo;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -18,11 +20,13 @@ import java.time.LocalDate;
  * Organization
  */
 @Getter
-@Setter
+@Builder
 @ToString
 public class Organization implements Serializable {
     @Serial
     private static final long serialVersionUID = 0L;
+
+    @Setter
     @NotNull
     @Min(value=0)
     private long id; //Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
@@ -32,6 +36,7 @@ public class Organization implements Serializable {
     @NotNull
     @Valid
     private Coordinates coordinates; //Поле не может быть null
+
     @NotNull
     @Past
     private LocalDate creationDate; //Поле не может быть null, Значение этого поля должно генерироваться автоматически
@@ -40,7 +45,10 @@ public class Organization implements Serializable {
     private Double annualTurnover; //Поле не может быть null, Значение поля должно быть больше 0
     @NotNull(message="Invalid organization type")
     private OrganizationType type; //Поле не может быть null
-
     @Valid
     private Address postalAddress; //Поле может быть null
+
+    @Setter
+    @NotNull
+    private UserInfo userInfo;
 }

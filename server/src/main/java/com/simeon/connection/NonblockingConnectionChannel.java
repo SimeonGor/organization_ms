@@ -46,13 +46,23 @@ public class NonblockingConnectionChannel implements ConnectionChannel {
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(byteArrayOutputStream);
             objectOutputStream.writeObject(response);
             ByteBuffer response_buffer = ByteBuffer.allocate(byteArrayOutputStream.size() + 4);
+            response_buffer.position(0);
             response_buffer.putInt(byteArrayOutputStream.size());
             response_buffer.put(byteArrayOutputStream.toByteArray());
-            response_buffer.position(0);
+            response_buffer.rewind();
             byteChannel.write(response_buffer);
         }
         catch (IOException ignored) {
             ;
+        }
+    }
+
+    @Override
+    public void close() {
+        try {
+            byteChannel.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 }

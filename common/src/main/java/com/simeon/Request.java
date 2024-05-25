@@ -12,11 +12,11 @@ import java.util.HashMap;
  * Client's request
  */
 @Getter
-@Setter
 @AllArgsConstructor
 public class Request implements Serializable {
     @Serial
     private static final long serialVersionUID = 0L;
+    private final Token userToken;
     /**
      * Request's method
      */

@@ -4,6 +4,7 @@ import com.simeon.Response;
 import com.simeon.UserInfo;
 import com.simeon.authentication.IAuthenticationService;
 import com.simeon.commands.Command;
+import com.simeon.exceptions.BusyUsernameException;
 import com.simeon.exceptions.NoSuchParameterException;
 import lombok.NonNull;
 
@@ -43,6 +44,10 @@ public class RegisterCommand extends Command {
             return new Response(false, new NoSuchParameterException(name, "password"));
         }
 
-        return new Response(true, authenticationService.register(username, password));
+        try {
+            return new Response(true, authenticationService.register(username, password));
+        } catch (BusyUsernameException e) {
+            return new Response(false, e);
+        }
     }
 }

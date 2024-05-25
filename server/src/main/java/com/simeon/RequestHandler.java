@@ -3,7 +3,13 @@ package com.simeon;
 import com.simeon.authentication.IAuthenticationService;
 import com.simeon.commands.CommandHandler;
 import com.simeon.connection.ConnectionChannel;
+import com.simeon.exceptions.AuthorizedException;
+import com.simeon.exceptions.UnauthorizedUserException;
+import lombok.extern.java.Log;
 
+import java.util.logging.Level;
+
+@Log
 public class RequestHandler {
     private final CommandHandler commandHandler;
     private final ResponseHandler responseHandler;
@@ -20,6 +26,10 @@ public class RequestHandler {
         thread.start();
     }
 
+    public void close() {
+        responseHandler.close();
+    }
+
 
     private class Handler implements Runnable {
         private final Request request;
@@ -31,8 +41,15 @@ public class RequestHandler {
         @Override
         public void run() {
             if (request != null) {
-                UserInfo userInfo = authenticationService.verified(request.getUserToken());
-                Response response = commandHandler.handle(request.getMethod(), request.getParams(), userInfo);
+                log.log(Level.INFO, () -> "process " + request.getMethod());
+                Response response;
+                try {
+                    UserInfo userInfo = authenticationService.verified(request.getUserToken());
+                    log.log(Level.INFO, () -> userInfo.getRole().toString());
+                    response = commandHandler.handle(request.getMethod(), request.getParams(), userInfo);
+                } catch (AuthorizedException e) {
+                    response = new Response(false, e);
+                }
                 responseHandler.send(response, connectionChannel);
             }
         }

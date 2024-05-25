@@ -13,11 +13,10 @@ import lombok.extern.java.Log;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.net.InetSocketAddress;
 import java.net.Socket;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.NoSuchElementException;
-import java.util.Scanner;
+import java.nio.channels.SocketChannel;
+import java.util.*;
 import java.util.logging.LogManager;
 
 /**
@@ -31,39 +30,42 @@ public class Client {
     private CommandHandler commandHandler;
     private final InputHandler inputHandler;
     private final OutputHandler outputHandler;
-    private Socket socket;
+    private SocketChannel socket;
+    private ConnectionChannel connectionChannel;
+    @Setter
+    private Token token;
 
     public Client(CLI cli, InputHandler inputHandler, OutputHandler outputHandler) {
         this.cli = cli;
         this.inputHandler = inputHandler;
         this.outputHandler = outputHandler;
+        this.token = null;
+
+        this.outputHandler.add(new TokenOutputHandler(this));
     }
 
     public void start(String ip, int port) throws IOException, InvalidConnectionException {
         cli.print("Connecting...\n");
-        this.socket = new Socket(ip, port);
-        if (!socket.isOutputShutdown()) {
-            ISender sender = SenderFactory.getSEnder(socket.getOutputStream());
-            IReceiver receiver = ReceiverFactory.getReceiver(socket.getInputStream());
+        this.socket = SocketChannel.open();
+        this.socket.connect(new InetSocketAddress(ip, port));
+        connect();
+    }
 
-            ServerCommandHandler servercommandHandler = new ServerCommandHandler(sender, receiver);
-            sender.send(new Request("get_api", new HashMap<>()));
-            Response response = receiver.receive();
+    public void connect() throws IOException, InvalidConnectionException {
+        if (socket.isConnected()) {
+            connectionChannel = new NonblockingConnectionChannel(socket);
+            connectionChannel.send(new Request(token, "get_api", new HashMap<>()));
+            Response response = connectionChannel.receive();
+            ServerCommandHandler serverCommandHandler = new ServerCommandHandler(connectionChannel);
             if (response != null && response.isStatus())
-                servercommandHandler.setCommands((ArrayList<CommandInfo>) response.getData());
+                serverCommandHandler.setCommands((ArrayList<CommandInfo>) response.getData());
             else {
-                throw new InvalidConnectionException(socket.getInetAddress(), port);
+                throw new InvalidConnectionException(socket.getRemoteAddress());
             }
-            ClientCommandHandler clientCommandHandler = new ClientCommandHandler();
-            clientCommandHandler.setSuccessor(servercommandHandler);
-            clientCommandHandler.addCommand(new HelpCommand(clientCommandHandler));
-            clientCommandHandler.addCommand(new ExitCommand(this));
-            clientCommandHandler.addCommand(new ExecuteScriptCommand(this));
-            clientCommandHandler.addCommand(new RestartCommand(this));
-            this.commandHandler = clientCommandHandler;
-            cli.print("Connected!\n");
+            this.commandHandler = CommandHandlerFactory.getClientCommandHandler(serverCommandHandler, this);
         }
     }
+
     public void loop() {
         Scanner scanner = cli.getScanner();
         cli.printShellPrompt();
@@ -77,7 +79,7 @@ public class Client {
                     for (var e : params_info.entrySet()) {
                         parameters.put(e.getKey(), inputHandler.getInput(e.getValue(), cli));
                     }
-                    Response response = commandHandler.handle(method, parameters);
+                    Response response = commandHandler.handle(method, parameters, token);
                     outputHandler.handle(response.getData(), cli);
                 } catch (UnknownCommandException | InvalidArgumentException e) {
                     cli.error(e);
@@ -91,8 +93,12 @@ public class Client {
     }
 
     public void close() throws IOException {
-        cli.scanner.close();
         socket.close();
+    }
+
+    public void shutdown() throws IOException {
+        close();
+        cli.close();
     }
 
     public static void main(String[] args) {

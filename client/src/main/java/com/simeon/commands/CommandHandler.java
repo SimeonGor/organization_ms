@@ -2,6 +2,7 @@ package com.simeon.commands;
 
 import com.simeon.CommandInfo;
 import com.simeon.Response;
+import com.simeon.Token;
 import com.simeon.exceptions.UnknownCommandException;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,5 +18,5 @@ public abstract class CommandHandler {
 
     public abstract ArrayList<CommandInfo> getCommands();
     public abstract CommandInfo getCommandInfoOf(String method) throws UnknownCommandException;
-    public abstract Response handle(String method, HashMap<String, ? extends Serializable> parameters) throws UnknownCommandException;
+    public abstract Response handle(String method, HashMap<String, ? extends Serializable> parameters, Token token) throws UnknownCommandException;
 }

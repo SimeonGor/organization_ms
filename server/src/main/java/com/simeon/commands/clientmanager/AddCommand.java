@@ -32,7 +32,7 @@ public class AddCommand extends Command {
     @Override
     public Response execute(@NonNull Map<String, ? extends Serializable> parameters, @NonNull UserInfo userInfo) {
         log.log(Level.INFO, "Add command started with ", parameters.toString());
-        if (userInfo.getRole().compareTo(Role.NO_AUTH) > 0) {
+        if (userInfo.getRole().compareTo(Role.USER) < 0) {
             return new Response(false, new UnauthorizedUserException());
         }
 

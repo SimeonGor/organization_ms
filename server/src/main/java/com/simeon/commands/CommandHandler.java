@@ -6,11 +6,14 @@ import com.simeon.UserInfo;
 import com.simeon.exceptions.UnknownCommandException;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.extern.java.Log;
 
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
 
+@Log
 public class CommandHandler {
     @Getter
     @Setter
@@ -36,16 +39,16 @@ public class CommandHandler {
     public Map<String, ICommand> getCommands() {
         Map<String, ICommand> result = new HashMap<>();
         result.putAll(commands);
-        result.putAll(successor.getCommands());
+        if (successor != null) {
+            result.putAll(successor.getCommands());
+        }
         return result;
     }
 
     public Response handle(String method, Map<String, ? extends Serializable> parameters, UserInfo userInfo) {
-        if (userInfo.getRole().compareTo(level) < 0) {
-            return new Response(false, new UnknownCommandException(method));
-        }
+        log.log(Level.INFO, () -> String.format("process %s from %s %s by command handler %s", method, userInfo.getUsername(), userInfo.getRole(), level));
 
-        if (commands.containsKey(method)) {
+        if (userInfo.getRole().compareTo(level) >= 0 && commands.containsKey(method)) {
             ICommand command = commands.get(method);
             if (!parameters.isEmpty()) {
                 return command.execute(parameters, userInfo);

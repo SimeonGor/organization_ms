@@ -9,7 +9,7 @@ import java.io.Serializable;
 import java.util.HashMap;
 
 public class OutputHandler {
-    private HashMap<Class<? extends Serializable>, OutputCommand> commands = new HashMap<>();
+    private final HashMap<Class<? extends Serializable>, OutputCommand> commands = new HashMap<>();
     public boolean add(OutputCommand outputCommand) {
         if (commands.containsKey(outputCommand.getOutputType())) {
             return false;
@@ -18,12 +18,25 @@ public class OutputHandler {
         return true;
     }
 
-    public void handle(Serializable messsage, CLI cli) throws UnknownCommandException {
-        if (!commands.containsKey(messsage.getClass())) {
-            throw new UnknownCommandException(messsage.getClass().getCanonicalName());
+    public void handle(Serializable message, CLI cli) throws UnknownCommandException {
+        if (commands.containsKey(message.getClass())) {
+            OutputCommand outputCommand = commands.get(message.getClass());
+            try {
+                outputCommand.show(message, cli);
+                return;
+            } catch (ClassCastException e) {
+                throw new UnknownCommandException(message.getClass().getCanonicalName());
+            }
         }
 
-        OutputCommand outputCommand = commands.get(messsage.getClass());
-        outputCommand.show(messsage, cli);
+        for (var it : commands.entrySet()) {
+            try {
+                it.getValue().show(message, cli);
+                return;
+            } catch (ClassCastException ignored) {
+                ;
+            }
+        }
+        throw new UnknownCommandException(message.getClass().getCanonicalName());
     }
 }

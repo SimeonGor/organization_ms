@@ -12,7 +12,6 @@ import java.io.Serializable;
  * Server's response
  */
 @Getter
-@Setter
 @AllArgsConstructor
 public class Response implements Serializable {
     @Serial

@@ -3,24 +3,20 @@ package com.simeon.commands;
 import com.simeon.CommandInfo;
 import com.simeon.Request;
 import com.simeon.Response;
-import com.simeon.connection.IReceiver;
-import com.simeon.connection.ISender;
+import com.simeon.Token;
+import com.simeon.connection.ConnectionChannel;
 import com.simeon.exceptions.UnknownCommandException;
-import lombok.AccessLevel;
-import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class ServerCommandHandler extends CommandHandler {
-    protected HashMap<String, CommandInfo> commands = new HashMap<>();
-    protected ISender sender;
-    protected IReceiver receiver;
+    private HashMap<String, CommandInfo> commands = new HashMap<>();
+    private ConnectionChannel connectionChannel;
 
-    public ServerCommandHandler(ISender sender, IReceiver receiver) {
-        this.sender = sender;
-        this.receiver = receiver;
+    public ServerCommandHandler(ConnectionChannel connectionChannel) {
+        this.connectionChannel = connectionChannel;
     }
 
     public void setCommands(ArrayList<CommandInfo> commands) {
@@ -43,13 +39,13 @@ public class ServerCommandHandler extends CommandHandler {
     }
 
     @Override
-    public Response handle(String method, HashMap<String, ? extends Serializable> parameters) throws UnknownCommandException {
+    public Response handle(String method, HashMap<String, ? extends Serializable> parameters, Token token) throws UnknownCommandException {
         if (!commands.containsKey(method)) {
             throw new UnknownCommandException(method);
         }
 
-        sender.send(new Request(method, parameters));
-        Response response = receiver.receive();
+        connectionChannel.send(new Request(token, method, parameters));
+        Response response = connectionChannel.receive();
         if (response == null) {
             return new Response(false, "an error in data transmission or the server crashed");
         }

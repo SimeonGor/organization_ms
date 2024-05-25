@@ -6,13 +6,14 @@ import lombok.NonNull;
 
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 /**
  * Interface for command pattern.
  */
 public interface ICommand {
      String getName();
-     HashMap<String, Class<? extends Serializable>> getParameterTypes();
+     LinkedHashMap<String, Class<? extends Serializable>> getParameterTypes();
      String getDescription();
 
      boolean hasParameters();
