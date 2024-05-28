@@ -1,7 +1,5 @@
 show
-help
-clear
-show
+d
 add
 qw
 199
@@ -10,5 +8,3 @@ qw
 public
 
 show
-
-execute_script script

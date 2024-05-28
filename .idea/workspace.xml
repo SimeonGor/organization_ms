@@ -2,82 +2,50 @@
 <project version="4">
   <component name="AnalysisUIOptions">
     <option name="ANALYZE_TEST_SOURCES" value="false" />
+    <option name="SCOPE_TYPE" value="3" />
   </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7012e3a3-1d32-426b-90c8-6574a8dd71bb" name="Changes" comment="init commit">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/input.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/reserve.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/simeon/Client.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/simeon/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/simeon/Request.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/simeon/Response.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/simeon/Server.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/simeon/collection/CollectionLoader.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/simeon/collection/CollectionManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/simeon/collection/JsonCollectionLoader.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/simeon/collection/MyCollection.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/simeon/collection/Sequence.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/simeon/collection/comarators/AnnualTurnoverComparator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/simeon/collection/comarators/PostalAddressComparator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/simeon/collection/element/Address.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/simeon/collection/element/AnnualTurnoverConstraint.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/simeon/collection/element/AnnualTurnoverValidator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/simeon/collection/element/Coordinates.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/simeon/collection/element/Organization.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/simeon/collection/element/OrganizationType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/simeon/collection/element/ZipCodeConstraint.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/simeon/collection/element/ZipCodeConstraintValidator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/simeon/commands/AddCommand.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/simeon/commands/AddIfMaxCommand.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/simeon/commands/ClearCommand.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/simeon/commands/Command.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/simeon/commands/ExecuteScriptCommand.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/simeon/commands/ExitCommand.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/simeon/commands/FilterGreaterThanTypeCommand.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/simeon/commands/HelpCommand.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/simeon/commands/ICommand.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/simeon/commands/InfoCommand.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/simeon/commands/MinByPostalAddressCommand.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/simeon/commands/NewElementBuilder.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/simeon/commands/PrintFieldDescendingPostalAddressCommand.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/simeon/commands/RemoveAtCommand.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/simeon/commands/RemoveByIDCommand.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/simeon/commands/ReorderCommand.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/simeon/commands/SaveCommand.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/simeon/commands/ShowCommand.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/simeon/commands/UpdateCommand.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/simeon/exceptions/InvalidArgument.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/simeon/exceptions/InvalidCollectionDataException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/simeon/exceptions/InvalidCommandParametersException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/simeon/exceptions/UnknownCommandException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/simeon/utils/CommandParser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+    <list default="true" id="7012e3a3-1d32-426b-90c8-6574a8dd71bb" name="Changes" comment="fix: hotfix">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/simeon/commands/output/CollectionInfoOutputCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/simeon/commands/output/CollectionInfoOutputCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/simeon/collection/CollectionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/simeon/collection/CollectionManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/simeon/commands/clientmanager/ReorderCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/simeon/commands/clientmanager/ReorderCommand.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="ChangesViewManager">
+    <option name="groupingKeys">
+      <option value="module" />
+    </option>
+  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Enum" />
         <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="lab6" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RESET_MODE" value="HARD" />
+  </component>
+  <component name="JsbtTreeLayoutManager">
+    <layout place="tools.popupGrunt">
+      <scroll-view-position x="0" y="0" />
+    </layout>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -102,7 +70,7 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "main",
-    "last_opened_file_path": "/Users/simeongor/Documents/java_codes/Application/src/main/java/com/simeon",
+    "last_opened_file_path": "/Users/simeongor/Documents/java_codes/Application/server/src/main/resources",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -112,27 +80,69 @@
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "settings.editor.selected.configurable": "profiler.jvm",
+    "spring.configuration.checksum": "cf1e8c14e54505f60aa10ceb8d5d8ab3",
     "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "postgresql"
+    ]
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/server/src/main/resources" />
+      <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/src/main/java/com/simeon" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/server/src/main/lib" />
+      <recent name="$PROJECT_DIR$/server/src/main/resources" />
+      <recent name="$PROJECT_DIR$/client/src/main/resources" />
+      <recent name="$PROJECT_DIR$/client" />
       <recent name="$PROJECT_DIR$" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.simeon.collection" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Main">
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.simeon.Main" />
-      <module name="Application" />
-      <option name="PROGRAM_PARAMETERS" value="input.json" />
+  <component name="RunManager" selected="Application.Client">
+    <configuration name="Client" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="com.simeon.Client" />
+      <module name="client" />
+      <option name="PROGRAM_PARAMETERS" value="localhost 1234" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Server" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="com.simeon.Server" />
+      <module name="server" />
+      <option name="PROGRAM_PARAMETERS" value="1234 localhost postgres 5432 simeongor qwerty" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Test" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.simeon.Test" />
+      <module name="server" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="com.simeon.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="test" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.simeon.test" />
+      <module name="client" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.simeon.commands.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -171,12 +181,16 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Application.Main" />
+      <item itemvalue="Application.Client" />
+      <item itemvalue="Application.Server" />
+      <item itemvalue="Application.Test" />
+      <item itemvalue="Application.test" />
       <item itemvalue="Maven.Application [clean,package]" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Main" />
+        <item itemvalue="Application.Test" />
+        <item itemvalue="Application.test" />
       </list>
     </recent_temporary>
   </component>
@@ -192,6 +206,23 @@
       <workItem from="1710445042643" duration="275000" />
       <workItem from="1710445665205" duration="28000" />
       <workItem from="1710445697950" duration="26428000" />
+      <workItem from="1712490880429" duration="38054000" />
+      <workItem from="1713362698048" duration="18777000" />
+      <workItem from="1713770878229" duration="330000" />
+      <workItem from="1713787968711" duration="29056000" />
+      <workItem from="1713988886169" duration="20650000" />
+      <workItem from="1714124434643" duration="6900000" />
+      <workItem from="1714133053562" duration="31434000" />
+      <workItem from="1714905248655" duration="679000" />
+      <workItem from="1715150488811" duration="627000" />
+      <workItem from="1715172767359" duration="599000" />
+      <workItem from="1715757361863" duration="605000" />
+      <workItem from="1715787514580" duration="1274000" />
+      <workItem from="1715928977923" duration="193000" />
+      <workItem from="1715969448365" duration="3133000" />
+      <workItem from="1715975858348" duration="58000" />
+      <workItem from="1715976049003" duration="115803000" />
+      <workItem from="1716650517682" duration="3029000" />
     </task>
     <task id="LOCAL-00001" summary="init commit">
       <option name="closed" value="true" />
@@ -201,7 +232,247 @@
       <option name="project" value="LOCAL" />
       <updated>1710446114084</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="fix: remove exceptions in ICommand">
+      <option name="closed" value="true" />
+      <created>1712670462206</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1712670462206</updated>
+    </task>
+    <task id="LOCAL-00003" summary="fix: add Serializable">
+      <option name="closed" value="true" />
+      <created>1712670498920</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1712670498920</updated>
+    </task>
+    <task id="LOCAL-00004" summary="fix">
+      <option name="closed" value="true" />
+      <created>1712670571649</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1712670571649</updated>
+    </task>
+    <task id="LOCAL-00005" summary="feat: add connection to client">
+      <option name="closed" value="true" />
+      <created>1712670594500</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1712670594500</updated>
+    </task>
+    <task id="LOCAL-00006" summary="feat: add connection to server">
+      <option name="closed" value="true" />
+      <created>1712670617125</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1712670617125</updated>
+    </task>
+    <task id="LOCAL-00007" summary="feat: add CommandHandler to server">
+      <option name="closed" value="true" />
+      <created>1712670635786</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1712670635786</updated>
+    </task>
+    <task id="LOCAL-00008" summary="feat: change logic of Command (remove field collectionManager)">
+      <option name="closed" value="true" />
+      <created>1712757593739</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1712757593739</updated>
+    </task>
+    <task id="LOCAL-00009" summary="fix: change returns IListener">
+      <option name="closed" value="true" />
+      <created>1712757636517</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1712757636517</updated>
+    </task>
+    <task id="LOCAL-00010" summary="feat: add GetApiCommand">
+      <option name="closed" value="true" />
+      <created>1712757669041</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1712757669041</updated>
+    </task>
+    <task id="LOCAL-00011" summary="fix: change visibility">
+      <option name="closed" value="true" />
+      <created>1712780629550</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1712780629550</updated>
+    </task>
+    <task id="LOCAL-00012" summary="feat: add common exceptions">
+      <option name="closed" value="true" />
+      <created>1712780651994</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1712780651994</updated>
+    </task>
+    <task id="LOCAL-00013" summary="feat: working client">
+      <option name="closed" value="true" />
+      <created>1714157778717</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1714157778717</updated>
+    </task>
+    <task id="LOCAL-00014" summary="feat: add serialVersionUID">
+      <option name="closed" value="true" />
+      <created>1714157814819</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1714157814819</updated>
+    </task>
+    <task id="LOCAL-00015" summary="feat: add working server">
+      <option name="closed" value="true" />
+      <created>1714165031593</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1714165031593</updated>
+    </task>
+    <task id="LOCAL-00016" summary="feat: change protocol">
+      <option name="closed" value="true" />
+      <created>1714165048182</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1714165048182</updated>
+    </task>
+    <task id="LOCAL-00017" summary="feat: something">
+      <option name="closed" value="true" />
+      <created>1714199798213</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1714199798213</updated>
+    </task>
+    <task id="LOCAL-00018" summary="fix: remove skip blocking">
+      <option name="closed" value="true" />
+      <created>1714200871653</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1714200871653</updated>
+    </task>
+    <task id="LOCAL-00019" summary="fix: remove todo">
+      <option name="closed" value="true" />
+      <created>1714200917097</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1714200917097</updated>
+    </task>
+    <task id="LOCAL-00020" summary="fix: remove no usage">
+      <option name="closed" value="true" />
+      <created>1714201075868</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1714201075868</updated>
+    </task>
+    <task id="LOCAL-00021" summary="fix: fix input">
+      <option name="closed" value="true" />
+      <created>1714208822941</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1714208822941</updated>
+    </task>
+    <task id="LOCAL-00022" summary="feat">
+      <option name="closed" value="true" />
+      <created>1714208861556</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1714208861556</updated>
+    </task>
+    <task id="LOCAL-00023" summary="feat">
+      <option name="closed" value="true" />
+      <created>1715973293522</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1715973293522</updated>
+    </task>
+    <task id="LOCAL-00024" summary="feat: change DAO interface">
+      <option name="closed" value="true" />
+      <created>1716114838728</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1716114838728</updated>
+    </task>
+    <task id="LOCAL-00025" summary="feat: update commands">
+      <option name="closed" value="true" />
+      <created>1716114891708</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1716114891708</updated>
+    </task>
+    <task id="LOCAL-00026" summary="feat: server without DB">
+      <option name="closed" value="true" />
+      <created>1716559917270</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1716559917270</updated>
+    </task>
+    <task id="LOCAL-00027" summary="feat: working">
+      <option name="closed" value="true" />
+      <created>1716626854093</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1716626854093</updated>
+    </task>
+    <task id="LOCAL-00028" summary="fix: add id to entity">
+      <option name="closed" value="true" />
+      <created>1716627558929</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1716627558929</updated>
+    </task>
+    <task id="LOCAL-00029" summary="fix: remove imports">
+      <option name="closed" value="true" />
+      <created>1716634792266</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1716634792266</updated>
+    </task>
+    <task id="LOCAL-00030" summary="feat: add sql create script">
+      <option name="closed" value="true" />
+      <created>1716634892944</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1716634892944</updated>
+    </task>
+    <task id="LOCAL-00031" summary="fix: hotfix">
+      <option name="closed" value="true" />
+      <created>1716652699273</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1716652699273</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -218,7 +489,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="main" />
+                        <option value="db" />
                       </list>
                     </value>
                   </entry>
@@ -231,27 +502,31 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="init commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="init commit" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/main/java/com/simeon/Server.java</url>
-          <line>48</line>
-          <properties class="com.simeon.Server" method="executeRequest">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/simeon/Server.java</url>
-          <line>71</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="feat: add connection to server" />
+    <MESSAGE value="feat: add CommandHandler to server" />
+    <MESSAGE value="feat: change logic of Command (remove field collectionManager)" />
+    <MESSAGE value="fix: change returns IListener" />
+    <MESSAGE value="feat: add GetApiCommand" />
+    <MESSAGE value="fix: change visibility" />
+    <MESSAGE value="feat: add common exceptions" />
+    <MESSAGE value="feat: working client" />
+    <MESSAGE value="feat: add serialVersionUID" />
+    <MESSAGE value="feat: add working server" />
+    <MESSAGE value="feat: change protocol" />
+    <MESSAGE value="feat: something" />
+    <MESSAGE value="fix: remove skip blocking" />
+    <MESSAGE value="fix: remove todo" />
+    <MESSAGE value="fix: remove no usage" />
+    <MESSAGE value="fix: fix input" />
+    <MESSAGE value="feat" />
+    <MESSAGE value="feat: change DAO interface" />
+    <MESSAGE value="feat: update commands" />
+    <MESSAGE value="feat: server without DB" />
+    <MESSAGE value="feat: working" />
+    <MESSAGE value="fix: add id to entity" />
+    <MESSAGE value="fix: remove imports" />
+    <MESSAGE value="feat: add sql create script" />
+    <MESSAGE value="fix: hotfix" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: hotfix" />
   </component>
 </project>
