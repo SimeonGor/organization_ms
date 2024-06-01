@@ -9,10 +9,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7012e3a3-1d32-426b-90c8-6574a8dd71bb" name="Changes" comment="fix: hotfix">
+      <change afterPath="$PROJECT_DIR$/client/src/main/java/com/simeon/gui/gui.form" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/main/java/com/simeon/gui/gui.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/simeon/commands/output/CollectionInfoOutputCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/simeon/commands/output/CollectionInfoOutputCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/simeon/collection/CollectionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/simeon/collection/CollectionManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/simeon/commands/clientmanager/ReorderCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/simeon/commands/clientmanager/ReorderCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/client/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/common/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/server/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,7 +41,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="lab6" />
+        <entry key="$PROJECT_DIR$" value="main" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -80,7 +85,7 @@
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "profiler.jvm",
+    "settings.editor.selected.configurable": "project.propGUI",
     "spring.configuration.checksum": "cf1e8c14e54505f60aa10ceb8d5d8ab3",
     "vue.rearranger.settings.migration": "true"
   },
@@ -107,7 +112,7 @@
       <recent name="com.simeon.collection" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Client">
+  <component name="RunManager" selected="Application.gui">
     <configuration name="Client" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="com.simeon.Client" />
       <module name="client" />
@@ -130,6 +135,19 @@
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="com.simeon.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="gui" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.simeon.gui.gui" />
+      <module name="client" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.simeon.gui.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -183,14 +201,16 @@
     <list>
       <item itemvalue="Application.Client" />
       <item itemvalue="Application.Server" />
+      <item itemvalue="Application.gui" />
       <item itemvalue="Application.Test" />
       <item itemvalue="Application.test" />
       <item itemvalue="Maven.Application [clean,package]" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Test" />
+        <item itemvalue="Application.gui" />
         <item itemvalue="Application.test" />
+        <item itemvalue="Application.Test" />
       </list>
     </recent_temporary>
   </component>
@@ -223,6 +243,10 @@
       <workItem from="1715975858348" duration="58000" />
       <workItem from="1715976049003" duration="115803000" />
       <workItem from="1716650517682" duration="3029000" />
+      <workItem from="1716998952615" duration="1645000" />
+      <workItem from="1717063609268" duration="79000" />
+      <workItem from="1717063698084" duration="52000" />
+      <workItem from="1717063754744" duration="2066000" />
     </task>
     <task id="LOCAL-00001" summary="init commit">
       <option name="closed" value="true" />
@@ -489,7 +513,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="db" />
+                        <option value="main" />
                       </list>
                     </value>
                   </entry>
@@ -528,5 +552,9 @@
     <MESSAGE value="feat: add sql create script" />
     <MESSAGE value="fix: hotfix" />
     <option name="LAST_COMMIT_MESSAGE" value="fix: hotfix" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>
