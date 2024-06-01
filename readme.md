@@ -8,15 +8,18 @@
 1. Клонирование репозитория
 
 ```git clone https://github.com/SimeonGor/organization_ms```
+
 2. Переход в директорию organization_ms
 
 ```cd organization_ms```
+
 3. Создание jar-файлов
 
 ```mvn clean package```
 
 ## Документация
 1. Для создания базы данных выполнить скрипт ```create.sql```
+
 2. Для запуска серверного приложения
 
 ```java -jar server\target\server-1.0-SNAPSHOT-jar-with-dependencies.jar```
