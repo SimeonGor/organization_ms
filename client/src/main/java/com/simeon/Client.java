@@ -100,6 +100,9 @@ public class Client {
         close();
         cli.close();
     }
+    public void send(String command, HashMap<String, ? extends Serializable> params) {
+
+    }
 
     public static void main(String[] args) {
         try {

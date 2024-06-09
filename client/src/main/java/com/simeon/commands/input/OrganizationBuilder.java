@@ -12,6 +12,7 @@ import javax.validation.ValidatorFactory;
 import java.io.PrintWriter;
 import java.io.Reader;
 import java.util.InputMismatchException;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 import java.util.Set;
 
@@ -22,7 +23,12 @@ public class OrganizationBuilder {
         validator = validatorFactory.usingContext().getValidator();
     }
     public static String getName(Scanner scanner)  throws InvalidArgumentException {
-        String name = scanner.nextLine();
+        String name = null;
+        try {
+            name = scanner.nextLine();
+        }
+        catch (NoSuchElementException ignored) {
+        }
         Set<ConstraintViolation<Organization>> validates =
                 validator.validateValue(Organization.class, "name", name);
 
@@ -46,8 +52,8 @@ public class OrganizationBuilder {
             throw new InvalidArgumentException(
                     String.join("\n", validates.stream().map(ConstraintViolation::getMessage).toList())
             );
-        } catch (InputMismatchException | NumberFormatException e) {
-            throw new InvalidArgumentException("it must be an integer");
+        } catch (NoSuchElementException | NumberFormatException e) {
+            throw new InvalidArgumentException("Coordinates.x must be an integer");
         }
     }
 
@@ -64,7 +70,7 @@ public class OrganizationBuilder {
                     String.join("\n", validates.stream().map(ConstraintViolation::getMessage).toList())
             );
         } catch (InputMismatchException | NumberFormatException e) {
-            throw new InvalidArgumentException("it must be an integer");
+            throw new InvalidArgumentException("Coordinates.y must be an integer");
         }
     }
 
@@ -80,13 +86,18 @@ public class OrganizationBuilder {
             throw new InvalidArgumentException(
                     String.join("\n", validates.stream().map(ConstraintViolation::getMessage).toList())
             );
-        } catch (NumberFormatException e) {
-            throw new InvalidArgumentException("it must be an floating point number");
+        } catch (NoSuchElementException | NumberFormatException e) {
+            throw new InvalidArgumentException("Annual turnover must be an floating point number");
         }
     }
 
     public static OrganizationType getOrganizationType(Scanner scanner) throws InvalidArgumentException {
-        OrganizationType organizationType = OrganizationType.getByName(scanner.nextLine());
+        OrganizationType organizationType = null;
+        try {
+            organizationType =  OrganizationType.getByName(scanner.nextLine());
+        } catch (NoSuchElementException ignored) {
+
+        }
         Set<ConstraintViolation<Organization>> validates =
                 validator.validateValue(Organization.class, "type", organizationType);
 
