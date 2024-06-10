@@ -44,12 +44,15 @@ public class OrganizationFormDialog extends JDialog {
         main.add(organizationUpdate);
         main.add(buttons);
         pack();
+
+        setAlwaysOnTop(true);
     }
 
     public void setMethod(String method, Organization organization) {
         organizationUpdate.show(organization);
 
         actionButton.setActionCommand(method);
+        setLocationRelativeTo(null);
         this.setVisible(true);
     }
 
@@ -84,5 +87,6 @@ public class OrganizationFormDialog extends JDialog {
         lang = ResourceBundle.getBundle("lang");
         actionButton.setText(lang.getString("save"));
         cancelBtn.setText(lang.getString("cancel"));
+        organizationUpdate.relocale();
     }
 }

@@ -53,6 +53,7 @@ public class AuthDialog extends JDialog {
         getContentPane().add(createGUI());
         pack();
         setResizable(false);
+        setAlwaysOnTop(true);
     }
 
     private JPanel createGUI() {
@@ -104,6 +105,7 @@ public class AuthDialog extends JDialog {
         usernameField.setBackground(Color.WHITE);
         passwordField.setBackground(Color.WHITE);
 
+        setLocationRelativeTo(null);
         setVisible(true);
     }
 

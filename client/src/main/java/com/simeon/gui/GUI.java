@@ -8,6 +8,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.util.*;
@@ -27,11 +29,19 @@ public class GUI extends JFrame {
 
     public GUI(Client client) {
         this.client = client;
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        addWindowListener(new WindowAdapter() {
+            @SneakyThrows
+            @Override
+            public void windowClosing(WindowEvent e) {
+                client.send("exit", new HashMap<>());
+            }
+        });
 
         this.getContentPane().add(createGUI());
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
         pack();
         setVisible(true);
+
 
         Timer timer = new Timer();
         timer.schedule(new TimerTask() {
