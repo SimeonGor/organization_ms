@@ -4,6 +4,7 @@ import com.simeon.UserInfo;
 import com.simeon.element.Address;
 import com.simeon.element.Coordinates;
 import com.simeon.element.Organization;
+import com.simeon.element.comparator.*;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
@@ -16,7 +17,7 @@ import java.util.List;
 import java.util.*;
 
 public class Table extends JPanel {
-    public static final ResourceBundle lang = ResourceBundle.getBundle("lang");
+    public static ResourceBundle lang = ResourceBundle.getBundle("lang");
 
     public static class CoordinatesRender extends DefaultTableCellRenderer {
         @Override
@@ -103,12 +104,14 @@ public class Table extends JPanel {
         @Override
         public Comparator<?> getComparator(int columnName) {
             return switch (columnName) {
-                default -> new Comparator<String>() {
-                    @Override
-                    public int compare(String o1, String o2) {
-                        return (o1).compareTo(o2);
-                    }
-                };
+                case 0 -> new IDComparator();
+                case 1 -> new NameComparator();
+                case 2 -> new TypeComparator();
+                case 3 -> new AnnualTurnoverComparator();
+                case 4 -> new CoordinateComparator();
+                case 5 -> new PostalAddressComparator();
+                case 6 -> new CreationDateComparator();
+                default -> new UserComparator();
             };
         }
     }
@@ -208,7 +211,7 @@ public class Table extends JPanel {
         table.setDefaultRenderer(UserInfo.class, new UserInfoRender());
         table.setDefaultRenderer(LocalDate.class, new LocalDateRender());
 
-//        table.setRowSorter(new Sorter());
+        table.setRowSorter(new Sorter());
         table.setAutoCreateRowSorter(true);
 
         table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
@@ -238,6 +241,11 @@ public class Table extends JPanel {
 
     public List<Organization> getCollection() {
         return tableModel.getCollection();
+    }
+
+    public void relocale() {
+        lang = ResourceBundle.getBundle("lang");
+        table.getTableHeader().resizeAndRepaint();
     }
 }
 

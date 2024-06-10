@@ -183,5 +183,6 @@ public class GUI extends JFrame {
         formDialog.relocale();
         organizationInfo.relocale();
         organizationInfo.show(organizationInfo.getOrganization());
+        table.relocale();
     }
 }
