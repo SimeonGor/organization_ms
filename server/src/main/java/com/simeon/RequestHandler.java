@@ -4,7 +4,6 @@ import com.simeon.authentication.IAuthenticationService;
 import com.simeon.commands.CommandHandler;
 import com.simeon.connection.ConnectionChannel;
 import com.simeon.exceptions.AuthorizedException;
-import com.simeon.exceptions.UnauthorizedUserException;
 import lombok.extern.java.Log;
 
 import java.util.logging.Level;

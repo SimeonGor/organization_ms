@@ -1,7 +1,6 @@
 package com.simeon.commands.input;
 
 import com.simeon.CLI;
-import com.simeon.commands.input.InputCommand;
 import com.simeon.exceptions.InvalidArgumentException;
 import com.simeon.exceptions.UnknownCommandException;
 import lombok.NonNull;

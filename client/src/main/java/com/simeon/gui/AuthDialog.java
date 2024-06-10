@@ -1,10 +1,6 @@
 package com.simeon.gui;
 
-import com.simeon.*;
-import com.simeon.commands.input.InputHandlerFactory;
-import com.simeon.commands.output.OutputHandlerFactory;
-import com.simeon.exceptions.AuthorizedException;
-import lombok.NonNull;
+import com.simeon.Client;
 import lombok.extern.java.Log;
 
 import javax.swing.*;

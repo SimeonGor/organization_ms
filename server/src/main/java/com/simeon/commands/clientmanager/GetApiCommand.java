@@ -7,9 +7,7 @@ import com.simeon.commands.Command;
 import com.simeon.commands.CommandHandler;
 import lombok.NonNull;
 
-import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 
 public class GetApiCommand extends Command {

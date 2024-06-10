@@ -30,7 +30,7 @@ public class MapCanvas extends JPanel {
     }
 
     public static class Entity extends JPanel {
-        private Coordinates coordinates;
+        private final Coordinates coordinates;
         private double percent;
 
         public Entity(Coordinates coordinates) {

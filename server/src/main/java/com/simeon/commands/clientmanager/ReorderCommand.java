@@ -7,7 +7,6 @@ import com.simeon.commands.Command;
 import com.simeon.element.Organization;
 import lombok.NonNull;
 import lombok.extern.java.Log;
-import org.apache.commons.collections4.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;

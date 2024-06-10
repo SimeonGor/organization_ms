@@ -1,7 +1,5 @@
 package com.simeon.commands.input;
 
-import com.simeon.CLI;
-
 public class InputHandlerFactory {
     public static InputHandler getInputHandler() {
         InputHandler inputHandler = new InputHandler();

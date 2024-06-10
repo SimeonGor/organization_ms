@@ -1,24 +1,14 @@
 package com.simeon.gui;
 
-import com.simeon.Response;
-import com.simeon.ResponseHandler;
-import com.simeon.Role;
-import com.simeon.UserInfo;
-import com.simeon.element.Address;
-import com.simeon.element.Coordinates;
 import com.simeon.element.Organization;
-import com.simeon.element.OrganizationType;
 import lombok.Getter;
-import lombok.NonNull;
 
 import javax.swing.*;
 import java.awt.*;
 import java.text.DateFormat;
 import java.text.NumberFormat;
-import java.time.LocalDate;
 import java.util.Date;
 import java.util.Locale;
-import java.util.ResourceBundle;
 
 public class OrganizationInfo extends JPanel {
     private final JLabel name;
@@ -31,7 +21,7 @@ public class OrganizationInfo extends JPanel {
     private final JLabel coordinateY;
     @Getter
     private Organization organization;
-    private OrganizationView view;
+    private final OrganizationView view;
 
 
     public OrganizationInfo() {

@@ -11,10 +11,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.util.*;
 import java.util.List;
 import java.util.Timer;
+import java.util.*;
 
 public class GUI extends JFrame {
     private static final ResourceBundle lang = ResourceBundle.getBundle("lang");

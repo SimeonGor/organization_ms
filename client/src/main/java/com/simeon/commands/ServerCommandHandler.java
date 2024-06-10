@@ -12,8 +12,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class ServerCommandHandler extends CommandHandler {
-    private HashMap<String, CommandInfo> commands = new HashMap<>();
-    private ConnectionChannel connectionChannel;
+    private final HashMap<String, CommandInfo> commands = new HashMap<>();
+    private final ConnectionChannel connectionChannel;
 
     public ServerCommandHandler(ConnectionChannel connectionChannel) {
         this.connectionChannel = connectionChannel;

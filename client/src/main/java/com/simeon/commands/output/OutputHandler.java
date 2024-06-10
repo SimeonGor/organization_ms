@@ -1,8 +1,6 @@
 package com.simeon.commands.output;
+
 import com.simeon.CLI;
-import com.simeon.commands.input.InputCommand;
-import com.simeon.commands.output.OutputCommand;
-import com.simeon.exceptions.InvalidArgumentException;
 import com.simeon.exceptions.UnknownCommandException;
 
 import java.io.Serializable;
@@ -34,7 +32,6 @@ public class OutputHandler {
                 it.getValue().show(message, cli);
                 return;
             } catch (ClassCastException ignored) {
-                ;
             }
         }
         throw new UnknownCommandException(message.getClass().getCanonicalName());

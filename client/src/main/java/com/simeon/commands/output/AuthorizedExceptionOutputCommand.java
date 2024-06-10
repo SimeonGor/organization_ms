@@ -2,7 +2,6 @@ package com.simeon.commands.output;
 
 import com.simeon.CLI;
 import com.simeon.exceptions.AuthorizedException;
-import com.simeon.gui.AuthDialog;
 
 import java.io.Serializable;
 

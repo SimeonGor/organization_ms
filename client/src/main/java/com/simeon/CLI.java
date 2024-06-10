@@ -2,17 +2,13 @@ package com.simeon;
 
 import com.simeon.element.Organization;
 import com.simeon.gui.GUI;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.SneakyThrows;
 import lombok.extern.java.Log;
 
-import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.io.PrintStream;
-import java.util.Collection;
 import java.util.List;
 import java.util.Scanner;
 import java.util.logging.Level;

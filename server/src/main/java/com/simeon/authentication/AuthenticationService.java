@@ -5,11 +5,9 @@ import com.simeon.Role;
 import com.simeon.Token;
 import com.simeon.User;
 import com.simeon.UserInfo;
-import com.simeon.element.Organization;
 import com.simeon.exceptions.AuthorizedException;
 import com.simeon.exceptions.BusyUsernameException;
 import com.simeon.exceptions.DBException;
-import com.simeon.exceptions.UnauthorizedUserException;
 
 import java.nio.charset.StandardCharsets;
 import java.sql.*;

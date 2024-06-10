@@ -1,9 +1,5 @@
 package com.simeon.gui;
 
-import com.simeon.Response;
-import com.simeon.ResponseHandler;
-import lombok.NonNull;
-
 import javax.swing.*;
 import java.awt.*;
 import java.util.HashMap;
@@ -11,7 +7,7 @@ import java.util.ResourceBundle;
 
 public class OrganizationView extends JPanel {
     private static ResourceBundle lang = ResourceBundle.getBundle("lang");
-    private HashMap<String, JLabel> labels = new HashMap<>();
+    private final HashMap<String, JLabel> labels = new HashMap<>();
 
     private JPanel createPanel(String name, JComponent component) {
         JPanel panel = new JPanel();

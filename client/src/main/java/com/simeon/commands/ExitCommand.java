@@ -3,14 +3,11 @@ package com.simeon.commands;
 import com.simeon.Client;
 import com.simeon.Response;
 import com.simeon.exceptions.InvalidArgumentException;
-import lombok.NonNull;
 
 import java.io.IOException;
-import java.io.Serializable;
-import java.util.HashMap;
 
 public class ExitCommand extends Command {
-    private Client client;
+    private final Client client;
     public ExitCommand(Client client) {
         super("exit", "exit the program");
         this.client = client;

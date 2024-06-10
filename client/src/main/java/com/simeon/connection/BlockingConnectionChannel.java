@@ -4,8 +4,9 @@ import com.simeon.Request;
 import com.simeon.Response;
 import lombok.NonNull;
 
-import java.io.*;
-import java.nio.ByteBuffer;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.nio.channels.ByteChannel;
 import java.nio.channels.Channels;
 
@@ -37,7 +38,6 @@ public class BlockingConnectionChannel implements ConnectionChannel {
             outputStream.writeObject(request);
         }
         catch (IOException ignored) {
-            ;
         }
     }
 }

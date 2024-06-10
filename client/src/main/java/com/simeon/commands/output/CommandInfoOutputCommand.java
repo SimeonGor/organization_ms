@@ -2,7 +2,6 @@ package com.simeon.commands.output;
 
 import com.simeon.CLI;
 import com.simeon.CommandInfo;
-import com.simeon.commands.Command;
 
 import java.io.Serializable;
 

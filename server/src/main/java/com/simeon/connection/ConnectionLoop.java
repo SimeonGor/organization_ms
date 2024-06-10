@@ -1,16 +1,14 @@
 package com.simeon.connection;
+
 import com.simeon.Request;
 import com.simeon.RequestHandler;
 import com.simeon.Response;
 import lombok.SneakyThrows;
 import lombok.extern.java.Log;
-import org.checkerframework.checker.units.qual.A;
 
 import java.io.IOException;
-import java.nio.channels.SelectionKey;
-import java.nio.channels.Selector;
 import java.nio.channels.SocketChannel;
-import java.util.*;
+import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.RecursiveTask;

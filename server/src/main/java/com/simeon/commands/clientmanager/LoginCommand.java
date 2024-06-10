@@ -6,7 +6,6 @@ import com.simeon.authentication.IAuthenticationService;
 import com.simeon.commands.Command;
 import com.simeon.exceptions.AuthorizedException;
 import com.simeon.exceptions.NoSuchParameterException;
-import com.simeon.exceptions.UnauthorizedUserException;
 import lombok.NonNull;
 
 import java.io.Serializable;

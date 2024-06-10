@@ -1,7 +1,6 @@
 package com.simeon.commands.output;
 
 import com.simeon.CLI;
-import com.simeon.Client;
 import com.simeon.element.Organization;
 
 import java.io.Serializable;

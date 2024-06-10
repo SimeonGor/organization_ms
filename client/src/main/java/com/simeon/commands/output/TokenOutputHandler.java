@@ -8,7 +8,7 @@ import lombok.SneakyThrows;
 import java.io.Serializable;
 
 public class TokenOutputHandler implements OutputCommand {
-    private Client client;
+    private final Client client;
 
     public TokenOutputHandler(Client client) {
         this.client = client;

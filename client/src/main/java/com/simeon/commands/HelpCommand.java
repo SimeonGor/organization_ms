@@ -3,7 +3,7 @@ package com.simeon.commands;
 import com.simeon.Response;
 
 public class HelpCommand extends Command {
-    private CommandHandler commandHandler;
+    private final CommandHandler commandHandler;
     public HelpCommand(CommandHandler commandHandler) {
         super("help", "print this help message");
         this.commandHandler = commandHandler;

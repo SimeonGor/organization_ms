@@ -1,7 +1,5 @@
 package com.simeon.gui;
 
-import com.simeon.Role;
-import com.simeon.UserInfo;
 import com.simeon.commands.input.OrganizationBuilder;
 import com.simeon.element.Address;
 import com.simeon.element.Coordinates;
@@ -12,13 +10,11 @@ import com.simeon.exceptions.InvalidArgumentException;
 import javax.swing.*;
 import java.awt.*;
 import java.text.NumberFormat;
-import java.time.LocalDate;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 
 public class OrganizationUpdate extends JPanel {
-    private static final ResourceBundle lang = ResourceBundle.getBundle("lang");
     private final JTextField nameField;
     private final JLabel nameErrMsg;
     private final JComboBox<String> typeField;

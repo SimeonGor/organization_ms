@@ -1,12 +1,10 @@
 package com.simeon.commands;
 
-import com.simeon.CLI;
 import com.simeon.Client;
 import com.simeon.Response;
 import com.simeon.exceptions.InvalidConnectionException;
 import lombok.NonNull;
 
-import javax.validation.constraints.Null;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.HashMap;

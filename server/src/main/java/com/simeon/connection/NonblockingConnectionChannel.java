@@ -5,10 +5,8 @@ import com.simeon.Response;
 import lombok.NonNull;
 
 import java.io.*;
-import java.net.Socket;
 import java.nio.ByteBuffer;
 import java.nio.channels.ByteChannel;
-import java.nio.channels.SocketChannel;
 
 public class NonblockingConnectionChannel implements ConnectionChannel {
     private final ByteChannel byteChannel;

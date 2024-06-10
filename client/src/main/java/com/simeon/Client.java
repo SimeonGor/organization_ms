@@ -1,9 +1,15 @@
 package com.simeon;
 
-import com.simeon.commands.*;
-import com.simeon.commands.input.*;
-import com.simeon.commands.output.*;
-import com.simeon.connection.*;
+import com.simeon.commands.CommandHandler;
+import com.simeon.commands.CommandHandlerFactory;
+import com.simeon.commands.ServerCommandHandler;
+import com.simeon.commands.input.InputHandler;
+import com.simeon.commands.input.InputHandlerFactory;
+import com.simeon.commands.output.OutputHandler;
+import com.simeon.commands.output.OutputHandlerFactory;
+import com.simeon.commands.output.TokenOutputHandler;
+import com.simeon.connection.ConnectionChannel;
+import com.simeon.connection.NonblockingConnectionChannel;
 import com.simeon.exceptions.InvalidArgumentException;
 import com.simeon.exceptions.InvalidConnectionException;
 import com.simeon.exceptions.UnknownCommandException;
@@ -16,7 +22,6 @@ import lombok.extern.java.Log;
 import javax.swing.*;
 import java.io.*;
 import java.net.InetSocketAddress;
-import java.net.Socket;
 import java.nio.channels.SocketChannel;
 import java.util.*;
 import java.util.logging.LogManager;
@@ -130,7 +135,6 @@ public class Client {
             lang.load(new FileReader("setting.properties"));
             Locale.setDefault(new Locale(lang.getProperty("lang")));
         } catch (IOException ignored) {
-            ;
         }
 
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {

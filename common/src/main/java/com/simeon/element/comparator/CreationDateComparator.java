@@ -2,7 +2,6 @@ package com.simeon.element.comparator;
 
 import com.simeon.element.Organization;
 
-import java.time.LocalDate;
 import java.util.Comparator;
 
 public class CreationDateComparator implements Comparator<Organization> {
