@@ -2,6 +2,7 @@ package com.simeon.gui;
 
 import com.simeon.element.Coordinates;
 import com.simeon.element.Organization;
+import lombok.Setter;
 
 import javax.swing.*;
 import java.awt.*;
@@ -32,6 +33,8 @@ public class MapCanvas extends JPanel {
     public static class Entity extends JPanel {
         private final Coordinates coordinates;
         private double percent;
+        @Setter
+        private boolean isSelected = false;
 
         public Entity(Coordinates coordinates) {
             this.coordinates = coordinates;
@@ -58,8 +61,13 @@ public class MapCanvas extends JPanel {
             Graphics2D g2 = (Graphics2D) g.create();
 
             Point point = new Point(coordinates.getX(), (int) coordinates.getY());
-            g2.setColor(Color.BLUE);
-//            g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+            if (isSelected) {
+                g2.setColor(Color.RED);
+            }
+            else {
+                g2.setColor(Color.BLUE);
+            }
+
             g2.fillArc(point.x - r, point.y - r, r * 2, r * 2, 90, (int) (-percent * 360));
 
             g2.dispose();
@@ -72,11 +80,9 @@ public class MapCanvas extends JPanel {
     private static final int  margin = 20;
 
     private Point zero;
-
-    private final GUI gui;
+    private long selectedId = 0;
 
     public MapCanvas(GUI gui) {
-        this.gui = gui;
 
         this.setBackground(Color.WHITE);
         this.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
@@ -174,6 +180,16 @@ public class MapCanvas extends JPanel {
         collection.put(id, entity);
         Timer timer = new Timer();
         timer.schedule(new Animation(entity), 0, 100);
+    }
+
+    public void select(Organization organization) {
+        if (collection.containsKey(selectedId)) {
+            collection.get(selectedId).setSelected(false);
+        }
+        selectedId = organization.getId();
+        collection.get(selectedId).setSelected(true);
+
+        repaint();
     }
 
     public void delete(Organization organization) {

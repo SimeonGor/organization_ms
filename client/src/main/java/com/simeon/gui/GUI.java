@@ -146,7 +146,9 @@ public class GUI extends JFrame {
     }
 
     public void select(long id) {
-        organizationInfo.show(table.getById(id));
+        Organization organization =table.getById(id);
+        mapCanvas.select(organization);
+        organizationInfo.show(organization);
     }
 
     public List<Organization> getCollection() {
