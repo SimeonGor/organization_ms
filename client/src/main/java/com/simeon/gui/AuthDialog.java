@@ -35,9 +35,14 @@ public class AuthDialog extends JDialog {
     }
 
 
-    private static final ResourceBundle lang = ResourceBundle.getBundle("lang");
+    private static ResourceBundle lang = ResourceBundle.getBundle("lang");
     private JTextField usernameField;
     private JPasswordField passwordField;
+    private JLabel header;
+    private JButton loginButton;
+    private JButton registerButton;
+    private JLabel usernameLabel;
+    private JLabel passwordLabel;
 
     private final Client client;
     public AuthDialog(JFrame parent, Client client) {
@@ -51,11 +56,11 @@ public class AuthDialog extends JDialog {
     }
 
     private JPanel createGUI() {
-        JLabel header = new JLabel(lang.getString("authorization"));
+        header = new JLabel(lang.getString("authorization"));
         JPanel form = new JPanel();
         form.setLayout(new GridLayout(2, 2));
-        JLabel usernameLabel = new JLabel(lang.getString("username"), SwingConstants.RIGHT);
-        JLabel passwordLabel = new JLabel(lang.getString("password"), SwingConstants.RIGHT);
+        usernameLabel = new JLabel(lang.getString("username"), SwingConstants.RIGHT);
+        passwordLabel = new JLabel(lang.getString("password"), SwingConstants.RIGHT);
         usernameField = new JTextField();
         passwordField = new JPasswordField();
         form.add(usernameLabel);
@@ -64,8 +69,8 @@ public class AuthDialog extends JDialog {
         form.add(passwordField);
         form.setOpaque(false);
 
-        JButton loginButton = new JButton(lang.getString("log_in"));
-        JButton registerButton = new JButton(lang.getString("register"));
+        loginButton = new JButton(lang.getString("log_in"));
+        registerButton = new JButton(lang.getString("register"));
         JPanel buttons = new JPanel();
         buttons.setOpaque(false);
         buttons.setLayout(new BoxLayout(buttons, BoxLayout.X_AXIS));
@@ -95,34 +100,26 @@ public class AuthDialog extends JDialog {
         passwordField.setBackground(new Color(0xFFA1A1));
     }
 
-    public void show() {
+    public void call() {
         usernameField.setBackground(Color.WHITE);
         passwordField.setBackground(Color.WHITE);
 
         setVisible(true);
     }
 
+    public void relocale() {
+        lang = ResourceBundle.getBundle("lang");
+        header.setText(lang.getString("authorization"));
+        usernameLabel.setText(lang.getString("username"));
+        passwordLabel.setText(lang.getString("password"));
+        loginButton.setText(lang.getString("log_in"));
+        registerButton.setText(lang.getString("register"));
 
-    public static void main(String[] args) {
-        CLI cli = new CLI(System.in, System.out, System.out);
-
-        Client client = new Client(cli,
-                InputHandlerFactory.getInputHandler(),
-                OutputHandlerFactory.getOutputHandler());
-
-
-        JFrame main = new JFrame("main");
-        main.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        AuthDialog authDialog = new AuthDialog(main, client);
-
-
-        JButton setFocus = new JButton("set focus");
-        main.add(setFocus);
-        setFocus.addActionListener(e -> {authDialog.setVisible(true); authDialog.requestFocus(); });
-
-        main.pack();
-
-        main.setVisible(true);
-        authDialog.setVisible(true);
+        header.repaint();
+        usernameLabel.repaint();
+        passwordLabel.repaint();
+        loginButton.repaint();
+        registerButton.repaint();
+        repaint();
     }
 }

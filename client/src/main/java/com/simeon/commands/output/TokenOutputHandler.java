@@ -23,7 +23,9 @@ public class TokenOutputHandler implements OutputCommand {
     @SneakyThrows
     @Override
     public void show(Serializable message, CLI cli) throws ClassCastException {
-        client.setToken((Token) message);
+        Token token = (Token) message;
+        client.setToken(token);
         client.connect();
+        cli.okAuth(token.getUsername());
     }
 }

@@ -7,12 +7,14 @@ import com.simeon.connection.*;
 import com.simeon.exceptions.InvalidArgumentException;
 import com.simeon.exceptions.InvalidConnectionException;
 import com.simeon.exceptions.UnknownCommandException;
+import com.simeon.gui.GUI;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.SneakyThrows;
 import lombok.extern.java.Log;
 
-import java.io.IOException;
-import java.io.Serializable;
+import javax.swing.*;
+import java.io.*;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.nio.channels.SocketChannel;
@@ -49,6 +51,7 @@ public class Client {
         this.socket = SocketChannel.open();
         this.socket.connect(new InetSocketAddress(ip, port));
         connect();
+        SwingUtilities.invokeLater(() -> cli.setGui(new GUI(this)));
     }
 
     public void connect() throws IOException, InvalidConnectionException {
@@ -100,22 +103,42 @@ public class Client {
         close();
         cli.close();
     }
-    public void send(String command, HashMap<String, ? extends Serializable> params) {
-
+    public void send(String method, HashMap<String, ? extends Serializable> params) {
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Response response = commandHandler.handle(method, params, token);
+                    outputHandler.handle(response.getData(), cli);
+                } catch (UnknownCommandException e) {
+                    cli.error(e);
+                }
+            }
+        });
+        thread.start();
     }
 
+    @SneakyThrows
     public static void main(String[] args) {
         try {
             LogManager.getLogManager().readConfiguration(Client.class.getResourceAsStream("/logging.properties"));
         } catch (IOException ignored) {
             System.out.println("config file was not found");
         }
+        Properties lang = new Properties();
+        try {
+            lang.load(new FileReader("setting.properties"));
+            Locale.setDefault(new Locale(lang.getProperty("lang")));
+        } catch (IOException ignored) {
+            ;
+        }
 
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
             System.out.println("Client was interrupted");
         }));
 
-        CLI cli = new CLI(System.in, System.out, System.out);
+        CLI cli = new CLI(System.in, new PrintStream(new FileOutputStream("log")), new PrintStream(new FileOutputStream("log")));
+//        CLI cli = new CLI(System.in, System.out, System.out);
 
         Client client = new Client(cli,
                 InputHandlerFactory.getInputHandler(),

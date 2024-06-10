@@ -13,12 +13,10 @@ import java.util.ResourceBundle;
 
 public class OrganizationFormDialog extends JDialog {
     private static final ResourceBundle lang = ResourceBundle.getBundle("lang");
-    private final Client client;
 
     private final JButton actionButton;
     private final OrganizationUpdate organizationUpdate;
     public OrganizationFormDialog(Client client) {
-        this.client = client;
 
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
@@ -70,10 +68,11 @@ public class OrganizationFormDialog extends JDialog {
             pack();
             if (element != null) {
                 HashMap<String, Serializable> parameters = new HashMap<>();
-                parameters.put("id", Long.valueOf(element.getId()));
+                parameters.put("id", element.getId());
                 parameters.put("element", element);
 //                System.out.println(element);
                 client.send(method, parameters);
+                dispose();
             }
             else {
                 System.out.println("error");

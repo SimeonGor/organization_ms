@@ -1,17 +1,18 @@
 package com.simeon.gui;
 
 import com.simeon.Client;
-import com.simeon.Response;
-import com.simeon.ResponseHandler;
 import com.simeon.element.Organization;
-import lombok.NonNull;
+import lombok.SneakyThrows;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.HashMap;
-import java.util.ResourceBundle;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.util.*;
+import java.util.List;
+import java.util.Timer;
 
 public class GUI extends JFrame {
     private static final ResourceBundle lang = ResourceBundle.getBundle("lang");
@@ -22,6 +23,7 @@ public class GUI extends JFrame {
     private OrganizationFormDialog formDialog;
 
     private Table table;
+    private JLabel userLabel;
 
     public GUI(Client client) {
         this.client = client;
@@ -30,6 +32,14 @@ public class GUI extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         pack();
         setVisible(true);
+
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                client.send("show", new HashMap<>());
+            }
+        }, 0, 10000);
     }
 
     private JPanel createGUI() {
@@ -37,10 +47,41 @@ public class GUI extends JFrame {
         mapCanvas = new MapCanvas(this);
         organizationInfo = new OrganizationInfo();
         formDialog = new OrganizationFormDialog(client);
-        table = new Table();
+        table = new Table(this);
 
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+
+        JPanel topPanel = new JPanel();
+        topPanel.setLayout(new BoxLayout(topPanel, BoxLayout.X_AXIS));
+        topPanel.add(Box.createHorizontalGlue());
+
+        userLabel = new JLabel("NO_AUTH");
+
+        JButton loginBtn = new JButton(lang.getString("log_in"));
+        loginBtn.addActionListener(e -> authDialog.call());
+
+        String[] languages = new String[]{"en", "es_SV", "is", "it", "ru"};
+        JComboBox<String> langCombo = new JComboBox<String>(languages);
+        langCombo.addActionListener(new ActionListener() {
+            @SneakyThrows
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String l = (String) langCombo.getSelectedItem();
+                Properties properties = new Properties();
+//                properties.load(new FileReader("setting.properties"));
+                Locale.setDefault(new Locale(l));
+                relocale();
+                properties.setProperty("lang", l);
+                properties.store(new FileOutputStream("setting.properties"), null);
+            }
+        });
+
+        topPanel.add(userLabel);
+        topPanel.add(loginBtn);
+        topPanel.add(langCombo);
+
+        panel.add(topPanel);
 
         JPanel tablePanel = new JPanel();
         JPanel buttons = new JPanel();
@@ -52,7 +93,7 @@ public class GUI extends JFrame {
 
         JButton addIfMaxBtn = new JButton(lang.getString("addIfMax"));
         addIfMaxBtn.setBackground(new Color(0xBAF3AF));
-        addIfMaxBtn.addActionListener(e -> formDialog.setMethod("addIfMax", null));
+        addIfMaxBtn.addActionListener(e -> formDialog.setMethod("add_if_max", null));
 
         JButton updateBtn = new JButton(lang.getString("update"));
         updateBtn.setBackground(new Color(0xFAD755));
@@ -99,16 +140,35 @@ public class GUI extends JFrame {
         organizationInfo.show(table.getById(id));
     }
 
+    public List<Organization> getCollection() {
+        return table.getCollection();
+    }
+
+    public void add(Organization organization) {
+        table.add(organization);
+        mapCanvas.add(organization);
+        if (organizationInfo.getOrganization() == null
+                || organizationInfo.getOrganization().getId() == organization.getId()) {
+            organizationInfo.show(organization);
+        }
+    }
+
+    public void delete(Organization organization) {
+        mapCanvas.delete(organization);
+        table.delete(organization);
+        organizationInfo.show(null);
+    }
+
     public void errorAuth() {
         authDialog.errorAuth();
     }
 
-    public void okAuth() {
+    public void okAuth(String username) {
+        userLabel.setText(username);
         authDialog.dispose();
     }
 
-    public static void main(String[] args) {
-        JFrame jFrame = new GUI(null);
-
+    private void relocale() {
+        authDialog.relocale();
     }
 }

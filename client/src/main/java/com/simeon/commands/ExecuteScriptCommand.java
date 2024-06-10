@@ -36,6 +36,7 @@ public class ExecuteScriptCommand extends Command {
                 CLI old_cli = client.getCli();
                 CLI replacing_cli = new CLI(new FileInputStream(file),
                                             old_cli.getOutputStream(), old_cli.getErrorStream());
+                replacing_cli.setGui(old_cli.getGui());
                 replacing_cli.setInteractiveMode(false);
                 client.setCli(replacing_cli);
 

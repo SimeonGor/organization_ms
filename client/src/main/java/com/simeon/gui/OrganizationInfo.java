@@ -31,6 +31,7 @@ public class OrganizationInfo extends JPanel {
     private final JLabel coordinateY;
     @Getter
     private Organization organization;
+    private JPanel view;
 
 
     public OrganizationInfo() {
@@ -38,22 +39,22 @@ public class OrganizationInfo extends JPanel {
         name.setFont(new Font("Helvetica", Font.BOLD, 16));
 
         type = new JLabel();
-        type.setPreferredSize(new Dimension(50, 5));
+//        type.setPreferredSize(new Dimension(100, 5));
         annualTurnover = new JLabel();
-        annualTurnover.setPreferredSize(new Dimension(50, 5));
+//        annualTurnover.setPreferredSize(new Dimension(100, 5));
         postalAddress = new JLabel();
-        postalAddress.setPreferredSize(new Dimension(50, 5));
+//        postalAddress.setPreferredSize(new Dimension(100, 5));
         creationDate = new JLabel();
-        creationDate.setPreferredSize(new Dimension(50, 5));
+//        creationDate.setPreferredSize(new Dimension(100, 5));
         user = new JLabel();
-        user.setPreferredSize(new Dimension(50, 5));
+//        user.setPreferredSize(new Dimension(50, 5));
         coordinateX = new JLabel();
-        coordinateX.setPreferredSize(new Dimension(50, 5));
+//        coordinateX.setPreferredSize(new Dimension(50, 5));
         coordinateY = new JLabel();
-        coordinateY.setPreferredSize(new Dimension(50, 5));
+//        coordinateY.setPreferredSize(new Dimension(50, 5));
 
 
-        JPanel view = OrganizationView.createGUI(name, type, annualTurnover, postalAddress, creationDate,
+        view = OrganizationView.createGUI(name, type, annualTurnover, postalAddress, creationDate,
                                     user, coordinateX, coordinateY);
         view.setOpaque(false);
 
@@ -98,29 +99,18 @@ public class OrganizationInfo extends JPanel {
             creationDate.setText(null);
             coordinateX.setText(null);
             coordinateY.setText(null);
+            user.setText(null);
         }
+        name.repaint();
+        type.repaint();
+        annualTurnover.repaint();
+        postalAddress.repaint();
+        creationDate.repaint();
+        coordinateX.repaint();
+        coordinateY.repaint();
+        user.repaint();
+        view.repaint();
+        this.repaint();
         this.organization = organization;
-    }
-
-    public static void main(String[] args) {
-        Organization organization = Organization.builder().name("qwerty")
-                .type(OrganizationType.COMMERCIAL)
-                .annualTurnover(12345.0)
-                .postalAddress(new Address("9rjlekf"))
-                .userInfo(new UserInfo(1, "simeon", Role.ADMIN))
-                .coordinates(new Coordinates(100, 1000))
-                .creationDate(LocalDate.now())
-                .build();
-
-
-        JFrame main = new JFrame("main");
-        main.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        main.setLayout(new FlowLayout());
-        OrganizationInfo org = new OrganizationInfo();
-        main.add(org);
-
-        org.show(organization);
-        main.pack();
-        main.setVisible(true);
     }
 }

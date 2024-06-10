@@ -86,7 +86,7 @@ public class ConnectionLoop {
                         connectionChannel.send(new Response(false, "Reading exception"));
                     }
                 }
-                return connectionChannels.subList(left, right);
+                return null;
             }
 
             int middle = (left + right) / 2;
@@ -94,10 +94,7 @@ public class ConnectionLoop {
             Receiver rightReceiver = new Receiver(connectionChannels, middle, right);
             leftReceiver.fork();
             rightReceiver.fork();
-            List<ConnectionChannel> result = new ArrayList<>();
-            result.addAll(leftReceiver.join());
-            result.addAll(rightReceiver.join());
-            return result;
+            return null;
         }
     }
 

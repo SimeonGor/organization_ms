@@ -11,10 +11,9 @@ import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 import java.io.PrintWriter;
 import java.io.Reader;
-import java.util.InputMismatchException;
-import java.util.NoSuchElementException;
-import java.util.Scanner;
-import java.util.Set;
+import java.text.NumberFormat;
+import java.text.ParseException;
+import java.util.*;
 
 public class OrganizationBuilder {
     private static final Validator validator;
@@ -76,7 +75,8 @@ public class OrganizationBuilder {
 
     public static double getAnnualTurnover(Scanner scanner) throws InvalidArgumentException {
         try {
-            double annualTurnover = Double.parseDouble(scanner.nextLine());
+            NumberFormat nf = NumberFormat.getNumberInstance(Locale.getDefault());
+            double annualTurnover = nf.parse(scanner.nextLine()).doubleValue();
             Set<ConstraintViolation<Organization>> validates =
                     validator.validateValue(Organization.class, "annualTurnover", annualTurnover);
 
@@ -86,7 +86,7 @@ public class OrganizationBuilder {
             throw new InvalidArgumentException(
                     String.join("\n", validates.stream().map(ConstraintViolation::getMessage).toList())
             );
-        } catch (NoSuchElementException | NumberFormatException e) {
+        } catch (ParseException| NoSuchElementException | NumberFormatException e) {
             throw new InvalidArgumentException("Annual turnover must be an floating point number");
         }
     }

@@ -16,7 +16,7 @@ public class NonblockingConnectionChannel implements ConnectionChannel {
     }
 
     @Override
-    public Response receive() {
+    public synchronized Response receive() {
         try {
             ByteBuffer length = ByteBuffer.allocate(4);
             int r = byteChannel.read(length);

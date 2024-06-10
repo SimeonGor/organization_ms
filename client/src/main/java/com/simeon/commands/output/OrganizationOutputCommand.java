@@ -38,5 +38,7 @@ public class OrganizationOutputCommand implements OutputCommand {
                         element.getUserInfo().getUsername());
         cli.print(result);
         cli.print("\n");
+
+        cli.add(element);
     }
 }

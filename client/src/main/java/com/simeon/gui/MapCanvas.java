@@ -1,13 +1,7 @@
 package com.simeon.gui;
 
-import com.simeon.Response;
-import com.simeon.ResponseHandler;
 import com.simeon.element.Coordinates;
 import com.simeon.element.Organization;
-import lombok.Getter;
-import lombok.NonNull;
-import lombok.Setter;
-import lombok.SneakyThrows;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,8 +11,6 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Timer;
 import java.util.TimerTask;
-
-import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
 public class MapCanvas extends JPanel {
     public class Animation extends TimerTask {
@@ -38,15 +30,25 @@ public class MapCanvas extends JPanel {
     }
 
     public static class Entity extends JPanel {
-        private final long id;
         private Coordinates coordinates;
         private double percent;
 
-        public Entity(long id, Coordinates coordinates) {
-            this.id = id;
+        public Entity(Coordinates coordinates) {
             this.coordinates = coordinates;
             percent = 0;
             setOpaque(false);
+        }
+
+        @Override
+        public int hashCode() {
+            return coordinates.hashCode();
+        }
+        @Override
+        public boolean equals(Object other) {
+            if (other == this) return true;
+            if (other == null || other.getClass() != getClass()) return false;
+            Entity e = (Entity) other;
+            return e.coordinates.getY() == coordinates.getY() && e.coordinates.getX() == coordinates.getX();
         }
 
         @Override
@@ -78,7 +80,7 @@ public class MapCanvas extends JPanel {
 
         this.setBackground(Color.WHITE);
         this.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
-        this.setPreferredSize(new Dimension(1000, 1000));
+        this.setPreferredSize(new Dimension(1000, 500));
 
 
         this.addMouseListener(new MouseAdapter() {
@@ -91,12 +93,10 @@ public class MapCanvas extends JPanel {
                 for (var it : collection.entrySet()) {
                     Coordinates coord = it.getValue().coordinates;
                     if (Math.pow(x - coord.getX(), 2) + Math.pow(y - coord.getY(), 2) <= Math.pow(r, 2)) {
-                        System.out.println("YES");
-                        gui.select(it.getValue().id);
+                        gui.select(it.getKey());
                         return;
                     }
                 }
-                System.out.println("NO");
             }
         });
     }
@@ -168,9 +168,15 @@ public class MapCanvas extends JPanel {
 //    }
 
     public void add(Organization organization) {
-        Entity entity =new Entity(organization.getId(), organization.getCoordinates());
-        collection.put(organization.getId(), entity);
+        Entity entity =new Entity(organization.getCoordinates());
+        long id = organization.getId();
+        if (collection.containsKey(id) && collection.get(id).equals(entity)) return;
+        collection.put(id, entity);
         Timer timer = new Timer();
         timer.schedule(new Animation(entity), 0, 100);
+    }
+
+    public void delete(Organization organization) {
+        collection.remove(organization.getId());
     }
 }

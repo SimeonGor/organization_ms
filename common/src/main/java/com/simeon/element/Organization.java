@@ -39,6 +39,7 @@ public class Organization implements Serializable {
 
     @NotNull
     @Past
+    @Setter
     private LocalDate creationDate; //Поле не может быть null, Значение этого поля должно генерироваться автоматически
     @NotNull
     @AnnualTurnoverConstraint

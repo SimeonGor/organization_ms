@@ -118,7 +118,7 @@ public class OrganizationUpdate extends JPanel {
         else {
             nameField.setText("Name");
             typeField.setSelectedItem(0);
-            annualTurnoverField.setText("0.0");
+            annualTurnoverField.setText("0");
             postalAddressField.setText(null);
             coordinateXField.setText("0");
             coordinateYField.setText("0");
@@ -203,27 +203,5 @@ public class OrganizationUpdate extends JPanel {
         else {
             return null;
         }
-    }
-
-    public static void main(String[] args) {
-        Organization organization = Organization.builder().name("qwerty")
-                .type(OrganizationType.COMMERCIAL)
-                .annualTurnover(12345.0)
-                .postalAddress(new Address("9rjlekf"))
-                .userInfo(new UserInfo(1, "simeon", Role.ADMIN))
-                .coordinates(new Coordinates(100, 1000))
-                .creationDate(LocalDate.now())
-                .build();
-
-
-        JFrame main = new JFrame("main");
-        main.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        main.setLayout(new FlowLayout());
-        OrganizationUpdate org = new OrganizationUpdate();
-        main.add(org);
-
-        org.show(organization);
-        main.pack();
-        main.setVisible(true);
     }
 }

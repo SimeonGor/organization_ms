@@ -13,11 +13,12 @@ public class CommandHandlerFactory {
         return banedCommandHandler;
     }
 
-    public static CommandHandler getNoauthCommandHandler(IAuthenticationService authenticationService) {
+    public static CommandHandler getNoauthCommandHandler(IAuthenticationService authenticationService, ICollectionManager<Organization> collectionManager) {
         CommandHandler noauthCommandHandler = new CommandHandler(Role.NO_AUTH);
         noauthCommandHandler.addCommand(new RegisterCommand(authenticationService));
         noauthCommandHandler.addCommand(new LoginCommand(authenticationService));
         noauthCommandHandler.addCommand(new GetApiCommand(noauthCommandHandler));
+        noauthCommandHandler.addCommand(new ShowCommand(collectionManager));
 
         return noauthCommandHandler;
     }
@@ -34,7 +35,6 @@ public class CommandHandlerFactory {
         userCommandHandler.addCommand(new RemoveAtCommand(collectionManager));
         userCommandHandler.addCommand(new RemoveByIDCommand(collectionManager));
         userCommandHandler.addCommand(new ReorderCommand(collectionManager));
-        userCommandHandler.addCommand(new ShowCommand(collectionManager));
         userCommandHandler.addCommand(new UpdateCommand(collectionManager));
         userCommandHandler.addCommand(new GetApiCommand(userCommandHandler));
 
@@ -50,7 +50,7 @@ public class CommandHandlerFactory {
     public static CommandHandler getCommandHandler(ICollectionManager<Organization> collectionManager, IAuthenticationService authenticationService) {
         CommandHandler banedCommandHandler = getBanedCommandHandler(collectionManager);
 
-        CommandHandler noauthCommandHandler = getNoauthCommandHandler(authenticationService);
+        CommandHandler noauthCommandHandler = getNoauthCommandHandler(authenticationService, collectionManager);
         noauthCommandHandler.setSuccessor(banedCommandHandler);
 
         CommandHandler userCommandHandler = gerUserCommandHandler(collectionManager);

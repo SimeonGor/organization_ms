@@ -1,23 +1,19 @@
 package com.simeon.gui;
 
-import com.simeon.Response;
-import com.simeon.ResponseHandler;
-import com.simeon.Role;
 import com.simeon.UserInfo;
 import com.simeon.element.Address;
 import com.simeon.element.Coordinates;
 import com.simeon.element.Organization;
-import com.simeon.element.OrganizationType;
-import lombok.NonNull;
 
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.*;
 import java.awt.*;
 import java.text.DateFormat;
 import java.time.LocalDate;
-import java.time.temporal.Temporal;
-import java.util.*;
 import java.util.List;
+import java.util.*;
 
 public class Table extends JPanel {
     public static final ResourceBundle lang = ResourceBundle.getBundle("lang");
@@ -27,9 +23,18 @@ public class Table extends JPanel {
         public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected,
                                                        boolean hasFocus, int row, int column) {
             Coordinates coord = (Coordinates) value;
-            JLabel label = new JLabel();
-            label.setText(String.format("(%d; %d)", coord.getX(), coord.getY()));
-            return label;
+            setText(String.format("(%d; %d)", coord.getX(), coord.getY()));
+            if (isSelected) {
+                setBackground(table.getSelectionBackground());
+                setForeground(table.getSelectionForeground());
+            }
+            else {
+                setBackground(table.getBackground());
+                setForeground(table.getForeground());
+            }
+
+            setAlignmentX(CENTER_ALIGNMENT);
+            return this;
         }
     }
 
@@ -39,7 +44,16 @@ public class Table extends JPanel {
                                                        boolean hasFocus, int row, int column) {
             if (value != null) {
                 Address address = (Address) value;
-                return new JLabel(address.getZipCode());
+                setText(address.getZipCode());
+                if (isSelected) {
+                    setBackground(table.getSelectionBackground());
+                    setForeground(table.getSelectionForeground());
+                }
+                else {
+                    setBackground(table.getBackground());
+                    setForeground(table.getForeground());
+                }
+                return this;
             }
             else {
                 return null;
@@ -52,7 +66,16 @@ public class Table extends JPanel {
         public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected,
                                                        boolean hasFocus, int row, int column) {
             UserInfo user = (UserInfo) value;
-            return new JLabel(user.getUsername());
+            setText(user.getUsername());
+            if (isSelected) {
+                setBackground(table.getSelectionBackground());
+                setForeground(table.getSelectionForeground());
+            }
+            else {
+                setBackground(table.getBackground());
+                setForeground(table.getForeground());
+            }
+            return this;
         }
     }
 
@@ -63,7 +86,16 @@ public class Table extends JPanel {
             LocalDate localDate = (LocalDate) value;
             DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.SHORT, Locale.getDefault());
             Date date = java.sql.Date.valueOf(localDate);
-            return new JLabel(dateFormat.format(date));
+            setText(dateFormat.format(date));
+            if (isSelected) {
+                setBackground(table.getSelectionBackground());
+                setForeground(table.getSelectionForeground());
+            }
+            else {
+                setBackground(table.getBackground());
+                setForeground(table.getForeground());
+            }
+            return this;
         }
     }
 
@@ -137,14 +169,28 @@ public class Table extends JPanel {
         }
 
         public void insertRow(Organization entity) {
+            collection.removeIf(e -> e.getId() == entity.getId());
             collection.add(entity);
+        }
+
+        public List<Organization> getCollection() {
+            List<Organization> res = new ArrayList<>();
+            for (var e : collection) {
+                res.add(e);
+            }
+            return res;
+        }
+
+        public void removeRow(Organization entity) {
+            collection.remove(entity);
         }
     }
 
     private JTable table;
     private TableModel tableModel;
-
-    public Table() {
+    private final GUI gui;
+    public Table(GUI gui) {
+        this.gui = gui;
         createGUI();
     }
 
@@ -165,6 +211,14 @@ public class Table extends JPanel {
 //        table.setRowSorter(new Sorter());
         table.setAutoCreateRowSorter(true);
 
+        table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                long id = (long) tableModel.getValueAt(table.getSelectedRow(), 0);
+                gui.select(id);
+            }
+        });
+
         JScrollPane scrollPane = new JScrollPane(table);
         add(scrollPane);
     }
@@ -174,54 +228,16 @@ public class Table extends JPanel {
         ColumnsAutoSizer.sizeColumnsToFit(table);
     }
 
-    public void setCollection(List<Organization> collection) {
-        for (Organization organization : collection) {
-            add(organization);
-        }
+    public void delete(Organization entity) {
+        tableModel.removeRow(entity);
     }
 
     public Organization getById(long id) {
         return tableModel.getById(id);
     }
 
-    public static void main(String[] args) {
-        Organization mock1 = Organization.builder().name("qwerty")
-                .type(OrganizationType.COMMERCIAL)
-                .annualTurnover(12345.10)
-                .postalAddress(new Address("9rjlekf"))
-                .userInfo(new UserInfo(1, "simeon", Role.ADMIN))
-                .coordinates(new Coordinates(100, 1000))
-                .creationDate(LocalDate.now())
-                .build();
-        Organization mock2 = Organization.builder().name("asdfb").id(1)
-                .type(OrganizationType.PUBLIC)
-                .annualTurnover(0.124)
-                .postalAddress(null)
-                .userInfo(new UserInfo(1, "mth", Role.ADMIN))
-                .coordinates(new Coordinates(12, 34))
-                .creationDate(LocalDate.now().minusDays(1))
-                .build();
-        Organization mock3 = Organization.builder().name("asdfb").id(1)
-                .type(OrganizationType.PUBLIC)
-                .annualTurnover(0.124)
-                .postalAddress(new Address("qwertt"))
-                .userInfo(new UserInfo(1, "mth", Role.ADMIN))
-                .coordinates(new Coordinates(12, 34))
-                .creationDate(LocalDate.now().minusDays(1))
-                .build();
-
-        JFrame main = new JFrame();
-        main.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-
-        main.getContentPane().setLayout(new GridLayout(1, 1));
-        Table table = new Table();
-        table.add(mock1);
-        table.add(mock3);
-        table.add(mock2);
-        main.add(table);
-        main.pack();
-
-        main.setVisible(true);
+    public List<Organization> getCollection() {
+        return tableModel.getCollection();
     }
 }
 

@@ -1,5 +1,7 @@
 package com.simeon;
 
+import com.simeon.element.Organization;
+import com.simeon.gui.GUI;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -10,6 +12,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintStream;
+import java.util.Collection;
+import java.util.List;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.regex.Pattern;
@@ -23,6 +27,8 @@ public class CLI {
     protected Scanner scanner;
     protected PrintStream outputStream;
     protected PrintStream errorStream;
+    @Setter
+    private GUI gui;
     protected boolean interactiveMode = true;
     private boolean block = false;
 
@@ -31,6 +37,33 @@ public class CLI {
         this.scanner = new Scanner(inputStream);
         this.outputStream = outputStream;
         this.errorStream = errorStream;
+    }
+
+    public void add(Organization organization) {
+        if (gui != null) {
+            gui.add(organization);
+        }
+    }
+
+    public void delete(Organization organization) {
+        if (gui != null) {
+            gui.delete(organization);
+        }
+    }
+
+    public List<Organization> getCollection() {
+        return gui.getCollection();
+    }
+    public void okAuth(String username) {
+        if (gui != null) {
+            gui.okAuth(username);
+        }
+    }
+
+    public void errorAuth() {
+        if (gui != null) {
+            gui.errorAuth();
+        }
     }
 
     public void block() {

@@ -35,7 +35,7 @@ public class UpdateCommand extends Command {
     @Override
     public Response execute(@NonNull Map<String, ? extends Serializable> parameters, @NonNull UserInfo userInfo) {
         log.log(Level.INFO, "{0} command command started with {1}", new String[]{name, parameters.toString()});
-        if (userInfo.getRole().compareTo(Role.NO_AUTH) <= 0) {
+        if (userInfo.getRole().compareTo(Role.USER) < 0) {
             return new Response(false, new UnauthorizedUserException());
         }
 

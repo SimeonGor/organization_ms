@@ -14,6 +14,7 @@ public class AuthorizedExceptionOutputCommand implements OutputCommand {
 
     @Override
     public void show(Serializable message, CLI cli) throws ClassCastException {
-
+        cli.errorAuth();
+        cli.error((Exception) message);
     }
 }

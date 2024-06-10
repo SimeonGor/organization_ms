@@ -155,11 +155,17 @@ public class CollectionManager implements ICollectionManager<Organization> {
             statement.setLong(4, entity.getCoordinates().getY());
             statement.setDouble(5, entity.getAnnualTurnover());
             statement.setString(6, entity.getType().toString());
-            statement.setString(7, entity.getPostalAddress().getZipCode());
+            if (entity.getPostalAddress() != null) {
+                statement.setString(7, entity.getPostalAddress().getZipCode());
+            }
+            else {
+                statement.setString(7, null);
+            }
             statement.setLong(8, entity.getUserInfo().getId());
 
             statement.executeUpdate();
             entity.setId(genId);
+            entity.setCreationDate(LocalDate.now());
             collection.add(entity);
             collection.sort(comparator);
             return entity;
@@ -207,11 +213,17 @@ public class CollectionManager implements ICollectionManager<Organization> {
             preparedStatement.setInt(2, entity.getCoordinates().getX());
             preparedStatement.setLong(3, entity.getCoordinates().getY());
             preparedStatement.setDouble(4, entity.getAnnualTurnover());
-            preparedStatement.setString(5, entity.getPostalAddress().getZipCode());
+            if (entity.getPostalAddress() != null) {
+                preparedStatement.setString(5, entity.getPostalAddress().getZipCode());
+            }
+            else {
+                preparedStatement.setString(5, null);
+            }
             preparedStatement.setString(6, entity.getType().toString());
             preparedStatement.setLong(7, entity.getId());
             preparedStatement.executeUpdate();
 
+            entity.setCreationDate(LocalDate.now());
             collection.remove(old);
             collection.add(entity);
             collection.sort(comparator);
