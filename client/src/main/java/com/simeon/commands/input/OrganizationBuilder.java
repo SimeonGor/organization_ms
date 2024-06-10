@@ -41,7 +41,8 @@ public class OrganizationBuilder {
 
     public static int getCoordinatesX(Scanner scanner) throws InvalidArgumentException {
         try {
-            int x = Integer.parseInt(scanner.nextLine());
+            NumberFormat nf = NumberFormat.getNumberInstance(Locale.getDefault());
+            int x = nf.parse(scanner.nextLine()).intValue();
             Set<ConstraintViolation<Organization>> validates =
                     validator.validateValue(Organization.class, "coordinates.x", x);
 
@@ -51,14 +52,15 @@ public class OrganizationBuilder {
             throw new InvalidArgumentException(
                     String.join("\n", validates.stream().map(ConstraintViolation::getMessage).toList())
             );
-        } catch (NoSuchElementException | NumberFormatException e) {
+        } catch (ParseException | NoSuchElementException | NumberFormatException e) {
             throw new InvalidArgumentException("Coordinates.x must be an integer");
         }
     }
 
     public static long getCoordinatesY(Scanner scanner) throws InvalidArgumentException {
         try {
-            long y = Long.parseLong(scanner.nextLine());
+            NumberFormat nf = NumberFormat.getNumberInstance(Locale.getDefault());
+            long y = nf.parse(scanner.nextLine()).longValue();
             Set<ConstraintViolation<Organization>> validates =
                     validator.validateValue(Organization.class, "coordinates.y", y);
 
@@ -68,7 +70,7 @@ public class OrganizationBuilder {
             throw new InvalidArgumentException(
                     String.join("\n", validates.stream().map(ConstraintViolation::getMessage).toList())
             );
-        } catch (InputMismatchException | NumberFormatException e) {
+        } catch (ParseException | InputMismatchException | NumberFormatException e) {
             throw new InvalidArgumentException("Coordinates.y must be an integer");
         }
     }

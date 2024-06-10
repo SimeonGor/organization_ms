@@ -12,12 +12,12 @@ import java.util.HashMap;
 import java.util.ResourceBundle;
 
 public class OrganizationFormDialog extends JDialog {
-    private static final ResourceBundle lang = ResourceBundle.getBundle("lang");
+    private static ResourceBundle lang = ResourceBundle.getBundle("lang");
 
     private final JButton actionButton;
+    private final JButton cancelBtn;
     private final OrganizationUpdate organizationUpdate;
     public OrganizationFormDialog(Client client) {
-
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
         Container main = getContentPane();
@@ -33,7 +33,7 @@ public class OrganizationFormDialog extends JDialog {
         actionButton = new JButton(lang.getString("save"));
         actionButton.addActionListener(new SaveAction(organizationUpdate, client));
 
-        JButton cancelBtn = new JButton(lang.getString("cancel"));
+        cancelBtn = new JButton(lang.getString("cancel"));
         cancelBtn.setBackground(new Color(0xFF8B8B));
         cancelBtn.addActionListener(e -> dispose());
 
@@ -78,5 +78,11 @@ public class OrganizationFormDialog extends JDialog {
                 System.out.println("error");
             }
         }
+    }
+
+    public void relocale() {
+        lang = ResourceBundle.getBundle("lang");
+        actionButton.setText(lang.getString("save"));
+        cancelBtn.setText(lang.getString("cancel"));
     }
 }

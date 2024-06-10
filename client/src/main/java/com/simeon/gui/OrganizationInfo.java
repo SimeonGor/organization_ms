@@ -31,7 +31,7 @@ public class OrganizationInfo extends JPanel {
     private final JLabel coordinateY;
     @Getter
     private Organization organization;
-    private JPanel view;
+    private OrganizationView view;
 
 
     public OrganizationInfo() {
@@ -54,7 +54,7 @@ public class OrganizationInfo extends JPanel {
 //        coordinateY.setPreferredSize(new Dimension(50, 5));
 
 
-        view = OrganizationView.createGUI(name, type, annualTurnover, postalAddress, creationDate,
+        view = new OrganizationView(name, type, annualTurnover, postalAddress, creationDate,
                                     user, coordinateX, coordinateY);
         view.setOpaque(false);
 
@@ -112,5 +112,9 @@ public class OrganizationInfo extends JPanel {
         view.repaint();
         this.repaint();
         this.organization = organization;
+    }
+
+    public void relocale() {
+        view.relocale();
     }
 }

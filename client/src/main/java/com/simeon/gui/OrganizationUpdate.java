@@ -31,6 +31,8 @@ public class OrganizationUpdate extends JPanel {
     private final JTextField coordinateYField;
     private final JLabel coordinateYErrMsg;
 
+    private final OrganizationView view;
+
     private Organization organization;
     public OrganizationUpdate() {
         JPanel namePanel = new JPanel();
@@ -87,12 +89,12 @@ public class OrganizationUpdate extends JPanel {
         coordinateYPanel.add(coordinateYField);
         coordinateYPanel.add(coordinateYErrMsg);
 
-        JPanel viewUpdate = OrganizationView.createGUI(namePanel, typeField, annualTurnoverPanel,
+        view = new OrganizationView(namePanel, typeField, annualTurnoverPanel,
                 postalAddressPanel, null, null, coordinateXPanel, coordinateYPanel);
 
-        viewUpdate.setOpaque(false);
+        view.setOpaque(false);
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        add(viewUpdate);
+        add(view);
         setOpaque(false);
     }
 
@@ -203,5 +205,9 @@ public class OrganizationUpdate extends JPanel {
         else {
             return null;
         }
+    }
+
+    public void relocale() {
+        view.relocale();
     }
 }

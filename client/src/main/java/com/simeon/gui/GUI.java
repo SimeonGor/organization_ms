@@ -69,13 +69,13 @@ public class GUI extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 String l = (String) langCombo.getSelectedItem();
                 Properties properties = new Properties();
-//                properties.load(new FileReader("setting.properties"));
                 Locale.setDefault(new Locale(l));
                 relocale();
                 properties.setProperty("lang", l);
                 properties.store(new FileOutputStream("setting.properties"), null);
             }
         });
+        langCombo.setSelectedItem(Locale.getDefault().getLanguage());
 
         topPanel.add(userLabel);
         topPanel.add(loginBtn);
@@ -170,5 +170,8 @@ public class GUI extends JFrame {
 
     private void relocale() {
         authDialog.relocale();
+        formDialog.relocale();
+        organizationInfo.relocale();
+        organizationInfo.show(organizationInfo.getOrganization());
     }
 }

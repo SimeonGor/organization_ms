@@ -6,15 +6,19 @@ import lombok.NonNull;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 
-public class OrganizationView {
-    private static final ResourceBundle lang = ResourceBundle.getBundle("lang");
-    private static JPanel createPanel(String name, JComponent component) {
+public class OrganizationView extends JPanel {
+    private static ResourceBundle lang = ResourceBundle.getBundle("lang");
+    private HashMap<String, JLabel> labels = new HashMap<>();
+
+    private JPanel createPanel(String name, JComponent component) {
         JPanel panel = new JPanel();
         BoxLayout layout = new BoxLayout(panel, BoxLayout.X_AXIS);
         panel.setLayout(layout);
-        JLabel label = new JLabel(name);
+        JLabel label = new JLabel(lang.getString(name));
+        labels.put(name, label);
         label.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
         panel.add(label);
         panel.add(Box.createHorizontalGlue());
@@ -30,7 +34,18 @@ public class OrganizationView {
         return panel;
     }
 
-    protected static JPanel createGUI(
+    public OrganizationView(JComponent name,
+                            JComponent type,
+                            JComponent annualTurnover,
+                            JComponent postalAddress,
+                            JComponent creationDate,
+                            JComponent user,
+                            JComponent coordinationX,
+                            JComponent coordinationY) {
+        createGUI(name, type, annualTurnover, postalAddress, creationDate, user, coordinationX, coordinationY);
+    }
+
+    protected void createGUI(
             JComponent name,
             JComponent type,
             JComponent annualTurnover,
@@ -39,10 +54,9 @@ public class OrganizationView {
             JComponent user,
             JComponent coordinationX,
             JComponent coordinationY) {
-        JPanel panel = new JPanel();
 
-        BoxLayout layout = new BoxLayout(panel, BoxLayout.Y_AXIS);
-        panel.setLayout(layout);
+        BoxLayout layout = new BoxLayout(this, BoxLayout.Y_AXIS);
+        setLayout(layout);
 
         JPanel namePanel = new JPanel();
         namePanel.setLayout(new BoxLayout(namePanel, BoxLayout.X_AXIS));
@@ -50,19 +64,20 @@ public class OrganizationView {
         namePanel.add(name);
         namePanel.add(Box.createHorizontalGlue());
         namePanel.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
-        panel.add(namePanel);
 
-        panel.add(createPanel(lang.getString("type"), type));
-        panel.add(createPanel(lang.getString("annualTurnover"), annualTurnover));
-        panel.add(createPanel(lang.getString("postalAddress"), postalAddress));
+        add(namePanel);
 
-        panel.add(Box.createVerticalGlue());
+        add(createPanel("type", type));
+        add(createPanel("annualTurnover", annualTurnover));
+        add(createPanel("postalAddress", postalAddress));
+
+        add(Box.createVerticalGlue());
 
         if (creationDate != null) {
-            panel.add(createPanel(lang.getString("creationDate"), creationDate));
+            add(createPanel("creationDate", creationDate));
         }
         if (user != null) {
-            panel.add(createPanel(lang.getString("user"), user));
+            add(createPanel("user", user));
         }
 
         JPanel coordPanel = new JPanel();
@@ -70,11 +85,16 @@ public class OrganizationView {
         coordPanel.setLayout(coordPanelLayout);
         coordPanel.setOpaque(false);
 
-        coordPanel.add(createPanel("x:", coordinationX));
-        coordPanel.add(createPanel("y:", coordinationY));
+        coordPanel.add(createPanel("x", coordinationX));
+        coordPanel.add(createPanel("y", coordinationY));
 
-        panel.add(createPanel(lang.getString("coordinates"), coordPanel));
+        add(createPanel("coordinates", coordPanel));
+    }
 
-        return panel;
+    public void relocale() {
+        lang = ResourceBundle.getBundle("lang");
+        for (var e : labels.entrySet()) {
+            e.getValue().setText(lang.getString(e.getKey()));
+        }
     }
 }

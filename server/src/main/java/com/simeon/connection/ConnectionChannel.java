@@ -10,4 +10,5 @@ public interface ConnectionChannel {
     Request receive() throws IOException;
     void send(@NonNull Response response);
     void close();
+    boolean isClosed();
 }

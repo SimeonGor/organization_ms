@@ -49,6 +49,11 @@ public class ConnectionLoop {
         running = true;
         while (running) {
             forkJoinPool.invoke(new Receiver(connections));
+            for (var e : connections) {
+                if (e.isClosed()) {
+                    connections.remove(e);
+                }
+            }
         }
     }
 
