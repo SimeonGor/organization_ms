@@ -1,6 +1,7 @@
 package com.simeon.commands.output;
 
 import com.simeon.CLI;
+import com.simeon.Client;
 import com.simeon.Response;
 import com.simeon.commands.UnknownCommandException;
 import lombok.AllArgsConstructor;

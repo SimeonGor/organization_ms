@@ -9,11 +9,13 @@ public class PopupDialog extends JDialog {
     private JLabel messageLabel;
     public PopupDialog(JFrame parent) {
         super(parent, "Message");
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         getContentPane().add(createGUI());
+
+        pack();
 
         setLocationRelativeTo(null);
         setAlwaysOnTop(true);
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
 
     private JPanel createGUI() {
@@ -35,6 +37,7 @@ public class PopupDialog extends JDialog {
 
     public void show(String message) {
         messageLabel.setText(message);
+        messageLabel.repaint();
         setVisible(true);
     }
 }

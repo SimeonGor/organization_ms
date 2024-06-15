@@ -1,5 +1,7 @@
 package com.simeon.commands.output;
 
+import com.simeon.Client;
+
 public class OutputHandlerFactory {
     public static OutputHandler getOutputHandler() {
         OutputHandler outputHandler = new OutputHandler();

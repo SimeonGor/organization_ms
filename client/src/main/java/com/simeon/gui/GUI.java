@@ -2,6 +2,7 @@ package com.simeon.gui;
 
 import com.simeon.Client;
 import com.simeon.element.Organization;
+import com.simeon.element.OrganizationType;
 import lombok.SneakyThrows;
 
 import javax.swing.*;
@@ -29,6 +30,7 @@ public class GUI extends JFrame {
     private JLabel userLabel;
 
     private JButton loginBtn;
+    private JComboBox<String> typeField;
     private JButton addBtn;
     private JButton addIfMaxBtn;
     private JButton updateBtn;
@@ -124,11 +126,25 @@ public class GUI extends JFrame {
         clearBtn.setBackground(new Color(0xFF8B8B));
         clearBtn.addActionListener(e -> client.send("clear", new HashMap<>()));
 
+        Vector<String> items = new Vector<>();
+        items.add(" ");
+        items.addAll(List.of(OrganizationType.listOfElements().toArray(new String[0])));
+        typeField = new JComboBox<>(items);
+        typeField.addActionListener(new ActionListener() {
+            @SneakyThrows
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String type = (String) typeField.getSelectedItem();
+                table.setFilterType(type);
+            }
+        });
+
         buttons.add(addBtn);
         buttons.add(addIfMaxBtn);
         buttons.add(updateBtn);
         buttons.add(deleteBtn);
         buttons.add(clearBtn);
+        buttons.add(typeField);
         buttons.add(Box.createHorizontalGlue());
 
         tablePanel.setLayout(new BoxLayout(tablePanel, BoxLayout.Y_AXIS));

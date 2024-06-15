@@ -4,6 +4,7 @@ import com.simeon.UserInfo;
 import com.simeon.element.Address;
 import com.simeon.element.Coordinates;
 import com.simeon.element.Organization;
+import com.simeon.element.OrganizationType;
 import com.simeon.element.comparator.*;
 
 import javax.swing.*;
@@ -18,6 +19,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.*;
 import java.util.concurrent.locks.ReentrantLock;
+import java.util.function.Predicate;
 
 public class Table extends JPanel {
     public static ResourceBundle lang = ResourceBundle.getBundle("lang");
@@ -118,6 +120,8 @@ public class Table extends JPanel {
     public static class TableModel extends AbstractTableModel {
         private final ReentrantLock lock = new ReentrantLock();
         private final Vector<Organization> collection = new Vector<>();
+
+        private Predicate<Organization> filter = organization -> true;
         private final static String[] header =
                 new String[]{"id", "name", "type", "annualTurnover", "coordinates", "postalAddress", "creationDate", "user"};
 
@@ -134,7 +138,7 @@ public class Table extends JPanel {
         public int getRowCount() {
             lock.lock();
             try {
-                return collection.size();
+                return collection.stream().filter(filter).toList().size();
             }
             finally {
                 lock.unlock();
@@ -168,7 +172,8 @@ public class Table extends JPanel {
         public Object getValueAt(int rowIndex, int columnIndex) {
             lock.lock();
             try {
-                Organization entity = collection.get(rowIndex);
+                List<Organization> filt_list = collection.stream().filter(filter).toList();
+                Organization entity = filt_list.get(rowIndex);
                 return switch (columnIndex) {
                     case 0 -> entity.getId();
                     case 1 -> entity.getName();
@@ -226,12 +231,24 @@ public class Table extends JPanel {
         public void removeRow(Organization entity) {
             lock.lock();
             try {
-                collection.remove(entity);
+                collection.removeIf((e) -> e.getId() == entity.getId());
                 fireTableDataChanged();
             }
             finally {
                 lock.unlock();
             }
+        }
+
+        public void setFiler(String type) {
+            OrganizationType organizationType = OrganizationType.getByName(type);
+            if (organizationType != null) {
+                filter = organization -> organization.getType().compareTo(organizationType) >= 0;
+            }
+            else {
+                filter = (e) -> true;
+            }
+
+            fireTableDataChanged();
         }
     }
 
@@ -297,6 +314,12 @@ public class Table extends JPanel {
 
     public List<Organization> getCollection() {
         return tableModel.getCollection();
+    }
+
+    public void setFilterType(String type) {
+        tableModel.setFiler(type);
+        table.repaint();
+        table.revalidate();
     }
 
     public void relocale() {

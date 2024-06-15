@@ -42,6 +42,9 @@ public class Client {
     @Setter
     private Token token;
 
+    @Getter
+    private ServerCommandHandler serverCommandHandler;
+
     private ResponseListener responseListener;
 
     public Client(CLI cli, InputHandler inputHandler, OutputHandler outputHandler) {
@@ -70,7 +73,7 @@ public class Client {
         if (socket.isConnected()) {
             connectionChannel.send(new Request(token, "get_api", new HashMap<>()));
             Response response = connectionChannel.receive();
-            ServerCommandHandler serverCommandHandler = new ServerCommandHandler(connectionChannel);
+            serverCommandHandler = new ServerCommandHandler(connectionChannel);
             if (response != null && response.getStatus() == ResponseStatus.OK)
                 serverCommandHandler.setCommands((ArrayList<CommandInfo>) response.getData());
             else {
@@ -79,7 +82,6 @@ public class Client {
             }
             this.commandHandler = CommandHandlerFactory.getClientCommandHandler(serverCommandHandler, this);
             responseListener.start();
-
             send("show", new HashMap<>());
         }
     }

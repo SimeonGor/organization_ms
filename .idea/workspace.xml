@@ -9,17 +9,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7012e3a3-1d32-426b-90c8-6574a8dd71bb" name="Changes" comment="feat: big feat">
-      <change afterPath="$PROJECT_DIR$/client/src/main/java/com/simeon/ResponseListener.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/main/java/com/simeon/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/simeon/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/simeon/commands/ServerCommandHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/simeon/commands/ServerCommandHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/main/java/com/simeon/commands/output/ArrayListOutputCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/simeon/commands/output/ArrayListOutputCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/simeon/connection/NonblockingConnectionChannel.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/simeon/connection/NonblockingConnectionChannel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/simeon/commands/output/OutputHandlerFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/simeon/commands/output/OutputHandlerFactory.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/main/java/com/simeon/gui/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/simeon/gui/GUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/simeon/gui/MapCanvas.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/simeon/gui/MapCanvas.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/simeon/gui/PopupDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/simeon/gui/PopupDialog.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/main/java/com/simeon/gui/Table.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/simeon/gui/Table.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/simeon/commands/clientmanager/UpdateCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/simeon/commands/clientmanager/UpdateCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/setting.properties" beforeDir="false" afterPath="$PROJECT_DIR$/setting.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -234,7 +230,7 @@
       <workItem from="1717317922002" duration="20125000" />
       <workItem from="1717530990504" duration="94980000" />
       <workItem from="1718284582506" duration="11442000" />
-      <workItem from="1718404218211" duration="11078000" />
+      <workItem from="1718404218211" duration="12557000" />
     </task>
     <task id="LOCAL-00001" summary="init commit">
       <option name="closed" value="true" />
@@ -548,7 +544,15 @@
       <option name="project" value="LOCAL" />
       <updated>1718432807274</updated>
     </task>
-    <option name="localTasksCounter" value="40" />
+    <task id="LOCAL-00040" summary="feat: big feat">
+      <option name="closed" value="true" />
+      <created>1718440028624</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1718440028624</updated>
+    </task>
+    <option name="localTasksCounter" value="41" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
