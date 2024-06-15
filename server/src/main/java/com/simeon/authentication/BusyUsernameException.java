@@ -1,4 +1,4 @@
-package com.simeon.exceptions;
+package com.simeon.authentication;
 
 public class BusyUsernameException extends Exception {
     public BusyUsernameException(String username) {

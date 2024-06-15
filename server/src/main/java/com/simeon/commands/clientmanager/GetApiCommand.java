@@ -2,6 +2,7 @@ package com.simeon.commands.clientmanager;
 
 import com.simeon.CommandInfo;
 import com.simeon.Response;
+import com.simeon.ResponseStatus;
 import com.simeon.UserInfo;
 import com.simeon.commands.Command;
 import com.simeon.commands.CommandHandler;
@@ -19,7 +20,7 @@ public class GetApiCommand extends Command {
 
     @Override
     public Response execute(@NonNull UserInfo userInfo) {
-        return new Response(true,
+        return new Response(ResponseStatus.OK,
                 new ArrayList<>(commandHandler.getCommands().entrySet().stream()
                         .filter((entry) -> !entry.getValue().getName().equals(name))
                         .map((entry) -> new CommandInfo(

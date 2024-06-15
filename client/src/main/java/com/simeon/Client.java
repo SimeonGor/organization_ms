@@ -8,11 +8,12 @@ import com.simeon.commands.input.InputHandlerFactory;
 import com.simeon.commands.output.OutputHandler;
 import com.simeon.commands.output.OutputHandlerFactory;
 import com.simeon.commands.output.TokenOutputHandler;
+import com.simeon.connection.BlockingConnectionChannel;
 import com.simeon.connection.ConnectionChannel;
 import com.simeon.connection.NonblockingConnectionChannel;
 import com.simeon.exceptions.InvalidArgumentException;
 import com.simeon.exceptions.InvalidConnectionException;
-import com.simeon.exceptions.UnknownCommandException;
+import com.simeon.commands.UnknownCommandException;
 import com.simeon.gui.GUI;
 import lombok.Getter;
 import lombok.Setter;
@@ -24,7 +25,6 @@ import java.io.*;
 import java.net.InetSocketAddress;
 import java.nio.channels.SocketChannel;
 import java.util.*;
-import java.util.logging.LogManager;
 
 /**
  * Class for client that which interacts with the user
@@ -65,7 +65,7 @@ public class Client {
             connectionChannel.send(new Request(token, "get_api", new HashMap<>()));
             Response response = connectionChannel.receive();
             ServerCommandHandler serverCommandHandler = new ServerCommandHandler(connectionChannel);
-            if (response != null && response.isStatus())
+            if (response != null && response.getStatus() == ResponseStatus.OK)
                 serverCommandHandler.setCommands((ArrayList<CommandInfo>) response.getData());
             else {
                 throw new InvalidConnectionException(socket.getRemoteAddress());
@@ -88,7 +88,7 @@ public class Client {
                         parameters.put(e.getKey(), inputHandler.getInput(e.getValue(), cli));
                     }
                     Response response = commandHandler.handle(method, parameters, token);
-                    outputHandler.handle(response.getData(), cli);
+                    outputHandler.handle(response, cli);
                 } catch (UnknownCommandException | InvalidArgumentException e) {
                     cli.error(e);
                 }
@@ -114,7 +114,7 @@ public class Client {
             public void run() {
                 try {
                     Response response = commandHandler.handle(method, params, token);
-                    outputHandler.handle(response.getData(), cli);
+                    outputHandler.handle(response, cli);
                 } catch (UnknownCommandException e) {
                     cli.error(e);
                 }
@@ -125,15 +125,17 @@ public class Client {
 
     @SneakyThrows
     public static void main(String[] args) {
+//        try {
+//            LogManager.getLogManager().readConfiguration(Client.class.getResourceAsStream("/logging.properties"));
+//        } catch (IOException ignored) {
+//            System.out.println("config file was not found");
+//        }
         try {
-            LogManager.getLogManager().readConfiguration(Client.class.getResourceAsStream("/logging.properties"));
-        } catch (IOException ignored) {
-            System.out.println("config file was not found");
-        }
-        Properties lang = new Properties();
-        try {
-            lang.load(new FileReader("setting.properties"));
-            Locale.setDefault(new Locale(lang.getProperty("lang")));
+//            Properties lang = new Properties();
+//            lang.load(new FileReader("setting.properties"));
+//            Locale.setDefault(new Locale(lang.getProperty("lang")));
+            Locale.setDefault(new Locale("ru"));
+            throw new IOException();
         } catch (IOException ignored) {
         }
 
@@ -141,8 +143,10 @@ public class Client {
             System.out.println("Client was interrupted");
         }));
 
-        CLI cli = new CLI(System.in, new PrintStream(new FileOutputStream("log")), new PrintStream(new FileOutputStream("log")));
-//        CLI cli = new CLI(System.in, System.out, System.out);
+//        CLI cli = new CLI(System.in,
+//                new PrintStream(OutputStream.nullOutputStream()),
+//                new PrintStream(OutputStream.nullOutputStream()));
+        CLI cli = new CLI(System.in, System.out, System.out);
 
         Client client = new Client(cli,
                 InputHandlerFactory.getInputHandler(),

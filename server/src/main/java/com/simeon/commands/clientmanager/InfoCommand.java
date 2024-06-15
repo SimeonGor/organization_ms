@@ -1,6 +1,7 @@
 package com.simeon.commands.clientmanager;
 
 import com.simeon.Response;
+import com.simeon.ResponseStatus;
 import com.simeon.UserInfo;
 import com.simeon.collection.ICollectionManager;
 import com.simeon.commands.Command;
@@ -24,6 +25,6 @@ public class InfoCommand extends Command {
     @Override
     public Response execute(@NonNull UserInfo userInfo) {
         log.log(Level.INFO, "{0} command command started", name);
-        return new Response(true, collectionManager.getInfo());
+        return new Response(ResponseStatus.OK, collectionManager.getInfo());
     }
 }

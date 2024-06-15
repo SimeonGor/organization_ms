@@ -7,9 +7,7 @@ import com.simeon.collection.ICollectionManager;
 import com.simeon.commands.CommandHandler;
 import com.simeon.commands.CommandHandlerFactory;
 import com.simeon.commands.ServerCommandHandlerFactory;
-import com.simeon.connection.ConnectionListener;
-import com.simeon.connection.ConnectionLoop;
-import com.simeon.connection.NonblockingConnectionChannelFactory;
+import com.simeon.connection.*;
 import com.simeon.element.Organization;
 import com.simeon.element.comparator.AnnualTurnoverComparator;
 import com.simeon.exceptions.DBException;
@@ -32,11 +30,11 @@ import java.util.logging.LogManager;
 public class Server {
     private final CommandHandler serverCommandHandler;
     private final ConnectionListener connectionListener;
-    private final ConnectionLoop connectionLoop;
+    private final ConnectionHandler connectionLoop;
 
     private volatile boolean running;
 
-    public Server(Integer port, ConnectionLoop connectionLoop) throws IOException {
+    public Server(Integer port, ConnectionHandler connectionLoop) throws IOException {
         this.serverCommandHandler = ServerCommandHandlerFactory.getCommandHandler(this);
         this.connectionLoop = connectionLoop;
 
@@ -116,9 +114,9 @@ public class Server {
             CommandHandler commandHandler = CommandHandlerFactory.getCommandHandler(collectionManager, authenticationService);
             RequestHandler requestHandler = new RequestHandler(commandHandler, responseHandler, authenticationService);
 
-            ConnectionLoop connectionLoop = new ConnectionLoop(new NonblockingConnectionChannelFactory(), requestHandler);
-
-            Server server = new Server(Integer.parseInt(args[0]), connectionLoop);
+            ConnectionHandler connectionHandler = new ConnectionHandler(new NonblockingConnectionChannelFactory(), requestHandler);
+            responseHandler.setConnectionHandler(connectionHandler);
+            Server server = new Server(Integer.parseInt(args[0]), connectionHandler);
             System.out.println("server started");
             server.start();
         } catch (IOException e) {

@@ -1,11 +1,13 @@
 package com.simeon.commands.clientmanager;
 
 import com.simeon.Response;
+import com.simeon.ResponseStatus;
 import com.simeon.UserInfo;
+import com.simeon.authentication.BusyUsernameException;
 import com.simeon.authentication.IAuthenticationService;
 import com.simeon.commands.Command;
-import com.simeon.exceptions.BusyUsernameException;
-import com.simeon.exceptions.NoSuchParameterException;
+import com.simeon.exceptions.AuthorizationRE;
+import com.simeon.exceptions.NoSuchParameterRE;
 import lombok.NonNull;
 
 import java.io.Serializable;
@@ -26,28 +28,22 @@ public class RegisterCommand extends Command {
         try {
             username = (String) parameters.get("username");
         }
-        catch (ClassCastException e) {
-            return new Response(false, e);
-        }
-        catch (NullPointerException e) {
-            return new Response(false, new NoSuchParameterException(name, "username"));
+        catch (NullPointerException | ClassCastException e) {
+            return new Response(ResponseStatus.ERROR, new NoSuchParameterRE(name, "username"));
         }
 
         String password;
         try {
             password = (String) parameters.get("password");
         }
-        catch (ClassCastException e) {
-            return new Response(false, e);
-        }
-        catch (NullPointerException e) {
-            return new Response(false, new NoSuchParameterException(name, "password"));
+        catch (NullPointerException | ClassCastException e) {
+            return new Response(ResponseStatus.ERROR, new NoSuchParameterRE(name, "password"));
         }
 
         try {
-            return new Response(true, authenticationService.register(username, password));
+            return new Response(ResponseStatus.OK, authenticationService.register(username, password));
         } catch (BusyUsernameException e) {
-            return new Response(false, e);
+            return new Response(ResponseStatus.ERROR, new AuthorizationRE(e.getMessage()));
         }
     }
 }

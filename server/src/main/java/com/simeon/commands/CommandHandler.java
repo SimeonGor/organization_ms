@@ -1,9 +1,10 @@
 package com.simeon.commands;
 
 import com.simeon.Response;
+import com.simeon.ResponseStatus;
 import com.simeon.Role;
 import com.simeon.UserInfo;
-import com.simeon.exceptions.UnknownCommandException;
+import com.simeon.exceptions.UnknownCommandRE;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.java.Log;
@@ -62,7 +63,7 @@ public class CommandHandler {
                 return successor.handle(method, parameters, userInfo);
             }
             else {
-                return new Response(false, new UnknownCommandException(method));
+                return new Response(ResponseStatus.ERROR, new UnknownCommandRE(method));
             }
         }
     }

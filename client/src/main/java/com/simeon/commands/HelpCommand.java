@@ -1,6 +1,7 @@
 package com.simeon.commands;
 
 import com.simeon.Response;
+import com.simeon.ResponseStatus;
 
 public class HelpCommand extends Command {
     private final CommandHandler commandHandler;
@@ -10,7 +11,7 @@ public class HelpCommand extends Command {
     }
     @Override
     public Response execute() {
-        return new Response(true, commandHandler.getCommands());
+        return new Response(ResponseStatus.OK, commandHandler.getCommands());
     }
 
 }

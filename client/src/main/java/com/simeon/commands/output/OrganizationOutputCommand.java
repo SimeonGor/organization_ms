@@ -1,6 +1,8 @@
 package com.simeon.commands.output;
 
 import com.simeon.CLI;
+import com.simeon.Response;
+import com.simeon.ResponseStatus;
 import com.simeon.element.Organization;
 
 import java.io.Serializable;
@@ -12,7 +14,7 @@ public class OrganizationOutputCommand implements OutputCommand {
     }
 
     @Override
-    public void show(Serializable message, CLI cli) {
+    public void show(Response response, CLI cli) {
         String template = "%-4s| %-10s| %3s| %-6s| %-10s| %-15s| %-10s| %-9s | %-9s";
         String header = String.format("%-4s| %-10s| %-11s| %-10s| %-15s| %-10s| %-9s | %-9s",
                 "id",
@@ -23,7 +25,7 @@ public class OrganizationOutputCommand implements OutputCommand {
                 "type",
                 "zip code",
                 "user");
-        Organization element = (Organization) message;
+        Organization element = (Organization) response.getData();
         String result = header + "\n" +
                 String.format(template,
                         element.getId(),
@@ -38,6 +40,13 @@ public class OrganizationOutputCommand implements OutputCommand {
         cli.print(result);
         cli.print("\n");
 
-        cli.add(element);
+        if (response.getStatus().equals(ResponseStatus.ADD)
+                || response.getStatus().equals(ResponseStatus.UPDATE)
+                || response.getStatus().equals(ResponseStatus.OK)) {
+            cli.add(element);
+        }
+        else if (response.getStatus().equals(ResponseStatus.DELETE)) {
+            cli.delete(element);
+        }
     }
 }

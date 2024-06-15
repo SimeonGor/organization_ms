@@ -1,6 +1,8 @@
 package com.simeon;
 
 import com.simeon.connection.ConnectionChannel;
+import com.simeon.connection.ConnectionHandler;
+import lombok.Setter;
 import lombok.extern.java.Log;
 
 import java.util.concurrent.ExecutorService;
@@ -10,6 +12,8 @@ import java.util.logging.Level;
 @Log
 public class ResponseHandler {
     private final ExecutorService executorService;
+    @Setter
+    private ConnectionHandler connectionHandler;
 
     public ResponseHandler() {
         this.executorService = Executors.newCachedThreadPool();
@@ -33,8 +37,15 @@ public class ResponseHandler {
 
         @Override
         public void run() {
-            log.log(Level.INFO, "send " + response.isStatus());
-            connectionChannel.send(response);
+            log.log(Level.INFO, "send " + response.getStatus());
+            if (response.getStatus().equals(ResponseStatus.ADD)
+                    || response.getStatus().equals(ResponseStatus.DELETE)
+                    || response.getStatus().equals(ResponseStatus.UPDATE)) {
+                connectionHandler.sendAll(response);
+            }
+            else {
+                connectionChannel.send(response);
+            }
         }
     }
 }

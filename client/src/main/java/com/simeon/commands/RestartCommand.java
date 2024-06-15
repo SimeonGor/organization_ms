@@ -2,6 +2,7 @@ package com.simeon.commands;
 
 import com.simeon.Client;
 import com.simeon.Response;
+import com.simeon.ResponseStatus;
 import com.simeon.exceptions.InvalidConnectionException;
 import lombok.NonNull;
 
@@ -23,9 +24,9 @@ public class RestartCommand extends Command {
         try {
             client.close();
             client.start((String) parameters.get("ip"), (int) parameters.get("port"));
-            return new Response(true, "reconnected");
+            return new Response(ResponseStatus.OK, "reconnected");
         } catch (IOException | InvalidConnectionException e) {
-            return new Response(false, e.getMessage());
+            return new Response(ResponseStatus.ERROR, e.getMessage());
         }
     }
 }

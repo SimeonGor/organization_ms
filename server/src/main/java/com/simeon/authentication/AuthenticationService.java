@@ -5,8 +5,6 @@ import com.simeon.Role;
 import com.simeon.Token;
 import com.simeon.User;
 import com.simeon.UserInfo;
-import com.simeon.exceptions.AuthorizedException;
-import com.simeon.exceptions.BusyUsernameException;
 import com.simeon.exceptions.DBException;
 
 import java.nio.charset.StandardCharsets;
@@ -138,23 +136,4 @@ public class AuthenticationService implements IAuthenticationService {
         }
     }
 
-    @Override
-    public UserInfo getUserById(long id) {
-        lock.lock();
-        try {
-            if (id < 0) {
-                try {
-                    User user = users.get(id);
-                    return new UserInfo(id, user.getUsername(), user.getRole());
-                } catch (NoSuchElementException e) {
-                    return null;
-                }
-            } else {
-                return new UserInfo(id, "unauthorized", Role.NO_AUTH);
-            }
-        }
-        finally {
-            lock.unlock();
-        }
-    }
 }

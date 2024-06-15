@@ -1,6 +1,7 @@
 package com.simeon;
 
 import com.simeon.element.Organization;
+import com.simeon.exceptions.RequestError;
 import com.simeon.gui.GUI;
 import lombok.Getter;
 import lombok.Setter;
@@ -108,5 +109,10 @@ public class CLI {
         if (interactiveMode) {
             outputStream.printf("\u001B[34mEnter %s: \u001B[0m", parameter_name);
         }
+    }
+
+    public void printError(String message) {
+        outputStream.println(message);
+        gui.showPopup(message);
     }
 }

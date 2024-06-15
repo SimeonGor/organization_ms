@@ -18,7 +18,6 @@ public class CommandHandlerFactory {
         noauthCommandHandler.addCommand(new RegisterCommand(authenticationService));
         noauthCommandHandler.addCommand(new LoginCommand(authenticationService));
         noauthCommandHandler.addCommand(new GetApiCommand(noauthCommandHandler));
-        noauthCommandHandler.addCommand(new ShowCommand(collectionManager));
 
         return noauthCommandHandler;
     }
@@ -37,6 +36,7 @@ public class CommandHandlerFactory {
         userCommandHandler.addCommand(new ReorderCommand(collectionManager));
         userCommandHandler.addCommand(new UpdateCommand(collectionManager));
         userCommandHandler.addCommand(new GetApiCommand(userCommandHandler));
+        userCommandHandler.addCommand(new ShowCommand(collectionManager));
 
         return userCommandHandler;
     }

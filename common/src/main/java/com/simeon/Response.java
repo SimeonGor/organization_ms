@@ -14,11 +14,11 @@ import java.io.Serializable;
 @AllArgsConstructor
 public class Response implements Serializable {
     @Serial
-    private static final long serialVersionUID = 0L;
+    private static final long serialVersionUID = 1L;
     /**
      * Response status
      */
-    private final boolean status;
+    private final ResponseStatus status;
     /**
      * Response data
      */

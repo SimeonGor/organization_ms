@@ -1,6 +1,7 @@
 package com.simeon.commands.clientmanager;
 
 import com.simeon.Response;
+import com.simeon.ResponseStatus;
 import com.simeon.UserInfo;
 import com.simeon.collection.ICollectionManager;
 import com.simeon.commands.Command;
@@ -33,7 +34,7 @@ public class MinByPostalAddressCommand extends Command {
                 .filter((o) -> o.getPostalAddress().getZipCode() != null)
                 .min(Comparator.comparing(o -> o.getPostalAddress().getZipCode()));
 
-        return op.map(organization -> new Response(true, organization))
-                .orElseGet(() -> new Response(true, "No such elements")); // интересная замена от IDE
+        return op.map(organization -> new Response(ResponseStatus.OK, organization))
+                .orElseGet(() -> new Response(ResponseStatus.OK, "No such elements")); // интересная замена от IDE
     }
 }

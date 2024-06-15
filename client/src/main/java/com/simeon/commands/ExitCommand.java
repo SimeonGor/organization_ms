@@ -2,6 +2,7 @@ package com.simeon.commands;
 
 import com.simeon.Client;
 import com.simeon.Response;
+import com.simeon.ResponseStatus;
 import com.simeon.exceptions.InvalidArgumentException;
 
 import java.io.IOException;
@@ -14,12 +15,12 @@ public class ExitCommand extends Command {
     }
 
     @Override
-    public Response execute() throws InvalidArgumentException {
+    public Response execute() {
         try {
             client.shutdown();
-            return new Response(true, "Goodbye!");
+            return new Response(ResponseStatus.OK, "Goodbye!");
         } catch (IOException e) {
-            return new Response(false, "something went wrong (」°ロ°)」");
+            return new Response(ResponseStatus.ERROR, "something went wrong (」°ロ°)」");
         }
     }
 }

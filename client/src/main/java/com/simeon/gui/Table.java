@@ -15,6 +15,7 @@ import java.text.DateFormat;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.*;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class Table extends JPanel {
     public static ResourceBundle lang = ResourceBundle.getBundle("lang");
@@ -116,16 +117,29 @@ public class Table extends JPanel {
         }
     }
     public static class TableModel extends AbstractTableModel {
+        private final ReentrantLock lock = new ReentrantLock();
         private final Vector<Organization> collection = new Vector<>();
         private final static String[] header =
                 new String[]{"id", "name", "type", "annualTurnover", "coordinates", "postalAddress", "creationDate", "user"};
 
         public Organization getById(long id) {
-            return collection.stream().filter(e -> e.getId() == id).findFirst().get();
+            lock.lock();
+            try {
+                return collection.stream().filter(e -> e.getId() == id).findFirst().get();
+            }
+            finally {
+                lock.unlock();
+            }
         }
         @Override
         public int getRowCount() {
-            return collection.size();
+            lock.lock();
+            try {
+                return collection.size();
+            }
+            finally {
+                lock.unlock();
+            }
         }
 
         @Override
@@ -153,17 +167,23 @@ public class Table extends JPanel {
 
         @Override
         public Object getValueAt(int rowIndex, int columnIndex) {
-            Organization entity = collection.get(rowIndex);
-            return switch (columnIndex) {
-                case 0 -> entity.getId();
-                case 1 -> entity.getName();
-                case 2 -> entity.getType().toString();
-                case 3 -> entity.getAnnualTurnover();
-                case 4 -> entity.getCoordinates();
-                case 5 -> entity.getPostalAddress();
-                case 6 -> entity.getCreationDate();
-                default -> entity.getUserInfo();
-            };
+            lock.lock();
+            try {
+                Organization entity = collection.get(rowIndex);
+                return switch (columnIndex) {
+                    case 0 -> entity.getId();
+                    case 1 -> entity.getName();
+                    case 2 -> entity.getType().toString();
+                    case 3 -> entity.getAnnualTurnover();
+                    case 4 -> entity.getCoordinates();
+                    case 5 -> entity.getPostalAddress();
+                    case 6 -> entity.getCreationDate();
+                    default -> entity.getUserInfo();
+                };
+            }
+            finally {
+                lock.unlock();
+            }
         }
 
         @Override
@@ -172,20 +192,34 @@ public class Table extends JPanel {
         }
 
         public void insertRow(Organization entity) {
-            collection.removeIf(e -> e.getId() == entity.getId());
-            collection.add(entity);
+            lock.lock();
+            try {
+                collection.removeIf(e -> e.getId() == entity.getId());
+                collection.add(entity);
+            }
+            finally {
+                lock.unlock();
+            }
         }
 
         public List<Organization> getCollection() {
-            List<Organization> res = new ArrayList<>();
-            for (var e : collection) {
-                res.add(e);
+            lock.lock();
+            try {
+                return new ArrayList<>(collection);
             }
-            return res;
+            finally {
+                lock.unlock();
+            }
         }
 
         public void removeRow(Organization entity) {
-            collection.remove(entity);
+            lock.lock();
+            try {
+                collection.remove(entity);
+            }
+            finally {
+                lock.unlock();
+            }
         }
     }
 

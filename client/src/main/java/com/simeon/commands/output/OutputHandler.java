@@ -1,7 +1,8 @@
 package com.simeon.commands.output;
 
 import com.simeon.CLI;
-import com.simeon.exceptions.UnknownCommandException;
+import com.simeon.Response;
+import com.simeon.commands.UnknownCommandException;
 
 import java.io.Serializable;
 import java.util.HashMap;
@@ -16,11 +17,12 @@ public class OutputHandler {
         return true;
     }
 
-    public void handle(Serializable message, CLI cli) throws UnknownCommandException {
+    public void handle(Response response, CLI cli) throws UnknownCommandException {
+        Serializable message = response.getData();
         if (commands.containsKey(message.getClass())) {
             OutputCommand outputCommand = commands.get(message.getClass());
             try {
-                outputCommand.show(message, cli);
+                outputCommand.show(response, cli);
                 return;
             } catch (ClassCastException e) {
                 throw new UnknownCommandException(message.getClass().getCanonicalName());
@@ -29,7 +31,7 @@ public class OutputHandler {
 
         for (var it : commands.entrySet()) {
             try {
-                it.getValue().show(message, cli);
+                it.getValue().show(response, cli);
                 return;
             } catch (ClassCastException ignored) {
             }

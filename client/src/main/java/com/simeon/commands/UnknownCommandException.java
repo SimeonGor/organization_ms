@@ -1,4 +1,4 @@
-package com.simeon.exceptions;
+package com.simeon.commands;
 
 import lombok.Getter;
 

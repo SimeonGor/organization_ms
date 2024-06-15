@@ -22,10 +22,10 @@ public interface ICommand {
       * Execute the command with parameters
       * @param parameters map of parameters
       */
-     Response execute(@NonNull HashMap<String, ? extends Serializable> parameters) throws InvalidArgumentException;
+     Response execute(@NonNull HashMap<String, ? extends Serializable> parameters);
 
      /**
       * Execute the command without parameters
       */
-     Response execute() throws InvalidArgumentException;
+     Response execute();
 }

@@ -1,8 +1,9 @@
 package com.simeon.commands.output;
 
 import com.simeon.CLI;
+import com.simeon.Response;
 import com.simeon.element.Organization;
-import com.simeon.exceptions.UnknownCommandException;
+import com.simeon.commands.UnknownCommandException;
 import lombok.AllArgsConstructor;
 
 import java.io.Serializable;
@@ -18,24 +19,14 @@ public class ArrayListOutputCommand implements OutputCommand {
     }
 
     @Override
-    public void show(Serializable message, CLI cli) {
+    public void show(Response response, CLI cli) {
         int i = 1;
-        ArrayList<Serializable> list = (ArrayList<Serializable>) message;
-        if (list.get(0).getClass().equals(Organization.class)) {
-            ArrayList<Organization> orgList = (ArrayList<Organization>) message;
-            List<Organization> old = cli.getCollection();
-            for (var e : orgList) {
-                old.removeIf((o) -> o.getId() == e.getId());
-            }
-            for (var e : old) {
-                cli.delete(e);
-            }
-        }
+        ArrayList<Serializable> list = (ArrayList<Serializable>) response.getData();
 
         for (var e : list) {
             cli.print(String.format("#%d\t", i++));
             try {
-                outputHandler.handle(e, cli);
+                outputHandler.handle(new Response(response.getStatus(), e), cli);
             } catch (UnknownCommandException ex) {
                 cli.print("unknown type\n");
             }

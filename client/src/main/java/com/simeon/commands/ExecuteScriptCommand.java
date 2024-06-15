@@ -3,7 +3,9 @@ package com.simeon.commands;
 import com.simeon.CLI;
 import com.simeon.Client;
 import com.simeon.Response;
+import com.simeon.ResponseStatus;
 import com.simeon.exceptions.InvalidArgumentException;
+import com.simeon.exceptions.RequestError;
 import lombok.NonNull;
 
 import java.io.*;
@@ -21,15 +23,20 @@ public class ExecuteScriptCommand extends Command {
     }
 
     @Override
-    public Response execute(@NonNull HashMap<String, ? extends Serializable> parameters) throws InvalidArgumentException {
+    public Response execute(@NonNull HashMap<String, ? extends Serializable> parameters) {
         if (!parameters.containsKey("filename")) {
-            throw new InvalidArgumentException("filename is required parameter");
+            return new Response(ResponseStatus.ERROR, new RequestError() {
+                @Override
+                public String getMessage() {
+                    return "filename is required parameter";
+                }
+            });
         }
         String filename = (String) parameters.get("filename");
         try {
             File file = new File(filename);
             if (!file.canRead()) {
-                return new Response(false, String.format("%s : permission to read denied", filename));
+                return new Response(ResponseStatus.ERROR, String.format("%s : permission to read denied", filename));
             }
 
             if (!filenames.contains(filename)) {
@@ -46,14 +53,29 @@ public class ExecuteScriptCommand extends Command {
                 client.setCli(old_cli);
             }
             else {
-                return new Response(false, "recursive call");
+                return new Response(ResponseStatus.ERROR, new RequestError() {
+                    @Override
+                    public String getMessage() {
+                        return "recursive call";
+                    }
+                });
             }
         } catch (ClassCastException e) {
-            throw new InvalidArgumentException("The filename must be string");
+            return new Response(ResponseStatus.ERROR, new RequestError() {
+                @Override
+                public String getMessage() {
+                    return "The filename must be string";
+                }
+            });
         } catch (FileNotFoundException e) {
-            throw new InvalidArgumentException(String.format("%s : no such file", filename));
+            return new Response(ResponseStatus.ERROR, new RequestError() {
+                @Override
+                public String getMessage() {
+                    return String.format("%s : no such file", filename);
+                }
+            });
         }
 
-        return new Response(true, "The script has been executed successfully");
+        return new Response(ResponseStatus.OK, "The script has been executed successfully");
     }
 }

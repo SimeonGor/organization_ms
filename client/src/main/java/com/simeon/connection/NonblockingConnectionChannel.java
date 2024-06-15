@@ -2,6 +2,7 @@ package com.simeon.connection;
 
 import com.simeon.Request;
 import com.simeon.Response;
+import com.simeon.ResponseStatus;
 import lombok.NonNull;
 
 import java.io.*;
@@ -37,7 +38,7 @@ public class NonblockingConnectionChannel implements ConnectionChannel {
             try {
                 return (Response) objectInputStream.readObject();
             } catch (ClassNotFoundException e) {
-                return new Response(false, null);
+                return new Response(ResponseStatus.ERROR, null);
             }
         }
         catch (IOException e) {

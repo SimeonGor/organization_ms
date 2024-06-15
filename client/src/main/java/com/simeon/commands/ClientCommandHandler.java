@@ -4,7 +4,7 @@ import com.simeon.CommandInfo;
 import com.simeon.Response;
 import com.simeon.Token;
 import com.simeon.exceptions.InvalidArgumentException;
-import com.simeon.exceptions.UnknownCommandException;
+import com.simeon.commands.UnknownCommandException;
 import lombok.extern.java.Log;
 
 import java.io.Serializable;
@@ -40,15 +40,11 @@ public class ClientCommandHandler extends CommandHandler {
     public Response handle(String method, HashMap<String, ? extends Serializable> parameters, Token token) throws UnknownCommandException {
         if (commands.containsKey(method)) {
             ICommand command = commands.get(method);
-            try {
-                if (parameters.isEmpty()) {
-                    return command.execute();
-                }
-                else {
-                    return command.execute(parameters);
-                }
-            } catch (InvalidArgumentException e) {
-                return successor.handle(method, parameters, token);
+            if (parameters.isEmpty()) {
+                return command.execute();
+            }
+            else {
+                return command.execute(parameters);
             }
         }
         return successor.handle(method, parameters, token);

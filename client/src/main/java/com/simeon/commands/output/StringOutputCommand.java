@@ -1,6 +1,7 @@
 package com.simeon.commands.output;
 
 import com.simeon.CLI;
+import com.simeon.Response;
 
 import java.io.Serializable;
 
@@ -12,8 +13,8 @@ public class StringOutputCommand implements OutputCommand {
     }
 
     @Override
-    public void show(Serializable message, CLI cli) {
-        cli.print((String) message);
+    public void show(Response message, CLI cli) {
+        cli.print((String) message.getData());
         cli.print("\n");
     }
 }

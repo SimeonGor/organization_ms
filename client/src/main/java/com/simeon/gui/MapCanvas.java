@@ -12,8 +12,11 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class MapCanvas extends JPanel {
+    private final ReentrantLock lock = new ReentrantLock();
+
     public class Animation extends TimerTask {
         private final Entity entity;
         public Animation(Entity entity) {
@@ -156,15 +159,21 @@ public class MapCanvas extends JPanel {
 
     @Override
     public void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        this.zero = drawCoordinateSystem(g);
-        Graphics2D g2 = (Graphics2D) g.create();
-        g2.translate(zero.x, zero.y);
-        for (var it : collection.entrySet()) {
-            Entity entity = it.getValue();
-            entity.paintComponent(g2);
+        lock.lock();
+        try {
+            super.paintComponent(g);
+            this.zero = drawCoordinateSystem(g);
+            Graphics2D g2 = (Graphics2D) g.create();
+            g2.translate(zero.x, zero.y);
+            for (var it : collection.entrySet()) {
+                Entity entity = it.getValue();
+                entity.paintComponent(g2);
+            }
+            g2.dispose();
         }
-        g2.dispose();
+        finally {
+            lock.unlock();
+        }
     }
 
 //    @Override
@@ -174,25 +183,43 @@ public class MapCanvas extends JPanel {
 //    }
 
     public void add(Organization organization) {
-        Entity entity =new Entity(organization.getCoordinates());
-        long id = organization.getId();
-        if (collection.containsKey(id) && collection.get(id).equals(entity)) return;
-        collection.put(id, entity);
-        Timer timer = new Timer();
-        timer.schedule(new Animation(entity), 0, 100);
+        lock.lock();
+        try {
+            Entity entity = new Entity(organization.getCoordinates());
+            long id = organization.getId();
+            if (collection.containsKey(id) && collection.get(id).equals(entity)) return;
+            collection.put(id, entity);
+            Timer timer = new Timer();
+            timer.schedule(new Animation(entity), 0, 100);
+        }
+        finally {
+            lock.unlock();
+        }
     }
 
     public void select(Organization organization) {
-        if (collection.containsKey(selectedId)) {
-            collection.get(selectedId).setSelected(false);
-        }
-        selectedId = organization.getId();
-        collection.get(selectedId).setSelected(true);
+        lock.lock();
+        try {
+            if (collection.containsKey(selectedId)) {
+                collection.get(selectedId).setSelected(false);
+            }
+            selectedId = organization.getId();
+            collection.get(selectedId).setSelected(true);
 
-        repaint();
+            repaint();
+        }
+        finally {
+            lock.unlock();
+        }
     }
 
     public void delete(Organization organization) {
-        collection.remove(organization.getId());
+        lock.lock();
+        try {
+            collection.remove(organization.getId());
+        }
+        finally {
+            lock.unlock();
+        }
     }
 }

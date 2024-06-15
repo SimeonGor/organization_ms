@@ -1,6 +1,7 @@
 package com.simeon.commands.clientmanager;
 
 import com.simeon.Response;
+import com.simeon.ResponseStatus;
 import com.simeon.UserInfo;
 import com.simeon.collection.ICollectionManager;
 import com.simeon.commands.Command;
@@ -29,7 +30,7 @@ public class ReorderCommand extends Command {
         log.log(Level.INFO, "{0} command command started", name);
         List<Organization> result = new ArrayList<>(collectionManager.getAllItems());
         Collections.reverse(result);
-        return new Response(true,
+        return new Response(ResponseStatus.OK,
                 new ArrayList<>(result));
     }
 }

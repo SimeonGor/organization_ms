@@ -1,6 +1,7 @@
 package com.simeon.commands.servercommands;
 
 import com.simeon.Response;
+import com.simeon.ResponseStatus;
 import com.simeon.Server;
 import com.simeon.UserInfo;
 import com.simeon.commands.Command;
@@ -18,6 +19,6 @@ public class ExitCommand extends Command {
     @Override
     public Response execute(@NonNull UserInfo userInfo) {
         server.close();
-        return new Response(true, "collection was saved");
+        return new Response(ResponseStatus.OK, "collection was saved");
     }
 }

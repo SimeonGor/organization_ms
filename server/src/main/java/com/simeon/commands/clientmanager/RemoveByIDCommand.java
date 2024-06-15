@@ -1,13 +1,15 @@
 package com.simeon.commands.clientmanager;
 
 import com.simeon.Response;
+import com.simeon.ResponseStatus;
 import com.simeon.Role;
 import com.simeon.UserInfo;
 import com.simeon.collection.ICollectionManager;
 import com.simeon.commands.Command;
 import com.simeon.element.Organization;
-import com.simeon.exceptions.DeniedModificationException;
-import com.simeon.exceptions.NoSuchParameterException;
+import com.simeon.exceptions.DeniedModificationRE;
+import com.simeon.exceptions.NoSuchParameterRE;
+import com.simeon.exceptions.RequestError;
 import lombok.NonNull;
 import lombok.extern.java.Log;
 
@@ -36,22 +38,25 @@ public class RemoveByIDCommand extends Command {
             id = (long) parameters.get("id");
         }
         catch (ClassCastException e) {
-            return new Response(false, "Invalid type of parameters");
+            return new Response(ResponseStatus.ERROR, new NoSuchParameterRE(name, "id"));
         }
-        catch (NullPointerException e) {
-            return new Response(false, new NoSuchParameterException(name, "id"));
-        }
+
         try {
             Organization element = collectionManager.getById(id);
             if (userInfo.getRole().compareTo(Role.ADMIN) >= 0 ||
                     element.getUserInfo().getId() == userInfo.getId()) {
                 collectionManager.delete(element);
-                return new Response(true, String.format("The item with id %d is no longer in the collection", id));
+                return new Response(ResponseStatus.DELETE, element);
             } else {
-                return new Response(false, new DeniedModificationException());
+                return new Response(ResponseStatus.ERROR, new DeniedModificationRE());
             }
         } catch (NoSuchElementException e) {
-            return new Response(false, e);
+            return new Response(ResponseStatus.ERROR, new RequestError() {
+                @Override
+                public String getMessage() {
+                    return "No such element";
+                }
+            });
         }
     }
 }

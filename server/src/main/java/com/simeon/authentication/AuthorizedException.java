@@ -1,4 +1,4 @@
-package com.simeon.exceptions;
+package com.simeon.authentication;
 
 public class AuthorizedException extends Exception {
     public AuthorizedException() {

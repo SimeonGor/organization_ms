@@ -1,15 +1,13 @@
 package com.simeon.commands.clientmanager;
 
 import com.simeon.Response;
+import com.simeon.ResponseStatus;
 import com.simeon.Role;
 import com.simeon.UserInfo;
 import com.simeon.collection.ICollectionManager;
 import com.simeon.commands.Command;
 import com.simeon.element.Organization;
-import com.simeon.exceptions.DBException;
-import com.simeon.exceptions.DeniedModificationException;
-import com.simeon.exceptions.NoSuchParameterException;
-import com.simeon.exceptions.UnauthorizedUserException;
+import com.simeon.exceptions.*;
 import lombok.NonNull;
 import lombok.extern.java.Log;
 
@@ -36,26 +34,22 @@ public class UpdateCommand extends Command {
     public Response execute(@NonNull Map<String, ? extends Serializable> parameters, @NonNull UserInfo userInfo) {
         log.log(Level.INFO, "{0} command command started with {1}", new String[]{name, parameters.toString()});
         if (userInfo.getRole().compareTo(Role.USER) < 0) {
-            return new Response(false, new UnauthorizedUserException());
+            return new Response(ResponseStatus.ERROR, new UnauthorizedUserRE());
         }
 
         long id;
         try {
             id = (long) parameters.get("id");
-        } catch (ClassCastException e) {
-            return new Response(false, e);
-        } catch (NullPointerException e) {
-            return new Response(false, new NoSuchParameterException(name, "id"));
+        } catch (NullPointerException | ClassCastException e) {
+            return new Response(ResponseStatus.ERROR, new NoSuchParameterRE(name, "id"));
         }
+
         Organization element;
         try {
             element = (Organization) parameters.get("element");
         }
-        catch (ClassCastException e) {
-            return new Response(false, e);
-        }
-        catch (NullPointerException e) {
-            return new Response(false, new NoSuchParameterException(name, "element"));
+        catch (NullPointerException | ClassCastException e) {
+            return new Response(ResponseStatus.ERROR, new NoSuchParameterRE(name, "element"));
         }
 
         if (collectionManager.getById(id).getUserInfo().getId() == userInfo.getId()) {
@@ -64,17 +58,22 @@ public class UpdateCommand extends Command {
             try {
                 Organization added_entity = collectionManager.update(element);
                 if (added_entity != null) {
-                    return new Response(true, added_entity);
+                    return new Response(ResponseStatus.DELETE, added_entity);
                 } else {
-                    return new Response(false, new DBException());
+                    return new Response(ResponseStatus.ERROR, new DataBaseRE());
                 }
             }
             catch (NoSuchElementException e) {
-                return new Response(false, e);
+                return new Response(ResponseStatus.ERROR, new RequestError() {
+                    @Override
+                    public String getMessage() {
+                        return "No such element";
+                    }
+                });
             }
         }
         else {
-            return new Response(false, new DeniedModificationException());
+            return new Response(ResponseStatus.ERROR, new DeniedModificationRE());
         }
     }
 }

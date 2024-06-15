@@ -1,7 +1,9 @@
 package com.simeon.commands;
 
 import com.simeon.Response;
+import com.simeon.ResponseStatus;
 import com.simeon.UserInfo;
+import com.simeon.exceptions.RequestError;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NonNull;
@@ -51,9 +53,14 @@ public abstract class Command implements ICommand {
     public Response execute(@NonNull Map<String, ? extends Serializable> parameters, @NonNull UserInfo userInfo) {
         log.log(Level.FINE, "Execution stub with the parameter started");
         if (!hasParameters()) {
-            return new Response(false, "Invalid parameters");
+            return new Response(ResponseStatus.ERROR, new RequestError() {
+                @Override
+                public String getMessage() {
+                    return "Invalid parameters";
+                }
+            });
         }
-        return new Response(false, null);
+        return new Response(ResponseStatus.ERROR, null);
     }
 
     /**
@@ -63,8 +70,13 @@ public abstract class Command implements ICommand {
     public Response execute(@NonNull UserInfo userInfo) {
         log.log(Level.FINE, "Execution stub without the parameter started");
         if (hasParameters()) {
-            return new Response(false, "Invalid parameters");
+            return new Response(ResponseStatus.ERROR, new RequestError() {
+                @Override
+                public String getMessage() {
+                    return "Invalid parameters";
+                }
+            });
         }
-        return new Response(false, null);
+        return new Response(ResponseStatus.ERROR, null);
     }
 }

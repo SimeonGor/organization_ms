@@ -3,7 +3,7 @@ package com.simeon.commands;
 import com.simeon.CommandInfo;
 import com.simeon.Response;
 import com.simeon.Token;
-import com.simeon.exceptions.UnknownCommandException;
+import com.simeon.commands.UnknownCommandException;
 import lombok.Getter;
 import lombok.Setter;
 

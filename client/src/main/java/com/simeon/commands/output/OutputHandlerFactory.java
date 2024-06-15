@@ -7,8 +7,9 @@ public class OutputHandlerFactory {
         outputHandler.add(new OrganizationOutputCommand());
         outputHandler.add(new StringOutputCommand());
         outputHandler.add(new CommandInfoOutputCommand());
-        outputHandler.add(new ExceptionOutputCommand());
+        outputHandler.add(new RequestErrorOutputCommand());
         outputHandler.add(new CollectionInfoOutputCommand());
+        outputHandler.add(new AuthorizationREOutputCommand());
         return outputHandler;
     }
 }

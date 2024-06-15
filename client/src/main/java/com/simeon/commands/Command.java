@@ -1,7 +1,9 @@
 package com.simeon.commands;
 
 import com.simeon.Response;
+import com.simeon.ResponseStatus;
 import com.simeon.exceptions.InvalidArgumentException;
+import com.simeon.exceptions.RequestError;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NonNull;
@@ -48,23 +50,33 @@ public abstract class Command implements ICommand {
      * @param parameters map of parameters
      */
     @Override
-    public Response execute(@NonNull HashMap<String, ? extends Serializable> parameters) throws InvalidArgumentException {
+    public Response execute(@NonNull HashMap<String, ? extends Serializable> parameters) {
         log.log(Level.FINE, "Execution stub with the parameter started");
         if (!hasParameters()) {
-            throw new InvalidArgumentException("This method doesn't have parameters");
+            return new Response(ResponseStatus.ERROR, new RequestError() {
+                @Override
+                public String getMessage() {
+                    return "This method doesn't have parameters";
+                }
+            });
         }
-        return new Response(false, null);
+        return new Response(ResponseStatus.ERROR, null);
     }
 
     /**
      * Execution stub without the parameter. Throws exception if it has parameters.
      */
     @Override
-    public Response execute() throws InvalidArgumentException {
+    public Response execute() {
         log.log(Level.FINE, "Execution stub without the parameter started");
         if (hasParameters()) {
-            throw new InvalidArgumentException("This method  have parameters");
+            return new Response(ResponseStatus.ERROR, new RequestError() {
+                @Override
+                public String getMessage() {
+                    return "This method has parameters";
+                }
+            });
         }
-        return new Response(false, null);
+        return new Response(ResponseStatus.ERROR, null);
     }
 }

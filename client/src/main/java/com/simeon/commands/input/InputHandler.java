@@ -2,7 +2,7 @@ package com.simeon.commands.input;
 
 import com.simeon.CLI;
 import com.simeon.exceptions.InvalidArgumentException;
-import com.simeon.exceptions.UnknownCommandException;
+import com.simeon.commands.UnknownCommandException;
 import lombok.NonNull;
 
 import java.io.Serializable;

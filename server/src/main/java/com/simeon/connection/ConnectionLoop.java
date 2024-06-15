@@ -3,6 +3,7 @@ package com.simeon.connection;
 import com.simeon.Request;
 import com.simeon.RequestHandler;
 import com.simeon.Response;
+import com.simeon.ResponseStatus;
 import lombok.SneakyThrows;
 import lombok.extern.java.Log;
 
@@ -12,6 +13,7 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.RecursiveTask;
+import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.logging.Level;
@@ -86,7 +88,7 @@ public class ConnectionLoop {
                             requestHandler.handleRequest(request, connectionChannel);
                         }
                     } catch (IOException e) {
-                        connectionChannel.send(new Response(false, "Reading exception"));
+                        connectionChannel.send(new Response(ResponseStatus.ERROR, "Reading exception"));
                     }
                 }
                 return null;

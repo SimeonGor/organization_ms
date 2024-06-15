@@ -1,12 +1,13 @@
 package com.simeon.commands.clientmanager;
 
 import com.simeon.Response;
+import com.simeon.ResponseStatus;
 import com.simeon.UserInfo;
 import com.simeon.collection.ICollectionManager;
 import com.simeon.commands.Command;
 import com.simeon.element.Organization;
 import com.simeon.element.OrganizationType;
-import com.simeon.exceptions.NoSuchParameterException;
+import com.simeon.exceptions.NoSuchParameterRE;
 import lombok.NonNull;
 import lombok.extern.java.Log;
 
@@ -35,14 +36,11 @@ public class FilterGreaterThanTypeCommand extends Command {
         try {
             type = (OrganizationType) parameters.get("type");
         }
-        catch (ClassCastException e) {
-            return new Response(false, e);
-        }
-        catch (NullPointerException e) {
-            return new Response(false, new NoSuchParameterException(name, "type"));
+        catch (NullPointerException | ClassCastException e) {
+            return new Response(ResponseStatus.ERROR, new NoSuchParameterRE(name, "type"));
         }
 
-        return new Response(true,
+        return new Response(ResponseStatus.OK,
                 new ArrayList<>(collectionManager.getAllItems().parallelStream()
                         .filter((o1) -> o1.getType().compareTo(type) > 0)
                         .toList()));

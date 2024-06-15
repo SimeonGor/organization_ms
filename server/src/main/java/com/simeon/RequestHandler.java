@@ -3,7 +3,8 @@ package com.simeon;
 import com.simeon.authentication.IAuthenticationService;
 import com.simeon.commands.CommandHandler;
 import com.simeon.connection.ConnectionChannel;
-import com.simeon.exceptions.AuthorizedException;
+import com.simeon.authentication.AuthorizedException;
+import com.simeon.exceptions.RequestError;
 import lombok.extern.java.Log;
 
 import java.util.logging.Level;
@@ -47,7 +48,12 @@ public class RequestHandler {
                     log.log(Level.INFO, () -> userInfo.getRole().toString());
                     response = commandHandler.handle(request.getMethod(), request.getParams(), userInfo);
                 } catch (AuthorizedException e) {
-                    response = new Response(false, e);
+                    response = new Response(ResponseStatus.ERROR, new RequestError() {
+                        @Override
+                        public String getMessage() {
+                            return e.getMessage();
+                        }
+                    });
                 }
                 responseHandler.send(response, connectionChannel);
             }
