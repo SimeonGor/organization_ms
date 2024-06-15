@@ -42,6 +42,8 @@ public class Client {
     @Setter
     private Token token;
 
+    private ResponseListener responseListener;
+
     public Client(CLI cli, InputHandler inputHandler, OutputHandler outputHandler) {
         this.cli = cli;
         this.inputHandler = inputHandler;
@@ -55,22 +57,30 @@ public class Client {
         cli.print("Connecting...\n");
         this.socket = SocketChannel.open();
         this.socket.connect(new InetSocketAddress(ip, port));
+        this.connectionChannel = new NonblockingConnectionChannel(socket);
+        if (responseListener != null) {
+            responseListener.stop();
+        }
+        this.responseListener = new ResponseListener(connectionChannel, outputHandler, cli);
         connect();
         SwingUtilities.invokeLater(() -> cli.setGui(new GUI(this)));
     }
 
     public void connect() throws IOException, InvalidConnectionException {
         if (socket.isConnected()) {
-            connectionChannel = new NonblockingConnectionChannel(socket);
             connectionChannel.send(new Request(token, "get_api", new HashMap<>()));
             Response response = connectionChannel.receive();
             ServerCommandHandler serverCommandHandler = new ServerCommandHandler(connectionChannel);
             if (response != null && response.getStatus() == ResponseStatus.OK)
                 serverCommandHandler.setCommands((ArrayList<CommandInfo>) response.getData());
             else {
+                System.out.println(response);
                 throw new InvalidConnectionException(socket.getRemoteAddress());
             }
             this.commandHandler = CommandHandlerFactory.getClientCommandHandler(serverCommandHandler, this);
+            responseListener.start();
+
+            send("show", new HashMap<>());
         }
     }
 
@@ -113,8 +123,7 @@ public class Client {
             @Override
             public void run() {
                 try {
-                    Response response = commandHandler.handle(method, params, token);
-                    outputHandler.handle(response, cli);
+                    commandHandler.handle(method, params, token);
                 } catch (UnknownCommandException e) {
                     cli.error(e);
                 }

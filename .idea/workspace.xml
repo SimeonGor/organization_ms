@@ -8,91 +8,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7012e3a3-1d32-426b-90c8-6574a8dd71bb" name="Changes" comment="feat: select items on canvas">
-      <change afterPath="$PROJECT_DIR$/client/src/main/java/com/simeon/commands/UnknownCommandException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/main/java/com/simeon/gui/PopupDialog.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/simeon/ResponseStatus.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/simeon/exceptions/AuthorizationRE.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/simeon/exceptions/DataBaseRE.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/simeon/exceptions/DeniedModificationRE.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/simeon/exceptions/NoSuchParameterRE.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/simeon/exceptions/RequestError.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/simeon/exceptions/UnauthorizedUserRE.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/simeon/exceptions/UnknownCommandRE.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/main/java/com/simeon/connection/BlockingChannelFactory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/main/java/com/simeon/connection/BlockingConnectionChannel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/main/java/com/simeon/connection/ConnectionHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/main/java/com/simeon/exceptions/DBException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/setting.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+    <list default="true" id="7012e3a3-1d32-426b-90c8-6574a8dd71bb" name="Changes" comment="feat: big feat">
+      <change afterPath="$PROJECT_DIR$/client/src/main/java/com/simeon/ResponseListener.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/simeon/CLI.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/simeon/CLI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/main/java/com/simeon/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/simeon/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/simeon/commands/ClientCommandHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/simeon/commands/ClientCommandHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/simeon/commands/Command.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/simeon/commands/Command.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/simeon/commands/CommandHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/simeon/commands/CommandHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/simeon/commands/ExecuteScriptCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/simeon/commands/ExecuteScriptCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/simeon/commands/ExitCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/simeon/commands/ExitCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/simeon/commands/HelpCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/simeon/commands/HelpCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/simeon/commands/ICommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/simeon/commands/ICommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/simeon/commands/RestartCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/simeon/commands/RestartCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/main/java/com/simeon/commands/ServerCommandHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/simeon/commands/ServerCommandHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/simeon/commands/input/InputHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/simeon/commands/input/InputHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/main/java/com/simeon/commands/output/ArrayListOutputCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/simeon/commands/output/ArrayListOutputCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/simeon/commands/output/AuthorizedExceptionOutputCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/simeon/commands/output/AuthorizationREOutputCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/simeon/commands/output/CollectionInfoOutputCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/simeon/commands/output/CollectionInfoOutputCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/simeon/commands/output/CommandInfoOutputCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/simeon/commands/output/CommandInfoOutputCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/simeon/commands/output/ExceptionOutputCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/simeon/commands/output/RequestErrorOutputCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/simeon/commands/output/OrganizationOutputCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/simeon/commands/output/OrganizationOutputCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/simeon/commands/output/OutputCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/simeon/commands/output/OutputCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/simeon/commands/output/OutputHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/simeon/commands/output/OutputHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/simeon/commands/output/OutputHandlerFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/simeon/commands/output/OutputHandlerFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/simeon/commands/output/StringOutputCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/simeon/commands/output/StringOutputCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/simeon/commands/output/TokenOutputHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/simeon/commands/output/TokenOutputHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/main/java/com/simeon/connection/NonblockingConnectionChannel.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/simeon/connection/NonblockingConnectionChannel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/main/java/com/simeon/gui/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/simeon/gui/GUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/main/java/com/simeon/gui/MapCanvas.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/simeon/gui/MapCanvas.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/main/java/com/simeon/gui/Table.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/simeon/gui/Table.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/resources/logging.properties" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/resources/logging.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/resources/setting.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/simeon/Response.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/simeon/Response.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/simeon/exceptions/AuthorizedException.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/simeon/authentication/AuthorizedException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/simeon/exceptions/BusyUsernameException.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/simeon/authentication/BusyUsernameException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/simeon/exceptions/DBException.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/simeon/exceptions/DeniedModificationException.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/simeon/exceptions/NoSuchParameterException.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/simeon/exceptions/UnauthorizedUserException.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/simeon/exceptions/UnknownCommandException.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/simeon/commands/UnknownCommandException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/simeon/RequestHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/simeon/RequestHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/simeon/ResponseHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/simeon/ResponseHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/simeon/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/simeon/Server.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/simeon/authentication/AuthenticationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/simeon/authentication/AuthenticationService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/simeon/authentication/IAuthenticationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/simeon/authentication/IAuthenticationService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/simeon/commands/Command.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/simeon/commands/Command.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/simeon/commands/CommandHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/simeon/commands/CommandHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/simeon/commands/CommandHandlerFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/simeon/commands/CommandHandlerFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/simeon/commands/clientmanager/AddCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/simeon/commands/clientmanager/AddCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/simeon/commands/clientmanager/AddIfMaxCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/simeon/commands/clientmanager/AddIfMaxCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/simeon/commands/clientmanager/ClearCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/simeon/commands/clientmanager/ClearCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/simeon/commands/clientmanager/FilterGreaterThanTypeCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/simeon/commands/clientmanager/FilterGreaterThanTypeCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/simeon/commands/clientmanager/GetApiCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/simeon/commands/clientmanager/GetApiCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/simeon/commands/clientmanager/InfoCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/simeon/commands/clientmanager/InfoCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/simeon/commands/clientmanager/LoginCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/simeon/commands/clientmanager/LoginCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/simeon/commands/clientmanager/MinByPostalAddressCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/simeon/commands/clientmanager/MinByPostalAddressCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/simeon/commands/clientmanager/PrintFieldDescendingPostalAddressCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/simeon/commands/clientmanager/PrintFieldDescendingPostalAddressCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/simeon/commands/clientmanager/RegisterCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/simeon/commands/clientmanager/RegisterCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/simeon/commands/clientmanager/RemoveAtCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/simeon/commands/clientmanager/RemoveAtCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/simeon/commands/clientmanager/RemoveByIDCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/simeon/commands/clientmanager/RemoveByIDCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/simeon/commands/clientmanager/ReorderCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/simeon/commands/clientmanager/ReorderCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/simeon/commands/clientmanager/ShowCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/simeon/commands/clientmanager/ShowCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/src/main/java/com/simeon/commands/clientmanager/UpdateCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/simeon/commands/clientmanager/UpdateCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/simeon/commands/servercommands/ExitCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/simeon/commands/servercommands/ExitCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/simeon/connection/ConnectionChannelFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/simeon/connection/ConnectionChannelFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/simeon/connection/ConnectionLoop.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/simeon/connection/ConnectionLoop.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/simeon/connection/NonblockingConnectionChannelFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/simeon/connection/NonblockingConnectionChannelFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/resources/logging.properties" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/resources/logging.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/setting.properties" beforeDir="false" afterPath="$PROJECT_DIR$/setting.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -307,7 +234,7 @@
       <workItem from="1717317922002" duration="20125000" />
       <workItem from="1717530990504" duration="94980000" />
       <workItem from="1718284582506" duration="11442000" />
-      <workItem from="1718404218211" duration="3680000" />
+      <workItem from="1718404218211" duration="11078000" />
     </task>
     <task id="LOCAL-00001" summary="init commit">
       <option name="closed" value="true" />
@@ -613,7 +540,15 @@
       <option name="project" value="LOCAL" />
       <updated>1718053759822</updated>
     </task>
-    <option name="localTasksCounter" value="39" />
+    <task id="LOCAL-00039" summary="feat: big feat">
+      <option name="closed" value="true" />
+      <created>1718432807274</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1718432807274</updated>
+    </task>
+    <option name="localTasksCounter" value="40" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -643,7 +578,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="feat: something" />
     <MESSAGE value="fix: remove skip blocking" />
     <MESSAGE value="fix: remove todo" />
     <MESSAGE value="fix: remove no usage" />
@@ -668,7 +602,8 @@
     <MESSAGE value="feat: row sorter" />
     <MESSAGE value="cleanup code and optimise imports" />
     <MESSAGE value="feat: select items on canvas" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: select items on canvas" />
+    <MESSAGE value="feat: big feat" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: big feat" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

@@ -102,7 +102,12 @@ public class MapCanvas extends JPanel {
                 for (var it : collection.entrySet()) {
                     Coordinates coord = it.getValue().coordinates;
                     if (Math.pow(x - coord.getX(), 2) + Math.pow(y - coord.getY(), 2) <= Math.pow(r, 2)) {
-                        gui.select(it.getKey());
+                        if (e.getClickCount() == 2) {
+                            gui.update(it.getKey());
+                        }
+                        else {
+                            gui.select(it.getKey());
+                        }
                         return;
                     }
                 }

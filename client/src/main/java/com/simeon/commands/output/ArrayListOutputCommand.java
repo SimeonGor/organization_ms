@@ -2,13 +2,11 @@ package com.simeon.commands.output;
 
 import com.simeon.CLI;
 import com.simeon.Response;
-import com.simeon.element.Organization;
 import com.simeon.commands.UnknownCommandException;
 import lombok.AllArgsConstructor;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
 
 @AllArgsConstructor
 public class ArrayListOutputCommand implements OutputCommand {

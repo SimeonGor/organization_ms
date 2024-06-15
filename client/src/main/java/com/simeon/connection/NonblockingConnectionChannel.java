@@ -60,6 +60,7 @@ public class NonblockingConnectionChannel implements ConnectionChannel {
             byteChannel.write(result_buffer);
         }
         catch (IOException ignored) {
+            ;
         }
     }
 }

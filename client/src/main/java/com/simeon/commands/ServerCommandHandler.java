@@ -42,10 +42,11 @@ public class ServerCommandHandler extends CommandHandler {
         }
 
         connectionChannel.send(new Request(token, method, parameters));
-        Response response = connectionChannel.receive();
-        if (response == null) {
-            return new Response(ResponseStatus.OK, "an error in data transmission or the server crashed");
-        }
-        return response;
+        return new Response(ResponseStatus.OK, "send");
+//        Response response = connectionChannel.receive();
+//        if (response == null) {
+//            return new Response(ResponseStatus.OK, "an error in data transmission or the server crashed");
+//        }
+//        return response;
     }
 }

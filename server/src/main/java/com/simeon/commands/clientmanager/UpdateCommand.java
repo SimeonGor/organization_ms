@@ -58,7 +58,7 @@ public class UpdateCommand extends Command {
             try {
                 Organization added_entity = collectionManager.update(element);
                 if (added_entity != null) {
-                    return new Response(ResponseStatus.DELETE, added_entity);
+                    return new Response(ResponseStatus.UPDATE, added_entity);
                 } else {
                     return new Response(ResponseStatus.ERROR, new DataBaseRE());
                 }

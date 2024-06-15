@@ -49,15 +49,6 @@ public class GUI extends JFrame {
         this.getContentPane().add(createGUI());
         pack();
         setVisible(true);
-
-
-        Timer timer = new Timer();
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                client.send("show", new HashMap<>());
-            }
-        }, 0, 10000);
     }
 
     private JPanel createGUI() {
@@ -126,7 +117,7 @@ public class GUI extends JFrame {
             long id = organizationInfo.getOrganization().getId();
             HashMap<String, Long> params = new HashMap<>();
             params.put("id", id);
-            client.send("delete_by_id", params);
+            client.send("remove_by_id", params);
         });
 
         clearBtn = new JButton(lang.getString("clear"));
@@ -194,6 +185,11 @@ public class GUI extends JFrame {
 
     public void showPopup(String message) {
         popupDialog.show(message);
+    }
+
+    public void update(long id) {
+        select(id);
+        updateBtn.doClick();
     }
 
     private void relocale() {

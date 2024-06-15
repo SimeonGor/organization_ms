@@ -11,6 +11,8 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.text.DateFormat;
 import java.time.LocalDate;
 import java.util.List;
@@ -44,22 +46,19 @@ public class Table extends JPanel {
         @Override
         public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected,
                                                        boolean hasFocus, int row, int column) {
+            if (isSelected) {
+                setBackground(table.getSelectionBackground());
+                setForeground(table.getSelectionForeground());
+            }
+            else {
+                setBackground(table.getBackground());
+                setForeground(table.getForeground());
+            }
             if (value != null) {
                 Address address = (Address) value;
                 setText(address.getZipCode());
-                if (isSelected) {
-                    setBackground(table.getSelectionBackground());
-                    setForeground(table.getSelectionForeground());
-                }
-                else {
-                    setBackground(table.getBackground());
-                    setForeground(table.getForeground());
-                }
-                return this;
             }
-            else {
-                return null;
-            }
+            return this;
         }
     }
 
@@ -194,8 +193,20 @@ public class Table extends JPanel {
         public void insertRow(Organization entity) {
             lock.lock();
             try {
-                collection.removeIf(e -> e.getId() == entity.getId());
-                collection.add(entity);
+                Optional<Organization> op = collection.stream().filter(e -> e.getId() == entity.getId()).findFirst();
+                int index = -1;
+                if (op.isPresent()) {
+                     index = collection.indexOf(op.get());
+                }
+                if (index > -1) {
+                    collection.set(index, entity);
+                }
+                else {
+                    collection.add(entity);
+                }
+//                collection.removeIf(e -> e.getId() == entity.getId());
+//                collection.add(entity);
+                fireTableDataChanged();
             }
             finally {
                 lock.unlock();
@@ -216,6 +227,7 @@ public class Table extends JPanel {
             lock.lock();
             try {
                 collection.remove(entity);
+                fireTableDataChanged();
             }
             finally {
                 lock.unlock();
@@ -248,11 +260,18 @@ public class Table extends JPanel {
         table.setRowSorter(new Sorter());
         table.setAutoCreateRowSorter(true);
 
-        table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+        table.addMouseListener(new MouseAdapter() {
             @Override
-            public void valueChanged(ListSelectionEvent e) {
-                long id = (long) tableModel.getValueAt(table.getSelectedRow(), 0);
-                gui.select(id);
+            public void mouseClicked(MouseEvent e) {
+                Point point = e.getPoint();
+                int row = table.rowAtPoint(point);
+                if (e.getClickCount() == 2 && table.getSelectedRow() != -1) {
+                    gui.update((Long) tableModel.getValueAt(row, 0));
+                }
+                else if (e.getClickCount() == 1 && table.getSelectedRow() != -1) {
+                    long id = (long) tableModel.getValueAt(table.getSelectedRow(), 0);
+                    gui.select(id);
+                }
             }
         });
 
@@ -267,6 +286,9 @@ public class Table extends JPanel {
 
     public void delete(Organization entity) {
         tableModel.removeRow(entity);
+        ColumnsAutoSizer.sizeColumnsToFit(table);
+        table.repaint();
+        table.revalidate();
     }
 
     public Organization getById(long id) {
@@ -279,6 +301,12 @@ public class Table extends JPanel {
 
     public void relocale() {
         lang = ResourceBundle.getBundle("lang");
+        String[] header =
+                new String[]{"id", "name", "type", "annualTurnover", "coordinates", "postalAddress", "creationDate", "user"};
+        for (int i = 0; i < header.length; ++i) {
+            TableColumn column = table.getTableHeader().getColumnModel().getColumn(i);
+            column.setHeaderValue(lang.getString(header[i]));
+        }
         table.getTableHeader().resizeAndRepaint();
     }
 }
