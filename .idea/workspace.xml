@@ -8,14 +8,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7012e3a3-1d32-426b-90c8-6574a8dd71bb" name="Changes" comment="feat: big feat">
+    <list default="true" id="7012e3a3-1d32-426b-90c8-6574a8dd71bb" name="Changes" comment="feat: working">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/simeon/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/simeon/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/simeon/commands/output/ArrayListOutputCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/simeon/commands/output/ArrayListOutputCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/simeon/commands/output/OutputHandlerFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/simeon/commands/output/OutputHandlerFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/simeon/gui/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/simeon/gui/GUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/simeon/gui/PopupDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/simeon/gui/PopupDialog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/simeon/gui/Table.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/simeon/gui/Table.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/client/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/simeon/gui/MapCanvas.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/simeon/gui/MapCanvas.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -230,7 +226,7 @@
       <workItem from="1717317922002" duration="20125000" />
       <workItem from="1717530990504" duration="94980000" />
       <workItem from="1718284582506" duration="11442000" />
-      <workItem from="1718404218211" duration="12557000" />
+      <workItem from="1718404218211" duration="13208000" />
     </task>
     <task id="LOCAL-00001" summary="init commit">
       <option name="closed" value="true" />
@@ -552,7 +548,15 @@
       <option name="project" value="LOCAL" />
       <updated>1718440028624</updated>
     </task>
-    <option name="localTasksCounter" value="41" />
+    <task id="LOCAL-00041" summary="feat: working">
+      <option name="closed" value="true" />
+      <created>1718441616968</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1718441616968</updated>
+    </task>
+    <option name="localTasksCounter" value="42" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -590,7 +594,6 @@
     <MESSAGE value="feat: change DAO interface" />
     <MESSAGE value="feat: update commands" />
     <MESSAGE value="feat: server without DB" />
-    <MESSAGE value="feat: working" />
     <MESSAGE value="fix: add id to entity" />
     <MESSAGE value="fix: remove imports" />
     <MESSAGE value="feat: add sql create script" />
@@ -607,7 +610,8 @@
     <MESSAGE value="cleanup code and optimise imports" />
     <MESSAGE value="feat: select items on canvas" />
     <MESSAGE value="feat: big feat" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: big feat" />
+    <MESSAGE value="feat: working" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: working" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

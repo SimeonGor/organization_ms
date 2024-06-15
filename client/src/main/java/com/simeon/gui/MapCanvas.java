@@ -1,5 +1,6 @@
 package com.simeon.gui;
 
+import com.google.common.hash.Hashing;
 import com.simeon.element.Coordinates;
 import com.simeon.element.Organization;
 import lombok.Setter;
@@ -8,6 +9,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.nio.charset.StandardCharsets;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Timer;
@@ -39,8 +41,11 @@ public class MapCanvas extends JPanel {
         @Setter
         private boolean isSelected = false;
 
-        public Entity(Coordinates coordinates) {
+        private final Color color;
+
+        public Entity(Coordinates coordinates, Color color) {
             this.coordinates = coordinates;
+            this.color = color;
             percent = 0;
             setOpaque(false);
         }
@@ -68,7 +73,7 @@ public class MapCanvas extends JPanel {
                 g2.setColor(Color.RED);
             }
             else {
-                g2.setColor(Color.BLUE);
+                g2.setColor(color);
             }
 
             g2.fillArc(point.x - r, point.y - r, r * 2, r * 2, 90, (int) (-percent * 360));
@@ -190,7 +195,8 @@ public class MapCanvas extends JPanel {
     public void add(Organization organization) {
         lock.lock();
         try {
-            Entity entity = new Entity(organization.getCoordinates());
+            int color = Hashing.sha256().hashString(String.valueOf(organization.getUserInfo().getId()), StandardCharsets.UTF_8).asInt();
+            Entity entity = new Entity(organization.getCoordinates(), new Color(color % 0xFFFFFF));
             long id = organization.getId();
             if (collection.containsKey(id) && collection.get(id).equals(entity)) return;
             collection.put(id, entity);
